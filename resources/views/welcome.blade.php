@@ -1,0 +1,83 @@
+@extends('essentials.navbar')
+@section('title', 'Home')
+@section('content')
+
+<!-- hero section -->
+<section class="hero_section w_100 h_100vh bg_white primary_font" id="hero" >
+    <div class="hero_content w_100 h_100 grid col_2 gap_2vw">
+        <div class="right_hero w_100 h_100 flex_cl justify_sb p_s7 p_v7">
+            <h2>WorldWide <br> Recruitment Services</h2>
+
+            <div class="menus w_100 flex gap_2vw ">
+                <div class="line h_100 bg_light"></div>
+                <div class="menu_links flex_cl gap_1vw">
+                    <a href="#"><h3 class="font_w500 w_100 color_light">Home</h3></a>
+                    <a href="#"><h3 class="font_w500 w_100 color_light">About</h3></a>
+                    <a href="#"><h3 class="font_w500 w_100 color_light">Services</h3></a>
+                    <a href="#"><h3 class="font_w500 w_100 color_light">Jobs</h3></a>
+                    <a href="#"><h3 class="font_w500 w_100 color_light">News & Events</h3></a>
+                    <a href="#"><h3 class="font_w500 w_100 color_light">Contact</h3></a>
+                </div>
+            </div>
+
+            <h5>Scroll for More <i class="ri-arrow-down-s-line"></i></h5>
+        </div>
+        <img src="{{ asset('./resources/images/hero_japan.jpg') }}" alt="Japan | WorldWide Recruitment Services" class="hero_image w_100 h_100 obj_cover">
+    </div>
+    <div class="license_number_holder w_100 h_100 flex p_v7 justify_fe">
+        <div class="license_number w_fc flex align_c bg_blue">
+            <h3 class="color_white font_w400">License No: 1617-079/80</h3>
+        </div>
+    </div>
+    <div class="hero_holder w_100 h_100 flex justify_c align_c">
+        <div class="hero_box bg_orange flex_cl justify_c align_c gap_1vw">
+            <h1>Your Journey to Overseas Jobs Starts Here -  With WRS Nepal</h1>
+            <div class="button_holder w_100 flex_cl ">
+                <x-button href="/dashboard"><h3 class="font_w500 color_white">Get Started</h3></x-button>
+                <x-button href="/dashboard"><h3 class="font_w500 color_white">Company's Profile</h3></x-button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- who are we section -->
+<section class="who_are_we w_100 h_90vh bg_white grid col_2 p_s7 align_fe gap_10vw primary_font">
+    <img src="{{ asset('./resources/images/who_are_we.png') }}" alt="About | WorldWide Recruitment Services" class="who_are_we_image w_100 h_100 obj_contain">
+
+    <div class="about_section w_100 h_100 flex_cl justify_c gap_1vw">
+        <x-section-title text="Who are We ?" />
+
+        <p class="font_w500">WRS Nepal is a trusted recruitment agency connecting Nepalese workers with reliable job opportunities abroad. We specialize in overseas employment for sectors like construction, hospitality, and 
+            security—ensuring safe, legal, and rewarding placements for our clients.
+        
+        <br>
+        <h4>Specialize in connecting skilled workers from Nepal with opportunities in top destinations like Dubai, Japan, Qatar, and many more! </h4>
+        </p>
+
+         <div class="button_holder w_40 flex_cl ">
+            <x-button href="/dashboard" variant="secondary" class="opacity_80"><h3 class=" color_white">Learn More</h3></x-button>
+        </div>
+    </div>
+</section>
+
+<!-- news and events section -->
+@include('sections.news_events')
+
+<!-- services -->
+@include('sections.services')
+
+<!-- jobs sections -->
+@include('sections.featured_jobs')
+
+<!-- advertisement Section -->
+@include('sections.ad')
+
+
+<!-- why choose us section -->
+@include('sections.WhyChooseUs')
+
+
+<!-- contacts -->
+@include('sections.contact')
+
+@endsection
