@@ -11,8 +11,8 @@
             <div class="menus w_100 flex gap_2vw ">
                 <div class="line h_100 bg_light"></div>
                 <div class="menu_links flex_cl gap_1vw">
-                    <a href="#"><h3 class="font_w500 w_100 color_light">Home</h3></a>
-                    <a href="#"><h3 class="font_w500 w_100 color_light">About</h3></a>
+                    <a href="/"><h3 class="font_w500 w_100 color_light">Home</h3></a>
+                    <a href="/about-us"><h3 class="font_w500 w_100 color_light">About</h3></a>
                     <a href="#"><h3 class="font_w500 w_100 color_light">Services</h3></a>
                     <a href="#"><h3 class="font_w500 w_100 color_light">Jobs</h3></a>
                     <a href="#"><h3 class="font_w500 w_100 color_light">News & Events</h3></a>
@@ -55,7 +55,7 @@
         </p>
 
          <div class="button_holder w_40 flex_cl ">
-            <x-button href="/dashboard" variant="secondary" class="opacity_80"><h3 class=" color_white">Learn More</h3></x-button>
+            <x-button href="/about-us" variant="secondary" class="opacity_80"><h3 class=" color_white">Learn More</h3></x-button>
         </div>
     </div>
 </section>

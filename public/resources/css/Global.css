@@ -313,6 +313,9 @@ button{
 .mtop_2vh{
     margin-top: 2vh;
 }
+.mtop_10vh{
+    margin-top: 10vh;
+}
 
 /* positions */
 .pos_relative{

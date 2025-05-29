@@ -9,17 +9,24 @@ lenis.on('scroll', (e) => {
 });
 
 // sticky navbar
-// document.addEventListener("DOMContentLoaded", () => {
-//     gsap.registerPlugin(ScrollTrigger);
+document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(ScrollTrigger);
 
-//     const navbar = document.getElementById("navbar");
+    const navbar = document.getElementById("navbar");
+    const hero = document.getElementById("hero");
 
-//     ScrollTrigger.create({
-//         trigger: "#hero",
-//         start: "bottom top",
-//         duration: 0.5,
-//         onEnter: () => navbar.classList.add("show"),
-//         onLeaveBack: () => navbar.classList.remove("show"),
-//     });
-// });
+    if (hero) {
+        // Only run this if #hero section exists (welcome page)
+        ScrollTrigger.create({
+            trigger: hero,
+            start: "bottom top",
+            onEnter: () => navbar.classList.add("show"),
+            onLeaveBack: () => navbar.classList.remove("show"),
+        });
+    } else {
+        // Else, make navbar visible by default on other pages
+        navbar.classList.add("show");
+    }
+});
+
 

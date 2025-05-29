@@ -4,13 +4,17 @@
     left: 0;
     width: 100%;
     height: 10vh;
-    z-index: 999;
     transform: translateY(-100%);
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
 }
 
 .navbar_sticky.show {
     transform: translateY(0);
+}
+
+.menu_extended{
+    display: none;
 }
 
 .hero_content{
@@ -128,6 +132,26 @@
     font-size: 1vw;
 }
 
+/* about_us_page */
+.about_us_image_hero{
+    position: absolute;
+    z-index: 1;
+}
+.about_hero_content{
+    position: absolute;
+    z-index: 66;
+}
+.about_service_card{
+    grid-template-columns: 1fr 2.5fr;
+    padding: 3.5vh 2vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.circle{
+    border-radius: 50%;
+}
+.circle_orange h2{
+    font-size: 2.5vw;
+}
 @media (max-width: 999px){
     .hero_content {
         display: flex !important;
@@ -180,7 +204,7 @@
     .job_card {
         height: 25vh !important;
     }
-    .featured_jobs , .why_choose_us, .contact{
+    .featured_jobs , .why_choose_us, .contact, .about_us_hero{
         height: fit-content !important;
     }
 
@@ -207,6 +231,18 @@
     .footer {
         gap: 5vh;
     }
+    .menu_extended{
+        display: block;
+    }
+
+    /* about page tablet*/
+    .circle {
+        width: 20vw;
+        height: 20vw;
+    }   
+    .circle_orange h2 {
+        font-size: 5vw;
+    }
 }
 
 @media (max-width: 699px) {
@@ -221,5 +257,8 @@
     }
     .job_card_content {
         padding: 2vh 5vw;
+    }
+    .about_service_card {
+        height: 15vh !important;
     }
 }
