@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/about-us', [PagesController::class, 'about'])->name('about');
+Route::get('/services', [PagesController::class, 'services'])->name('services');

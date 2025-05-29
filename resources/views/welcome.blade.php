@@ -13,7 +13,7 @@
                 <div class="menu_links flex_cl gap_1vw">
                     <a href="/"><h3 class="font_w500 w_100 color_light">Home</h3></a>
                     <a href="/about-us"><h3 class="font_w500 w_100 color_light">About</h3></a>
-                    <a href="#"><h3 class="font_w500 w_100 color_light">Services</h3></a>
+                    <a href="/services"><h3 class="font_w500 w_100 color_light">Services</h3></a>
                     <a href="#"><h3 class="font_w500 w_100 color_light">Jobs</h3></a>
                     <a href="#"><h3 class="font_w500 w_100 color_light">News & Events</h3></a>
                     <a href="#"><h3 class="font_w500 w_100 color_light">Contact</h3></a>

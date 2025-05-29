@@ -152,6 +152,27 @@
 .circle_orange h2{
     font-size: 2.5vw;
 }
+
+.service_card_content {
+    padding: 2vh 2vw;
+}
+
+.service_page_card {
+    transition: transform 0.3s ease;
+}
+
+.service_page_card:hover {
+    transform: translateY(-10px);
+}
+
+.stat_card {
+    transition: transform 0.3s ease;
+}
+
+.stat_card:hover {
+    transform: scale(1.05);
+}
+
 @media (max-width: 999px){
     .hero_content {
         display: flex !important;

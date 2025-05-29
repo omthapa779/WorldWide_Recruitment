@@ -16,7 +16,7 @@
         <div class="nav_links flex h_100 align_c gap_1vw">
             <a href="/" class="nav_link"><h3 class="font_w500 opacity_100">Home</h3></a>
             <a href="/about-us" class="nav_link"><h3 class="font_w500 opacity_100">About</h3></a>
-            <a href="#" class="nav_link"><h3 class="font_w500 opacity_100">Services</h3></a>
+            <a href="/services" class="nav_link"><h3 class="font_w500 opacity_100">Services</h3></a>
             <a href="#" class="nav_link"><h3 class="font_w500 opacity_100">Jobs</h3></a>
             <a href="#" class="nav_link"><h3 class="font_w500 opacity_100">News & Events</h3></a>
             <a href="#" class="nav_link"><h3 class="font_w500 opacity_100">Contact</h3></a>
