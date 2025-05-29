@@ -173,6 +173,44 @@
     transform: scale(1.05);
 }
 
+/* contact page specific styles */
+.contact_info_card {
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.contact_info_card:hover {
+    transform: translateY(-10px);
+}
+
+.contact_icon {
+    display: inline-flex;
+    margin: 0 auto;
+}
+
+.contact_icon i {
+    font-size: 1.5vw;
+}
+
+/* footer */
+.footer_link h4 {
+    transition: all 0.3s ease;
+}
+
+.footer_link:hover h4 {
+    color: var(--secondary_color);
+    transform: translateX(10px);
+}
+
+.footer_icon {
+    transition: transform 0.3s ease;
+}
+
+.footer_icon:hover {
+    transform: scale(1.2);
+}
+
+
 @media (max-width: 999px){
     .hero_content {
         display: flex !important;
@@ -264,6 +302,13 @@
     .circle_orange h2 {
         font-size: 5vw;
     }
+
+     .contact_icon i {
+        font-size: 3.5vw;
+    }
+    .contact_info_card {
+        padding: 4vh 3vw !important;
+    }
 }
 
 @media (max-width: 699px) {
@@ -281,5 +326,8 @@
     }
     .about_service_card {
         height: 15vh !important;
+    }
+    .contact_icon i {
+        font-size: 5vw;
     }
 }

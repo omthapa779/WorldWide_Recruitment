@@ -12,4 +12,7 @@ class PagesController extends Controller
     public function services(){
         return view('Pages.services');
     }
+    public function contact(){
+        return view('Pages.contact');
+    }
 }

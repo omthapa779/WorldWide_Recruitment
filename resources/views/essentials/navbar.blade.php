@@ -19,7 +19,7 @@
             <a href="/services" class="nav_link"><h3 class="font_w500 opacity_100">Services</h3></a>
             <a href="#" class="nav_link"><h3 class="font_w500 opacity_100">Jobs</h3></a>
             <a href="#" class="nav_link"><h3 class="font_w500 opacity_100">News & Events</h3></a>
-            <a href="#" class="nav_link"><h3 class="font_w500 opacity_100">Contact</h3></a>
+            <a href="/contact" class="nav_link"><h3 class="font_w500 opacity_100">Contact</h3></a>
             <a href="#" class="menu_extended"><h2><i class="ri-menu-line font_w500"></i></h2></a>
         </div>
     </section>
