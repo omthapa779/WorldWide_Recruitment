@@ -52,13 +52,11 @@
             @endif
 
             <!-- Submit Button -->
-            <button type="submit" class="button_link bg_blue w_100">
-                <span class="flex justify_c align_c gap_1vw">
-                    <h3 class="color_white">
-                        <i class="ri-save-line color_white"></i> Update Hero Section
-                    </h3>
-                </span>
-            </button>
+             <x-button type="submit" class="w_100">
+                <h3 class="font_w500 color_white">
+                    <i class="ri-save-line color_white"></i> Update Hero Section
+                </h3>
+            </x-button>
         </form>
     </div>
 </div>

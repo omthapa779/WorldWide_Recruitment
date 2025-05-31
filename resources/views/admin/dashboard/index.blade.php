@@ -108,5 +108,45 @@
         </div>
         @endif
     </div>
+    <!-- Ads Section Management -->
+<div class="section_card h_fc bg_white_light bradius_s p_v4 p_s4">
+    <div class="flex justify_sb align_c mbottom_2vh">
+        <h2 class="color_primary">Advertisement</h2>
+        <x-button href="{{ route('admin.ads.edit') }}" >
+            <h3 class="font_w500 color_white p_s4">Edit Advertisement</h3>
+        </x-button>
+    </div>
+
+    @if($ad = \App\Models\Ad::getActive())
+    <div class="hero_preview w_100 grid col_2 gap_2vw mtop_2vh">
+        <!-- Image Preview -->
+        <div class="preview_image w_100 h_30vh">
+            <img src="{{ asset('storage/' . $ad->image_path) }}" 
+                 alt="Advertisement Image" 
+                 class="w_100 h_100 obj_cover bradius_s">
+        </div>
+
+        <!-- Content Preview -->
+        <div class="preview_content flex_cl justify_c gap_1vw">
+            <div class="preview_item">
+                <h5 class="color_light">Title</h5>
+                <h3 class="color_primary">{{ $ad->title }}</h3>
+            </div>
+
+            <div class="preview_item">
+                <h5 class="color_light">Last Updated</h5>
+                <h4 class="color_blue">{{ $ad->updated_at->diffForHumans() }}</h4>
+            </div>
+        </div>
+    </div>
+    @else
+    <div class="empty_state text_ac p_v4">
+        <h4 class="color_light">No advertisement configured yet</h4>
+        <x-button href="{{ route('admin.ads.edit') }}" class="mtop_2vh">
+            <h3 class="font_w500 color_white">Set Up Advertisement</h3>
+        </x-button>
+    </div>
+    @endif
+</div>
 </div>
 @endsection

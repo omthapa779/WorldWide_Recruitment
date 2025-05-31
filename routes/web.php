@@ -12,10 +12,12 @@ use App\Http\Controllers\Admin\JobsController;
 
 // models
 use App\Models\Hero;
+use App\Models\Ad;
 
 Route::get('/', function () {
     $hero = Hero::getActive();
-    return view('welcome', compact('hero'));
+    $ad = Ad::getActive();
+    return view('welcome', compact('hero', 'ad'));
 });
 
 Route::get('/about-us', [PagesController::class, 'about'])->name('about');
@@ -36,7 +38,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::put('/hero', [HeroController::class, 'update'])->name('hero.update');
     
     Route::get('/ads', [AdsController::class, 'index'])->name('ads.index');
-    Route::resource('ads', AdsController::class)->except(['index']);
+    Route::get('/ads/edit', [AdsController::class, 'edit'])->name('ads.edit');
+    Route::put('/ads', [AdsController::class, 'update'])->name('ads.update');
     
     Route::get('/news', [NewsController::class, 'index'])->name('news.index');
     Route::resource('news', NewsController::class)->except(['index']);

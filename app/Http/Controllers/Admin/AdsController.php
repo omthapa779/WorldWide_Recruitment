@@ -3,63 +3,49 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $ad = Ad::getActive();
+        return view('admin.ads.index', compact('ad'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function edit()
     {
-        //
+        $ad = Ad::getActive();
+        return view('admin.ads.edit', compact('ad'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Delete old ad if exists
+        $oldAd = Ad::getActive();
+        if ($oldAd) {
+            Storage::delete('public/' . $oldAd->image_path);
+            $oldAd->delete();
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        // Store new image
+        $imagePath = $request->file('image')
+            ? $request->file('image')->store('ads', 'public')
+            : ($oldAd ? $oldAd->image_path : null);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        Ad::create([
+            'title' => $request->title,
+            'image_path' => $imagePath
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('admin.ads.index')
+            ->with('success', 'Advertisement updated successfully');
     }
 }
