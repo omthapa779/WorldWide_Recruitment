@@ -113,6 +113,10 @@
     padding-left: 2vw;
     padding-right: 2vw;
 }
+.p_s4{
+    padding-left: 4vw;
+    padding-right: 4vw;
+}
 .p_s7{
     padding-left: 7vw;
     padding-right: 7vw;
@@ -128,6 +132,10 @@
 .p_v2{
     padding-top: 2vh;
     padding-bottom: 2vh;
+}
+.p_v4{
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 .p_v5{
     padding-top: 5vh;
@@ -234,6 +242,9 @@ a{
 }
 .col_3{
     grid-template-columns: repeat(3, 1fr);
+}
+.col_4{
+    grid-template-columns: repeat(4, 1fr);
 }
 .col_5{
     grid-template-columns: repeat(5, 1fr);

@@ -39,7 +39,7 @@
 
             <a href="/jobs" class="footer_link"><h4 class="color_light mtop_2vh font_w500">Jobs</h4></a>
             <a href="/news-events" class="footer_link"><h4 class="color_light font_w500">News and Events</h4></a>
-            <a href="/admin" class="footer_link"><h4 class="color_light font_w500">Admin System</h4></a>
+            <a href="/admin/dashboard" class="footer_link"><h4 class="color_light font_w500">Admin System</h4></a>
         </div>
 
         <div class="quick_Contacts flex_cl w_100">

@@ -1,20 +1,53 @@
-.navbar_sticky {
-    position: fixed;
+.glass_nav {
+    background: rgba(255,255,255,0.85);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 10vh;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: 999;
+    z-index: 100;
 }
 
-.navbar_sticky.show {
-    transform: translateY(0);
+/* Navbar Logo */
+.navbar_logo_img {
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    object-fit: contain;
 }
 
-.menu_extended{
+.nav_link {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    color: var(--primary-color);
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    position: relative;
+    text-decoration: none;
+}
+
+.nav_link i {
+    transition: color 0.2s;
+}
+
+.nav_link:hover, .nav_link.active {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px) scale(1.05);
+}
+
+.nav_link:hover i, .nav_link.active i {
+    color: var(--secondary_color);
+}
+
+.menu_toggle {
     display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    margin-left: 1vw;
 }
 
 .hero_content{
@@ -210,6 +243,138 @@
     transform: scale(1.2);
 }
 
+/* login page */
+.login_bg_pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(45deg, var(--primary-color) 25%, transparent 25%),
+                      linear-gradient(-45deg, var(--primary-color) 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, var(--primary-color) 75%),
+                      linear-gradient(-45deg, transparent 75%, var(--primary-color) 75%);
+    background-size: 20px 20px;
+    opacity: 0.05;
+    z-index: 1;
+}
+
+.login_container {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 2;
+}
+
+.login_image_side {
+    background: linear-gradient(135deg, var(--primary-color), var(--blue));
+}
+
+.admin_icon {
+    color: var(--primary-color);
+    margin-bottom: 1vh;
+}
+
+.password_input_group {
+    display: flex;
+    align-items: center;
+}
+
+.toggle_password {
+    position: absolute;
+    right: 1vw;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--light);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.toggle_password:hover {
+    color: var(--primary-color);
+}
+
+.hover_scale {
+    transition: transform 0.3s ease;
+}
+
+.hover_scale:hover {
+    transform: scale(1.02);
+}
+
+
+/* admin navbar */
+/* Admin Layout Styles */
+.admin_sidebar {
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.sidebar_link {
+    text-decoration: none;
+    color: var(--light);
+    transition: all 0.3s ease;
+}
+
+.sidebar_link:hover, .sidebar_link.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.sidebar_link i {
+    font-size: 1.5vw;
+}
+
+.admin_content {
+    overflow-y: auto;
+    padding-bottom: 5vh;
+}
+
+.admin_profile_pic {
+    width: 2.5vw;
+    height: 2.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dashboard */
+.stat_card {
+    transition: transform 0.3s ease;
+    box-shadow: 0 0.5vh 2vh rgba(0,0,0,0.05);
+}
+
+.stat_bubble {
+    width: 3.5vw;
+    height: 3.5vw;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action_card {
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.action_icon {
+    width: 3vw;
+    height: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action_icon i {
+    font-size: 1.5vw;
+}
+.mobile_menu{
+    display: none;
+}
+.menu_extended{
+    background: none;
+}
 
 @media (max-width: 999px){
     .hero_content {
@@ -309,6 +474,21 @@
     .contact_info_card {
         padding: 4vh 3vw !important;
     }
+    .login_image_side {
+        display: none;
+    }
+    .mobile_menu{
+        display: flex;
+    }
+    .admin_sidebar{
+        display: none !important;
+    }
+    .admin_main{
+        padding-top: 2vh !important;
+    }
+    .stats_holder_dashboard{
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
 }
 
 @media (max-width: 699px) {
@@ -330,4 +510,10 @@
     .contact_icon i {
         font-size: 5vw;
     }
-}
+    .stats_holder_dashboard{
+        gap: 5vw;
+    }
+    .stat_card i {
+        display: none;
+    }
+}   
