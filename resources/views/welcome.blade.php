@@ -22,7 +22,15 @@
 
             <h5>Scroll for More <i class="ri-arrow-down-s-line"></i></h5>
         </div>
-        <img src="{{ asset('./resources/images/hero_japan.jpg') }}" alt="Japan | WorldWide Recruitment Services" class="hero_image w_100 h_100 obj_cover">
+        @if($hero && $hero->image_path)
+            <img src="{{ asset('storage/' . $hero->image_path) }}" 
+                alt="Hero Image | WorldWide Recruitment Services" 
+                class="hero_image w_100 h_100 obj_cover">
+        @else
+            <img src="{{ asset('./resources/images/hero_japan.jpg') }}" 
+                alt="Japan | WorldWide Recruitment Services" 
+                class="hero_image w_100 h_100 obj_cover">
+        @endif    
     </div>
     <div class="license_number_holder w_100 h_100 flex p_v7 justify_fe">
         <div class="license_number w_fc flex align_c bg_blue">
@@ -31,14 +39,30 @@
     </div>
     <div class="hero_holder w_100 h_100 flex justify_c align_c">
         <div class="hero_box bg_orange flex_cl justify_c align_c gap_1vw">
-            <h1>Your Journey to Overseas Jobs Starts Here -  With WRS Nepal</h1>
-            <div class="button_holder w_100 flex_cl ">
-                <x-button href="/dashboard"><h3 class="font_w500 color_white">Get Started</h3></x-button>
-                <x-button href="/dashboard"><h3 class="font_w500 color_white">Company's Profile</h3></x-button>
-            </div>
+            @if($hero = \App\Models\Hero::getActive())
+                <h1>{{ $hero->title }}</h1>
+                <div class="button_holder w_100 flex_cl">
+                    <x-button href="/dashboard">
+                        <h3 class="font_w500 color_white">{{ $hero->button_cta }}</h3>
+                    </x-button>
+                     <x-button href="/dashboard"><h3 class="font_w500 color_white">Company's Profile</h3></x-button>
+                </div>
+            @else
+                <!-- Fallback content -->
+                <h1>Your Journey to Overseas Jobs Starts Here - With WRS Nepal</h1>
+                <div class="button_holder w_100 flex_cl">
+                    <x-button href="/dashboard">
+                        <h3 class="font_w500 color_white">Get Started</h3>
+                    </x-button>
+                    <x-button href="/dashboard"><h3 class="font_w500 color_white">Company's Profile</h3></x-button>
+                </div>
+            @endif
         </div>
     </div>
 </section>
+
+
+
 
 <!-- who are we section -->
 <section class="who_are_we w_100 h_90vh bg_white grid col_2 p_s7 align_fe gap_10vw primary_font">

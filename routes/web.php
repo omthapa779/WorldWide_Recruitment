@@ -10,8 +10,12 @@ use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\JobsController;
 
+// models
+use App\Models\Hero;
+
 Route::get('/', function () {
-    return view('welcome');
+    $hero = Hero::getActive();
+    return view('welcome', compact('hero'));
 });
 
 Route::get('/about-us', [PagesController::class, 'about'])->name('about');
@@ -26,10 +30,10 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.
 Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    // Change resource routes to use index as the base route
+        
     Route::get('/hero', [HeroController::class, 'index'])->name('hero.index');
-    Route::resource('hero', HeroController::class)->except(['index']);
+    Route::get('/hero/edit', [HeroController::class, 'edit'])->name('hero.edit');
+    Route::put('/hero', [HeroController::class, 'update'])->name('hero.update');
     
     Route::get('/ads', [AdsController::class, 'index'])->name('ads.index');
     Route::resource('ads', AdsController::class)->except(['index']);

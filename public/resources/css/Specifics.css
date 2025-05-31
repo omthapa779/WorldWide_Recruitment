@@ -304,10 +304,13 @@
 }
 
 
-/* admin navbar */
 /* Admin Layout Styles */
 .admin_sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
     box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    z-index: 100;
 }
 
 .sidebar_link {
@@ -375,7 +378,14 @@
 .menu_extended{
     background: none;
 }
-
+.admin_main_container {
+    position: relative;
+    min-height: 100vh;
+}
+.admin_main {
+    margin-left: 20%; /* Same as sidebar width */
+    overflow-y: auto;
+}
 @media (max-width: 999px){
     .hero_content {
         display: flex !important;
@@ -488,6 +498,9 @@
     }
     .stats_holder_dashboard{
         grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .admin_main {
+        margin-left: 0%; 
     }
 }
 

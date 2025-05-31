@@ -19,7 +19,7 @@
 
 <div class="admin_main_container flex">
     <!-- Sidebar -->
-    <aside class="admin_sidebar w_20 h_100vh bg_white_light flex_cl justify_sb p_v5 primary_font"  id="adminSidebar">
+    <aside class="admin_sidebar w_20 h_100vh bg_white flex_cl justify_sb p_v5 primary_font" id="adminSidebar">
         <!-- Top Section -->
         <div class="sidebar_top w_100 flex_cl gap_2vw">
             <!-- Logo -->
@@ -64,9 +64,9 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="admin_main w_100 h_100vh bg_white primary_font p_v7">
+    <main class="admin_main w_100 h_fc bg_white primary_font p_v7">
         <!-- Page Content -->
-        <div class="admin_content w_100 h_90vh overflow_y p_s4">
+        <div class="admin_content w_100 h_fc overflow_y p_s4">
             @yield('content')
         </div>
     </main>

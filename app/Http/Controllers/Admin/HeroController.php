@@ -3,63 +3,60 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hero;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HeroController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $hero = Hero::getActive();
+        return view('admin.hero.index', compact('hero'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function edit()
     {
-        //
+        $hero = Hero::getActive();
+        return view('admin.hero.edit', compact('hero'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'button_cta' => 'required|string|max:50',
+            'image' => $request->hasFile('image') ? 'required|image|mimes:jpeg,png,jpg|max:2048' : ''
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $oldHero = Hero::getActive();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($oldHero && Storage::disk('public')->exists($oldHero->image_path)) {
+                Storage::disk('public')->delete($oldHero->image_path);
+            }
+            
+            // Store new image
+            $imagePath = $request->file('image')->store('hero', 'public');
+        } else {
+            $imagePath = $oldHero ? $oldHero->image_path : null;
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        // Delete old hero
+        if ($oldHero) {
+            $oldHero->delete();
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // Create new hero
+        Hero::create([
+            'title' => $request->title,
+            'button_cta' => $request->button_cta,
+            'image_path' => $imagePath
+        ]);
+
+        return redirect()->route('admin.dashboard')
+            ->with('success', 'Hero section updated successfully');
     }
 }
