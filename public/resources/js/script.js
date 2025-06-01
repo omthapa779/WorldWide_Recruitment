@@ -59,3 +59,35 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const newsHolder = document.querySelector('.news_holder');
+    if (!newsHolder) return;
+
+    let autoRotate = setInterval(rotateNews, 5000); // Rotate every 5 seconds
+
+    function rotateNews() {
+        const mainNews = newsHolder.querySelector('.main_news');
+        const newsCards = Array.from(newsHolder.querySelectorAll('.news_card'));
+        
+        if (!mainNews || newsCards.length === 0) return;
+
+        // Store main news content
+        const mainNewsHTML = mainNews.outerHTML;
+        
+        // Move first news card to main news position
+        mainNews.outerHTML = newsCards[0].outerHTML;
+        
+        // Shift other news cards up
+        for (let i = 0; i < newsCards.length - 1; i++) {
+            newsCards[i].outerHTML = newsCards[i + 1].outerHTML;
+        }
+        
+        // Put main news as last card
+        newsCards[newsCards.length - 1].outerHTML = mainNewsHTML;
+    }
+
+    // Pause rotation on hover
+    newsHolder.addEventListener('mouseenter', () => clearInterval(autoRotate));
+    newsHolder.addEventListener('mouseleave', () => autoRotate = setInterval(rotateNews, 5000));
+});

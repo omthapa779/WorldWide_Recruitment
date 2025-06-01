@@ -5,16 +5,15 @@
 @section('content')
 <div class="w_100 h_fc flex_cl gap_4vh">
     <!-- Action Button -->
-    <div class="w_100 flex justify_fe">
-       
+    <div class="w_100 flex">
+         <x-section-title text="Hero Section Management" />
     </div>
 
     <!-- Preview -->
     @if($hero)
     <div class="preview_card bg_white_light bradius_s p_v4 p_s4 mtop_2vh">
-        <h2 class="color_primary mbottom_2vh">Current Hero Section</h2>
         
-        <div class="preview_content w_100 grid col_2 gap_2vw mtop_2vh">
+        <div class="preview_content w_100 grid col_2 gap_2vw">
             <div class="preview_image w_100 h_40vh">
                 <img src="{{ asset('storage/' . $hero->image_path) }}" 
                      alt="Hero Image" 

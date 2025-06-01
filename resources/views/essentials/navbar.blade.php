@@ -20,7 +20,7 @@
             <h4 class="font_w500"><a href="/about-us" class="nav_link"><i class="ri-user-3-line"></i><span>About</span></a></h4>
             <h4 class="font_w500"><a href="/services" class="nav_link"><i class="ri-briefcase-4-line"></i><span>Services</span></a></h4>
             <h4 class="font_w500"><a href="#" class="nav_link"><i class="ri-suitcase-fill"></i><span>Jobs</span></a></h4>
-            <h4 class="font_w500"><a href="#" class="nav_link"><i class="ri-newspaper-line"></i><span>News & Events</span></a></h4>
+            <h4 class="font_w500"><a href="/news" class="nav_link"><i class="ri-newspaper-line"></i><span>News & Events</span></a></h4>
             <h4 class="font_w500"><a href="/contact" class="nav_link"><i class="ri-contacts-book-line"></i><span>Contact</span></a></h4>
             <button class="menu_toggle" id="menuToggle" aria-label="Open Menu">
                 <i class="ri-menu-3-line"></i>

@@ -96,15 +96,31 @@
 }
 
 /* news */
-.first_news { 
-    grid-area: 1 / 4 / 2 / 6; 
+.news_holder {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2vw;
+}
+
+.main_news {
+    grid-area: 1 / 1 / 4 / 4;
     position: relative;
 }
-.second_news { grid-area: 2 / 4 / 3 / 6; }
-.third_news { grid-area: 3 / 4 / 4 / 6; }
-.main_news { 
-    grid-area: 1 / 1 / 4 / 4;
-    position: relative; 
+
+.news_card.news_0 {
+    grid-area: 1 / 4 / 2 / 6;
+    position: relative;
+}
+
+.news_card.news_1 {
+    grid-area: 2 / 4 / 3 / 6;
+    position: relative;
+}
+
+.news_card.news_2 {
+    grid-area: 3 / 4 / 4 / 6;
+    position: relative;
 }
 
 .main_news_image{
@@ -386,6 +402,54 @@
     margin-left: 20%; /* Same as sidebar width */
     overflow-y: auto;
 }
+.admin_action_button{
+    width: 50% !Important;
+    justify-self: self-end;
+}
+
+/* news show page */
+.news_show_page {
+    overflow-x: hidden;
+}
+
+.news_hero {
+    position: relative;
+}
+
+.hero_overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.max_w800 {
+    max-width: 80vw;
+    margin: 0 auto;
+}
+
+.max_w1200 {
+    max-width: 90vw;
+    margin: 0 auto;
+}
+
+.formatted_content {
+    line-height: 1.8;
+    color: var(--primary-color);
+}
+
+.formatted_content p {
+    margin-bottom: 2vh;
+}
+
+.related_card {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 0.1vw solid rgba(0,0,0,0.1);
+}
+
+.related_card:hover {
+    transform: translateY(-1vh);
+    box-shadow: 0 1vw 2vw rgba(0,0,0,0.1);
+}
+
 @media (max-width: 999px){
     .hero_content {
         display: flex !important;
@@ -412,6 +476,7 @@
     .navbar_sticky{
         height: 7vh;
         transform: translateY(0%);
+        position: fixed;
     }
     .nav_link {
         display: none;
@@ -431,6 +496,8 @@
     }
     .news_holder {
         margin-top: 5vh;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
     }
     .job_two_holder:first-of-type{
         display: none;
@@ -501,6 +568,12 @@
     }
     .admin_main {
         margin-left: 0%; 
+    }
+    .admin_title {
+        grid-template-columns: 2fr 1.3fr !important;
+    }
+    .admin_action_button{
+        width: 100% !important;
     }
 }
 

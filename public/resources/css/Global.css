@@ -73,6 +73,15 @@
 }
 
 /* heights */
+.min_80vh{
+    min-height: 80vh;
+}
+.min_90vh{
+    min-height: 90vh;
+}
+.min_100vh{
+    min-height: 100vh;
+}
 .h_100{
     height: 100%;
 }
@@ -330,10 +339,16 @@ button{
 .mtop_10vh{
     margin-top: 10vh;
 }
+.mbottom_2vh{
+    margin-bottom: 2vh;
+}
 
 /* positions */
 .pos_relative{
     position: relative;
+}
+.pos_absolute{
+    position: absolute;
 }
 
 /* text- aligns */

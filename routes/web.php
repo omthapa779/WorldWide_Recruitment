@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\NewsControllers;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AdminAuthController;
@@ -51,3 +52,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 Route::get('/login', function () {
     return redirect('/admin/login');
 })->name('login');
+
+// Public news routes
+Route::get('/news', [NewsControllers::class, 'index'])->name('news.index');
+Route::get('/news/{id}', [NewsControllers::class, 'show'])->name('news.read');

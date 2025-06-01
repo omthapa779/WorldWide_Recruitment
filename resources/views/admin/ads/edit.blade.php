@@ -4,12 +4,14 @@
 
 @section('content')
 <div class="w_100 h_fc flex_cl gap_4vh">
-    <div class="form_card bg_white_light bradius_s p_v4 p_s4">
+    <div class="w_100 flex">
+        <x-section-title text="Hero Section Form" />
+    </div>
+    <div class="form_card bg_white_light bradius_s p_v4 p_s4 mtop_2vh">
         <form action="{{ route('admin.ads.update') }}" method="POST" enctype="multipart/form-data" 
               class="w_100 h_fc flex_cl gap_2vw">
             @csrf
             @method('PUT')
-            <h2 class="color_primary">Ads Section Update</h2>
             <!-- Title -->
             <div class="input_group w_100 flex_cl gap_1vw pos_relative">
                 <label for="title" class="flex align_c gap_1vw">
