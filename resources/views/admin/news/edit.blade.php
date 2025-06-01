@@ -16,7 +16,7 @@
             <!-- Title -->
             <div class="input_group w_100 flex_cl gap_1vw">
                 <label for="title" class="flex align_c gap_1vw">
-                    <h4 class="font_w400"><i class="ri-text-line"></i> News Title</h4>
+                    <h4 class="font_w400"><i class="ri-text-snippet"></i>  News Title</h4>
                 </label>
                 <input type="text" name="title" id="title" 
                        class="form_input w_100" required 
@@ -76,7 +76,7 @@
             <!-- Submit Button -->
             <x-button type="submit" class="w_100">
                 <h3 class="font_w500 color_white">
-                    <i class="ri-save-line"></i> Update News
+                    <i class="ri-save-line color_white"></i> Update News
                 </h3>
             </x-button>
         </form>

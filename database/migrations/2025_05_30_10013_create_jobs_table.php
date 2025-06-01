@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('image_path');
             $table->string('country');
             $table->text('description');
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });
     }

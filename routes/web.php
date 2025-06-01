@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\NewsControllers;
+use App\Http\Controllers\JobController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AdminAuthController;
@@ -14,12 +15,13 @@ use App\Http\Controllers\Admin\JobsController;
 // models
 use App\Models\Hero;
 use App\Models\Ad;
+use App\Models\Job;
 
 Route::get('/', function () {
     $hero = Hero::getActive();
     $ad = Ad::getActive();
     return view('welcome', compact('hero', 'ad'));
-});
+})->name('home');  // Add the route name here
 
 Route::get('/about-us', [PagesController::class, 'about'])->name('about');
 Route::get('/services', [PagesController::class, 'services'])->name('services');
@@ -56,3 +58,6 @@ Route::get('/login', function () {
 // Public news routes
 Route::get('/news', [NewsControllers::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsControllers::class, 'show'])->name('news.read');
+
+Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');

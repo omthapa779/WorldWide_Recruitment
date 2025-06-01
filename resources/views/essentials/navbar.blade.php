@@ -15,18 +15,30 @@
             <img src="{{ asset('./resources/images/logo.png') }}" alt="Logo" class="navbar_logo_img" style="height:2.5rem;">
             <h3 class="opacity_100 font_w700 color_primary">WorldWide<br>Recruitment</h3>
         </div>
-        <nav class="nav_links flex h_100 align_c gap_1vw">
-            <h4 class="font_w500"><a href="/" class="nav_link"><i class="ri-home-4-line"></i><span>Home</span></a></h4>
-            <h4 class="font_w500"><a href="/about-us" class="nav_link"><i class="ri-user-3-line"></i><span>About</span></a></h4>
-            <h4 class="font_w500"><a href="/services" class="nav_link"><i class="ri-briefcase-4-line"></i><span>Services</span></a></h4>
-            <h4 class="font_w500"><a href="#" class="nav_link"><i class="ri-suitcase-fill"></i><span>Jobs</span></a></h4>
-            <h4 class="font_w500"><a href="/news" class="nav_link"><i class="ri-newspaper-line"></i><span>News & Events</span></a></h4>
-            <h4 class="font_w500"><a href="/contact" class="nav_link"><i class="ri-contacts-book-line"></i><span>Contact</span></a></h4>
-            <button class="menu_toggle" id="menuToggle" aria-label="Open Menu">
+        <nav class="nav_links flex h_100 align_c gap_2vw">
+            <h4 class="font_w500"><a href="{{ route('home') }}" class="nav_link"><i class="ri-home-4-line"></i><span>Home</span></a></h4>
+            <h4 class="font_w500"><a href="{{ route('about') }}" class="nav_link"><i class="ri-user-3-line"></i><span>About</span></a></h4>
+            <h4 class="font_w500"><a href="{{ route('services') }}" class="nav_link"><i class="ri-briefcase-4-line"></i><span>Services</span></a></h4>
+            <h4 class="font_w500"><a href="{{ route('jobs.index') }}" class="nav_link"><i class="ri-suitcase-fill"></i><span>Jobs</span></a></h4>
+            <h4 class="font_w500"><a href="{{ route('news.index') }}" class="nav_link"><i class="ri-newspaper-line"></i><span>News & Events</span></a></h4>
+            <h4 class="font_w500"><a href="{{ route('contact') }}" class="nav_link"><i class="ri-contacts-book-line"></i><span>Contact</span></a></h4>
+            <button class="menu_toggle" id="menuToggle" aria-label="Toggle Menu">
                 <i class="ri-menu-3-line"></i>
             </button>
         </nav>
     </section>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile_menu_fullscreen">
+        <div class="mobile_menu_content flex_cl justify_c align_c gap_2vw primary_font">
+            <a href="{{ route('home') }}" class="mobile_link"><h2 class="color_white font_w500"><i class="ri-home-4-line color_white"></i> Home</h2></a>
+            <a href="{{ route('about') }}" class="mobile_link"><h2 class="color_white font_w500"><i class="ri-user-3-line color_white"></i> About</h2></a>
+            <a href="{{ route('services') }}" class="mobile_link"><h2 class="color_white font_w500"><i class="ri-briefcase-4-line color_white"></i> Services</h2></a>
+            <a href="{{ route('jobs.index') }}" class="mobile_link"><h2 class="color_white font_w500"><i class="ri-suitcase-fill color_white"></i> Jobs</h2></a>
+            <a href="{{ route('news.index') }}" class="mobile_link"><h2 class="color_white font_w500"><i class="ri-newspaper-line color_white"></i> News & Events</h2></a>
+            <a href="{{ route('contact') }}" class="mobile_link"><h2 class="color_white font_w500"><i class="ri-contacts-book-line color_white"></i> Contact</h2></a>
+        </div>
+    </div>
     
     <div class="main_container w_100 h_fc">
         @yield('content')

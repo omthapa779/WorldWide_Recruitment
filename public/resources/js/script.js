@@ -91,3 +91,84 @@ document.addEventListener('DOMContentLoaded', function() {
     newsHolder.addEventListener('mouseenter', () => clearInterval(autoRotate));
     newsHolder.addEventListener('mouseleave', () => autoRotate = setInterval(rotateNews, 5000));
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const body = document.body;
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Navbar Sticky Behavior
+    const navbar = document.getElementById('navbar');
+    const isHomePage = document.body.classList.contains('is_home');
+
+    if (isHomePage) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > window.innerHeight * 0.9) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+        });
+    }
+
+    // Counter Animation
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const counters = document.querySelectorAll('[data-count]');
+    counters.forEach(counter => {
+        const target = parseInt(counter.dataset.count);
+        
+        gsap.to(counter, {
+            textContent: target,
+            duration: 2,
+            ease: "power1.out",
+            snap: { textContent: 1 },
+            scrollTrigger: {
+                trigger: counter,
+                start: "top center+=100",
+                toggleActions: "play none none reverse"
+            }
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('adminMenuToggle');
+    const mobileMenu = document.getElementById('adminMobileMenu');
+    const body = document.body;
+
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            
+            // Toggle menu icon
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('ri-menu-3-line');
+            icon.classList.toggle('ri-close-line');
+        });
+
+        // Close menu when clicking links
+        const mobileLinks = document.querySelectorAll('.mobile_link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+                body.style.overflow = '';
+                
+                const icon = menuToggle.querySelector('i');
+                icon.classList.add('ri-menu-3-line');
+                icon.classList.remove('ri-close-line');
+            });
+        });
+    }
+});

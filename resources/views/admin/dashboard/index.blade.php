@@ -73,7 +73,7 @@
         </x-button>
     </div>
     <!-- Hero Section Management -->
-    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s4">
+    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s2">
     
         @if($hero = \App\Models\Hero::getActive())
         <div class="hero_preview w_100 grid col_2 gap_2vw ">
@@ -120,7 +120,7 @@
     </div>
 
     <!-- Ads Section Management -->
-    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s4">
+    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s2">
         @if($ad = \App\Models\Ad::getActive())
         <div class="hero_preview w_100 grid col_2 gap_2vw">
             <!-- Image Preview -->
@@ -149,6 +149,71 @@
             <x-button href="{{ route('admin.ads.edit') }}" class="mtop_2vh">
                 <h3 class="font_w500 color_white">Set Up Advertisement</h3>
             </x-button>
+        </div>
+        @endif
+    </div>
+
+    <!-- News Section Management -->
+    <div class="admin_title grid col_2 justify_sb align_c mbottom_2vh mtop_2vh">
+        <x-section-title text="Latest News" />
+        <x-button href="{{ route('admin.news.index') }}" class="admin_action_button">
+            <h3 class="font_w500 color_white p_s4">Manage News</h3>
+        </x-button>
+    </div>
+    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s2">
+        @if($latestNews = \App\Models\News::latest('posted_on')->take(3)->get())
+        <div class="news_preview w_100 grid col_3 gap_2vw">
+            @foreach($latestNews as $news)
+            <div class="preview_card bg_white bradius_s p_v4 p_s2">
+                <div class="preview_image w_100 h_20vh">
+                    <img src="{{ asset('storage/' . $news->image_path) }}" 
+                        alt="{{ $news->title }}"
+                        class="w_100 h_100 obj_cover bradius_s">
+                </div>
+                <div class="preview_content flex_cl gap_1vh mtop_2vh">
+                    <h4 class="color_primary">{{ $news->title }}</h4>
+                    <h5 class="color_blue">{{ $news->time_ago }}</h5>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @else
+        <div class="empty_state text_ac p_v4">
+            <h4 class="color_light">No news articles yet</h4>
+        </div>
+        @endif
+    </div>
+
+    <!-- Jobs Section Management -->
+    <div class="admin_title grid col_2 justify_sb align_c mbottom_2vh mtop_2vh">
+        <x-section-title text="Featured Jobs" />
+        <x-button href="{{ route('admin.jobs.index') }}" class="admin_action_button">
+            <h3 class="font_w500 color_white p_s4">Manage Jobs</h3>
+        </x-button>
+    </div>
+    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s2">
+        @if($featuredJobs = \App\Models\Job::where('is_featured', true)->take(3)->get())
+        <div class="jobs_preview w_100 grid col_3 gap_2vw">
+            @foreach($featuredJobs as $job)
+            <div class="preview_card bg_white bradius_s p_v4 p_s2">
+                <div class="preview_image w_100 h_20vh">
+                    <img src="{{ asset('storage/' . $job->image_path) }}" 
+                        alt="{{ $job->title }}"
+                        class="w_100 h_100 obj_cover bradius_s">
+                </div>
+                <div class="preview_content flex_cl gap_1vh mtop_2vh">
+                    <h4 class="color_primary">{{ $job->title }}</h4>
+                    <div class="flex justify_sb">
+                        <h5 class="color_blue">{{ $job->country }}</h5>
+                        <h5 class="color_light">{{ $job->positions_left }} Positions</h5>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @else
+        <div class="empty_state text_ac p_v4">
+            <h4 class="color_light">No featured jobs yet</h4>
         </div>
         @endif
     </div>

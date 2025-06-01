@@ -103,5 +103,7 @@
 
 <!-- contacts -->
 @include('sections.contact')
-
+<script>
+    document.body.classList.add('is_home');
+</script>
 @endsection

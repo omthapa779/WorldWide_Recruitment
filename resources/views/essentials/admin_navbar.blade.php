@@ -8,14 +8,43 @@
     <link rel="stylesheet" href="{{ asset('../resources/css/Specifics.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
-<body>
-<div class="mobile_menu w_100 h_10vh bg_white_light flex justify_sb align_c p_s7 primary_font">
-        <h3>WorldWide <br> Recruitment Servicess</h3>
-
-         <button class="menu_extended" id="menuToggle" aria-label="Open Menu">
-            <h2><i class="ri-menu-3-line"></i></h2>
+<body class="admin_body">
+    <!-- Admin Navbar -->
+    <section id="adminNavbar" class="navbar_sticky w_100 h_10vh bg_primary p_s7 primary_font flex justify_sb align_c">
+        <div class="navbar_logo flex align_c gap_1vw">
+            <h3 class="color_white font_w700">WorldWide<br>Recruitment</h3>
+        </div>
+        <button class="menu_toggle" id="adminMenuToggle" aria-label="Toggle Menu">
+            <h2><i class="ri-menu-3-line color_white"></i></h2>
         </button>
-</div>
+    </section>
+
+    <!-- Mobile Menu -->
+    <div id="adminMobileMenu" class="mobile_menu_fullscreen">
+        <div class="mobile_menu_content flex_cl justify_c align_c gap_4vh primary_font">
+            <a href="{{ route('admin.dashboard') }}" class="mobile_link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <h2 class="color_white font_w500"><i class="ri-dashboard-line color_white"></i> Dashboard</h2>
+            </a>
+            <a href="{{ route('admin.hero.index') }}" class="mobile_link {{ request()->routeIs('admin.hero.*') ? 'active' : '' }}">
+                <h2 class="color_white font_w500"><i class="ri-image-edit-line color_white"></i> Hero Management</h2>
+            </a>
+            <a href="{{ route('admin.ads.index') }}" class="mobile_link {{ request()->routeIs('admin.ads.*') ? 'active' : '' }}">
+                <h2 class="color_white font_w500"><i class="ri-advertisement-line color_white"></i> Ads Management</h2>
+            </a>
+            <a href="{{ route('admin.news.index') }}" class="mobile_link {{ request()->routeIs('admin.news.*') ? 'active' : '' }}">
+                <h2 class="color_white font_w500"><i class="ri-newspaper-line color_white"></i> News & Events</h2>
+            </a>
+            <a href="{{ route('admin.jobs.index') }}" class="mobile_link {{ request()->routeIs('admin.jobs.*') ? 'active' : '' }}">
+                <h2 class="color_white font_w500"><i class="ri-briefcase-4-line color_white"></i> Jobs Management</h2>
+            </a>
+            <form action="{{ route('admin.logout') }}" method="POST" class="m_0">
+                @csrf
+                <button type="submit" class="mobile_link">
+                    <h2 class="color_white font_w500"><i class="ri-logout-box-line color_white"></i> Logout</h2>
+                </button>
+            </form>
+        </div>
+    </div>
 
 <div class="admin_main_container flex">
     <!-- Sidebar -->

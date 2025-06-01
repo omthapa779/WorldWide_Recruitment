@@ -5,17 +5,17 @@
         <div class="stats w_100 h_fc grid row_2 gap_1vw">
             <div class="two_stats w_100 h_fc grid col_2 gap_1vw">
                 <div class="experience_stat w_100 h_35vh flex_cl justify_c align_c bg_orange opacity_80">
-                    <h2 class="color_white opacity_100">7 +</h2>
+                    <h2 class="color_white opacity_100" data-count="7">0</h2>
                     <h3 class="text_ac color_white opacity_100">Years of <br> Experience</h3>
                 </div>
                 <div class="countries_stat w_100 h_35vh flex_cl justify_c align_c bg_light">
-                    <h2 class="color_white">20 +</h2>
+                    <h2 class="color_white" data-count="20">0</h2>
                     <h3 class="text_ac color_white">Different <br> Countries</h3>
                 </div>
             </div>
             <div class="clients_stats w_100 h_35vh flex_cl justify_c align_c bg_blue">
-                    <h2 class="color_white">27,000 +</h2>
-                    <h3 class="text_ac color_white">Satisfied <br> Clients</h3>
+                <h2 class="color_white" data-count="27000">0</h2>
+                <h3 class="text_ac color_white">Satisfied <br> Clients</h3>
             </div>
         </div>
 
