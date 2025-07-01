@@ -11,7 +11,8 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::latest()->paginate(10);
+        // Show all news (draft and published) for admin
+        $news = News::latest('posted_on')->paginate(10);
         return view('admin.news.index', compact('news'));
     }
 
@@ -20,83 +21,83 @@ class NewsController extends Controller
         return view('admin.news.create');
     }
 
-    
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image_1' => 'nullable|image',
-            'image_2' => 'nullable|image',
-            'posted_on' => 'required|date'
+            'image_1' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'posted_on' => 'nullable|date',
         ]);
 
-        $data = $request->only(['title', 'content', 'posted_on']);
+        $status = $request->input('action') === 'publish' ? 'published' : 'draft';
 
-        // Handle Image 1
+        $data = [
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'posted_on' => $validated['posted_on'] ?? now(),
+            'status' => $status,
+        ];
+
         if ($request->hasFile('image_1')) {
             $data['image_1'] = $request->file('image_1')->store('news', 'public');
         }
-
-        // Handle Image 2
         if ($request->hasFile('image_2')) {
             $data['image_2'] = $request->file('image_2')->store('news', 'public');
         }
 
-        $news = News::create($data);
+        News::create($data);
 
         return redirect()->route('admin.news.index')
-            ->with('success', 'News created successfully');
+            ->with('success', $status === 'published' ? 'News published!' : 'Draft saved!');
     }
+
     public function edit(News $news)
     {
         return view('admin.news.edit', compact('news'));
     }
+
     public function update(Request $request, News $news)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image_1' => 'nullable|image',
-            'image_2' => 'nullable|image',
-            'posted_on' => 'required|date'
+            'image_1' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'posted_on' => 'nullable|date',
         ]);
 
-        $data = $request->only(['title', 'content', 'posted_on']);
+        $status = $request->input('action') === 'publish' ? 'published' : 'draft';
 
-        // Handle Image 1
+        $data = [
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'posted_on' => $validated['posted_on'] ?? now(),
+            'status' => $status,
+        ];
+
         if ($request->hasFile('image_1')) {
-            if ($news->image_1) {
-                Storage::disk('public')->delete($news->image_1);
-            }
+            if ($news->image_1) Storage::disk('public')->delete($news->image_1);
             $data['image_1'] = $request->file('image_1')->store('news', 'public');
         }
-
-        // Handle Image 2
         if ($request->hasFile('image_2')) {
-            if ($news->image_2) {
-                Storage::disk('public')->delete($news->image_2);
-            }
+            if ($news->image_2) Storage::disk('public')->delete($news->image_2);
             $data['image_2'] = $request->file('image_2')->store('news', 'public');
         }
 
         $news->update($data);
 
         return redirect()->route('admin.news.index')
-            ->with('success', 'News updated successfully');
+            ->with('success', $status === 'published' ? 'News updated and published!' : 'Draft updated!');
     }
 
     public function destroy(News $news)
     {
-        // Extract image paths from content and delete them
-        preg_match_all('/<img[^>]+src="([^">]+)"/', $news->content, $matches);
-        foreach ($matches[1] as $src) {
-            $path = str_replace(asset('storage/'), '', $src);
-            Storage::disk('public')->delete($path);
-        }
-        
+        if ($news->image_1) Storage::disk('public')->delete($news->image_1);
+        if ($news->image_2) Storage::disk('public')->delete($news->image_2);
         $news->delete();
-        return redirect()->route('admin.news.index')
-            ->with('success', 'News deleted successfully');
+
+        return redirect()->route('admin.news.index')->with('success', 'News deleted.');
     }
 }

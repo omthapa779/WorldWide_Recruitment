@@ -7,12 +7,14 @@ use Carbon\Carbon;
 
 class News extends Model
 {
+   
     protected $fillable = [
-        'title', 
+        'title',
         'content', 
-        'image_1',
-        'image_2',
-        'posted_on'
+        'image_1', 
+        'image_2', 
+        'posted_on', 
+        'status'
     ];
 
     protected $casts = [

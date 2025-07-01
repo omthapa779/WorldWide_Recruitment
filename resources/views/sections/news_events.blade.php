@@ -2,7 +2,7 @@
     <x-section-title text="News & Events" />
 
     @php
-        $allNews = \App\Models\News::latest()->take(5)->get();
+        $allNews = \App\Models\News::where('status', 'published')->latest()->take(5)->get();
         $tableNews = $allNews->take(5);
     @endphp
 

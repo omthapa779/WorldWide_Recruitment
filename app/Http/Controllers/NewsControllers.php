@@ -8,7 +8,7 @@ class NewsControllers extends Controller
 {
     public function index()
     {
-        $news = News::latest()->paginate(12);
+        $news = \App\Models\News::where('status', 'published')->latest('posted_on')->paginate(12);
         return view('news.index', compact('news'));
     }
 
