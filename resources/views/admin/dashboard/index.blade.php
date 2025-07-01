@@ -114,7 +114,7 @@
 
     <div class=" admin_title grid col_2 justify_sb align_c mbottom_2vh mtop_2vh">
         <x-section-title text="Ads Section" />
-        <x-button href="{{ route('admin.hero.edit') }}" class="admin_action_button" >
+        <x-button href="{{ route('admin.ads.edit') }}" class="admin_action_button" >
             <h3 class="font_w500 color_white p_s4">Edit Ads</h3>
         </x-button>
     </div>
@@ -161,14 +161,27 @@
         </x-button>
     </div>
     <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s2">
-        @if($latestNews = \App\Models\News::latest('posted_on')->take(3)->get())
+        @php
+            $latestNews = \App\Models\News::latest('posted_on')->take(3)->get();
+        @endphp
+        @if($latestNews->count())
         <div class="news_preview w_100 grid col_3 gap_2vw">
             @foreach($latestNews as $news)
             <div class="preview_card bg_white bradius_s p_v4 p_s2">
                 <div class="preview_image w_100 h_20vh">
-                    <img src="{{ asset('storage/' . $news->image_path) }}" 
-                        alt="{{ $news->title }}"
-                        class="w_100 h_100 obj_cover bradius_s">
+                    @if($news->image_1)
+                        <img src="{{ asset('storage/' . $news->image_1) }}" 
+                            alt="{{ $news->title }}"
+                            class="w_100 h_100 obj_cover bradius_s">
+                    @elseif($news->image_2)
+                        <img src="{{ asset('storage/' . $news->image_2) }}" 
+                            alt="{{ $news->title }}"
+                            class="w_100 h_100 obj_cover bradius_s">
+                    @else
+                        <div class="w_100 h_100 flex justify_c align_c bg_gray_light bradius_s">
+                            <h3><i class="ri-image-line color_light"></i></h3>
+                        </div>
+                    @endif
                 </div>
                 <div class="preview_content flex_cl gap_1vh mtop_2vh">
                     <h4 class="color_primary">{{ $news->title }}</h4>

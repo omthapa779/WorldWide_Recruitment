@@ -15,7 +15,7 @@
                 <i class="ri-map-pin-2-fill color_white"></i>
             </div>
             <h3 class="color_primary mtop_2vh">Our Location</h3>
-            <p class="mtop_2vh">Kathmandu, Nepal<br>Near Koteshwor Chowk</p>
+            <p class="mtop_2vh">Samakhusi Chowk, <br> Kathmandu 44600, Nepal</p>
         </div>
         
         <div class="contact_info_card w_100 h_fc bg_white_light bradius_s p_v5 p_s2">
@@ -23,16 +23,20 @@
                 <i class="ri-phone-fill color_white"></i>
             </div>
             <h3 class="color_primary mtop_2vh">Phone Number</h3>
-            <p class="mtop_2vh">+977-01-4545454<br>+977-9851234567</p>
+            <p class="mtop_2vh">
+                  <a href="tel:+977015363716"  class="footer_link">+977-01-5363716</a>
+                  <br>
+                <a href="tel:+9779841893098"  class="footer_link">+977-9841893098</a></p>
         </div>
         
-        <div class="contact_info_card w_100 h_fc bg_white_light bradius_s p_v5 p_s2">
+          <a href="mailto:info@wrsnepal.com" class="w_100 h_100"><div class="contact_info_card w_100 h_100 bg_white_light bradius_s p_v5 p_s2">
             <div class="contact_icon bg_blue w_fc bradius_s p_v2 p_s2">
                 <i class="ri-mail-fill color_white"></i>
             </div>
             <h3 class="color_primary mtop_2vh">Email Address</h3>
-            <p class="mtop_2vh">info@wrs.com.np<br>careers@wrs.com.np</p>
+            <p class="mtop_2vh">wrsnepal@gmail.com</p>
         </div>
+        </a>
     </div>
 
     @include('sections.contact')

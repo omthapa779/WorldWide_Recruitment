@@ -28,7 +28,7 @@
             <!-- Main Content -->
             <div class="main_content col_span_2 flex_cl gap_4vh">
                 <div class="content_text w_100 flex_cl gap_2vh">
-                    <h4 class="font_w400">{{ $job->description }}</h4>
+                    <h4 class="font_w400">{!! $job->description !!}</h4>
                 </div>
             </div>
         </div>

@@ -6,7 +6,11 @@
 <section class="hero_section w_100 h_100vh bg_white primary_font" id="hero" >
     <div class="hero_content w_100 h_100 grid col_2 gap_2vw">
         <div class="right_hero w_100 h_100 flex_cl justify_sb p_s7 p_v7">
-            <h2>WorldWide <br> Recruitment Services</h2>
+            
+            <div class="w_100 h_fc flex gap_1vw align_c">
+                <img src="{{ asset('./resources/images/logo.png') }}" alt="" class="h_10vh obj_contain">
+                <h2 class="color_primary">WorldWide Recruitment <br> Services Pvt. Ltd.</h2>
+            </div>
 
             <div class="menus w_100 flex gap_2vw ">
                 <div class="line h_100 bg_light"></div>
@@ -14,8 +18,8 @@
                     <a href="/"><h3 class="font_w500 w_100 color_light">Home</h3></a>
                     <a href="/about-us"><h3 class="font_w500 w_100 color_light">About</h3></a>
                     <a href="/services"><h3 class="font_w500 w_100 color_light">Services</h3></a>
-                    <a href="#"><h3 class="font_w500 w_100 color_light">Jobs</h3></a>
-                    <a href="#"><h3 class="font_w500 w_100 color_light">News & Events</h3></a>
+                    <a href="/jobs"><h3 class="font_w500 w_100 color_light">Jobs</h3></a>
+                    <a href="/news"><h3 class="font_w500 w_100 color_light">News & Events</h3></a>
                     <a href="/contact"><h3 class="font_w500 w_100 color_light">Contact</h3></a>
                 </div>
             </div>
@@ -42,19 +46,19 @@
             @if($hero = \App\Models\Hero::getActive())
                 <h1>{{ $hero->title }}</h1>
                 <div class="button_holder w_100 flex_cl">
-                    <x-button href="/dashboard">
+                    <x-button href="/contact">
                         <h3 class="font_w500 color_white">{{ $hero->button_cta }}</h3>
                     </x-button>
-                     <x-button href="/dashboard"><h3 class="font_w500 color_white">Company's Profile</h3></x-button>
+                     <x-button href="{{ asset('./resources/WorldWide_Company_Profile.pdf') }}"><h3 class="font_w500 color_white">Company's Profile</h3></x-button>
                 </div>
             @else
                 <!-- Fallback content -->
                 <h1>Your Journey to Overseas Jobs Starts Here - With WRS Nepal</h1>
                 <div class="button_holder w_100 flex_cl">
-                    <x-button href="/dashboard">
+                    <x-button href="/contact">
                         <h3 class="font_w500 color_white">Get Started</h3>
                     </x-button>
-                    <x-button href="/dashboard"><h3 class="font_w500 color_white">Company's Profile</h3></x-button>
+                    <x-button href="{{ asset('./resources/WorldWide_Company_Profile.pdf') }}"><h3 class="font_w500 color_white">Company's Profile</h3></x-button>
                 </div>
             @endif
         </div>
@@ -62,12 +66,13 @@
 </section>
 
 
+<!-- news and events section -->
+@include('sections.news_events')
+
 
 
 <!-- who are we section -->
-<section class="who_are_we w_100 h_90vh bg_white grid col_2 p_s7 align_fe gap_10vw primary_font">
-    <img src="{{ asset('./resources/images/who_are_we.png') }}" alt="About | WorldWide Recruitment Services" class="who_are_we_image w_100 h_100 obj_contain">
-
+<section class="who_are_we w_100 h_fc bg_white grid col_2 p_s7 p_v7 align_fe gap_10vw primary_font">
     <div class="about_section w_100 h_100 flex_cl justify_c gap_1vw">
         <x-section-title text="Who are We ?" />
 
@@ -82,10 +87,12 @@
             <x-button href="/about-us" variant="secondary" class="opacity_80"><h3 class=" color_white">Learn More</h3></x-button>
         </div>
     </div>
+
+     <img src="{{ asset('./resources/images/About_page.jpg') }}" alt="About | WorldWide Recruitment Services" class="who_are_we_image w_100 h_100 obj_contain bradius_s">
+
 </section>
 
-<!-- news and events section -->
-@include('sections.news_events')
+
 
 <!-- services -->
 @include('sections.services')

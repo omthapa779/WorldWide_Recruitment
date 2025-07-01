@@ -10,8 +10,8 @@
             security—ensuring safe, legal, and rewarding placements for our clients.</p>
         </div>
         <div class="about_services w_100 h_fc grid col_3 gap_2vw">
-            <div class="about_service_card w_100 h_20vh bg_white bradius_s grid gap_2vw">
-                <div class="circle_orange w_100 h_100 circle bg_orange opacity_80 flex justify_c align_c">
+            <div class="about_service_card w_100 h_fc bg_white bradius_s grid gap_2vw">
+                <div class="circle_orange w_100 circle bg_orange opacity_80 flex justify_c align_c">
                     <h2><i class="ri-earth-line color_white font_w500"></i></h2>
                 </div>
 
@@ -19,8 +19,8 @@
                     <h3>Overseas <br> Recruitment</h3>
                 </div>
             </div>
-            <div class="about_service_card w_100 h_20vh bg_white bradius_s grid gap_2vw">
-                <div class="circle_orange w_100 h_100 circle bg_orange opacity_80 flex justify_c align_c">
+            <div class="about_service_card w_100 h_fc bg_white bradius_s grid gap_2vw">
+                <div class="circle_orange w_100 circle bg_orange opacity_80 flex justify_c align_c">
                     <h2><i class="ri-file-paper-2-line color_white font_w500"></i></h2>
                 </div>
 
@@ -28,8 +28,8 @@
                     <h3>Documentation <br> Support</h3>
                 </div>
             </div>
-             <div class="about_service_card w_100 h_20vh bg_white bradius_s grid gap_2vw">
-                <div class="circle_orange w_100 h_100 circle bg_orange opacity_80 flex justify_c align_c">
+             <div class="about_service_card w_100 h_fc bg_white bradius_s grid gap_2vw">
+                <div class="circle_orange w_100 circle bg_orange opacity_80 flex justify_c align_c">
                     <h2><i class="ri-flight-takeoff-line color_white font_w500"></i></h2>
                 </div>
 
@@ -39,9 +39,9 @@
             </div>
         </div>
         <div class="about_hero_image w_100 h_35vh">
-            <img src="{{ asset('./resources/images/services/overseas_recruitment.jpg') }}" alt="" class="w_100 h_100 obj_cover">
+            <img src="{{ asset('./resources/images/About_page.jpg') }}" alt="" class="w_100 h_100 obj_cover">
         </div>
-    </div>
+    </div>  
 </section>
 
 @include('sections.WhyChooseUs')

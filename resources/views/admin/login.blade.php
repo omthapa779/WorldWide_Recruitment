@@ -68,4 +68,22 @@
         display: none;
     }
 </style>
+<script>
+document.querySelectorAll('.toggle_password').forEach(button => {
+    button.addEventListener('click', () => {
+        const passwordInput = button.closest('.password_input_group').querySelector('input[type="password"], input[type="text"]');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            button.querySelector('i').classList.remove('ri-eye-line');
+            button.querySelector('i').classList.add('ri-eye-off-line');
+        } else {
+            passwordInput.type = 'password';
+            button.querySelector('i').classList.remove('ri-eye-off-line');
+            button.querySelector('i').classList.add('ri-eye-line');
+        }
+    });
+});
+</script>
+
 @endsection

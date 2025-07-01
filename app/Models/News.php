@@ -3,37 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 
 class News extends Model
 {
     protected $fillable = [
-        'title',
-        'content',
-        'cta',
-        'image_path',
+        'title', 
+        'content', 
+        'image_1',
+        'image_2',
         'posted_on'
     ];
 
-    // Use casts instead of $dates
     protected $casts = [
-        'posted_on' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'posted_on' => 'datetime'
     ];
-
-    public function getTimeAgoAttribute()
-    {
-        return Carbon::parse($this->posted_on)->diffForHumans();
-    }
-
-    public static function getLatestNews($limit = 4)
-    {
-        return self::latest('posted_on')->take($limit)->get();
-    }
 
     public function getExcerpt($length = 150)
     {
         return \Str::limit(strip_tags($this->content), $length);
+    }
+
+    public function getTimeAgoAttribute()
+    {
+        return $this->posted_on ? $this->posted_on->diffForHumans() : '';
     }
 }

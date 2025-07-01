@@ -1,4 +1,4 @@
-<section class="featured_jobs w_100 h_100vh bg_white primary_font flex_cl p_s7 p_v10 gap_2vw justify_c">
+<section class="featured_jobs w_100 h_80vh bg_white primary_font flex_cl p_s7 p_v7 gap_2vw justify_c">
     <div class="featured_title flex justify_sb">
         <x-section-title text="Featured Jobs" />
         <div class="button_holder w_20 flex_cl">
@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <div class="jobs_holder w_100 h_fc grid col_left_3 gap_2vw">
+    <div class="jobs_holder w_100 h_100 grid col_left_3 gap_2vw">
         @php
             $featuredJobs = \App\Models\Job::getFeaturedJobs(5);
             $mainJob = $featuredJobs->shift();
@@ -21,9 +21,9 @@
                  class="job_image w_100 h_100 obj_cover"
                  alt="{{ $mainJob->title }} - WorldWide Recruitment Services">
             
-            <div class="overlay w_100 h_100 bg_dark opacity_80"></div>
+            <div class="overlay w_100 h_100 bg_dark opacity_80 pos_absolute"></div>
 
-            <div class="job_card_content w_100 h_100 flex_cl justify_fe p_s4">
+            <div class="job_card_content w_100 h_100 flex_cl justify_fe p_s4 pos_absolute">
                 <h2 class="color_white">{{ $mainJob->title }}</h2>
                 <h4 class="color_white_light opacity_80 font_w500">
                     {{ $mainJob->positions_left }} Positions Left
@@ -41,9 +41,9 @@
                      class="job_image w_100 h_100 obj_cover"
                      alt="{{ $job->title }} - WorldWide Recruitment Services">
             
-                <div class="overlay w_100 h_100 bg_dark opacity_80"></div>
+                <div class="overlay w_100 h_100 bg_dark opacity_80 pos_absolute"></div>
 
-                <div class="job_card_content w_100 h_100 flex_cl justify_fe p_s4">
+                <div class="job_card_content w_100 h_100 flex_cl justify_fe p_s4 pos_absolute">
                     <h2 class="color_white">{{ $job->title }}</h2>
                     <h4 class="color_white_light opacity_80 font_w500">
                         {{ $job->positions_left }} Positions Left

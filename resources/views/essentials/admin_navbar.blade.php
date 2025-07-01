@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="{{ asset('../resources/css/Global.css') }}">
     <link rel="stylesheet" href="{{ asset('../resources/css/Specifics.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('./resources/favicon.ico') }}" type="image/x-icon">
 </head>
 <body class="admin_body">
     <!-- Admin Navbar -->
     <section id="adminNavbar" class="navbar_sticky w_100 h_10vh bg_primary p_s7 primary_font flex justify_sb align_c">
-        <div class="navbar_logo flex align_c gap_1vw">
-            <h3 class="color_white font_w700">WorldWide<br>Recruitment</h3>
+        <div class="navbar_logo flex align_c gap_1vw h_100">
+            <img src="{{ asset('./resources/images/logo.png') }}" alt="Logo" class="navbar_logo_img h_7vh obj_contain">
+            <h3 class="opacity_100 font_w700 color_primary">WorldWide Recruitment <br> Services Pvt. Ltd.</h3>
         </div>
         <button class="menu_toggle" id="adminMenuToggle" aria-label="Toggle Menu">
             <h2><i class="ri-menu-3-line color_white"></i></h2>
@@ -52,12 +55,17 @@
         <!-- Top Section -->
         <div class="sidebar_top w_100 flex_cl gap_2vw">
             <!-- Logo -->
-            <div class="flex_cl align_c gap_1vh p_s2">
-                <h4 class="color_primary">WorldWide <br> Recruitment Services</h4>
+            <div class="flex align_c gap_1vw p_s2">
+                <img src="{{ asset('./resources/images/logo.png') }}" alt="Logo" class=" h_7vh obj_contain">
+                <h4 class="color_primary">WorldWide Recruitment <br> Services Pvt. Ltd.</h4>
             </div>
 
             <!-- Navigation -->
             <nav class="sidebar_nav w_100 flex_cl gap_1vh">
+                <a href="{{ route('admin.dashboard') }}" class="sidebar_link w_100 p_s2 p_v2 flex align_c gap_1vw {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <i class="ri-dashboard-line"></i>
+                    <h5>Dashboard</h5>
+                </a>
                 <a href="{{ route('admin.hero.index') }}" class="sidebar_link w_100 p_s2 p_v2 flex align_c gap_1vw {{ request()->routeIs('admin.hero.*') ? 'active' : '' }}">
                     <i class="ri-image-edit-line"></i>
                     <h5>Hero Management</h5>
@@ -101,6 +109,22 @@
     </main>
 </div>
     <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            height: 300,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link', 'picture']],
+                ['view', ['fullscreen', 'codeview']],
+            ]
+        });
+    });
+    </script>
     <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.3.3/dist/lenis.min.js"></script>
     <script src="{{ asset('./resources/js/script.js') }}"></script>

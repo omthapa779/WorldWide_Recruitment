@@ -8,13 +8,14 @@ use Illuminate\Support\Carbon;
 class Job extends Model
 {
      protected $fillable = [
-        'title',
-        'positions_left',
-        'country',
-        'description',
-        'image_path',
-        'is_featured',
-        'posted_on'
+    'title',
+    'positions_left',
+    'country',
+    'description',
+    'image_path',
+    'is_featured',
+    'featured_order',
+    'posted_on'
     ];
 
     protected $casts = [
@@ -29,8 +30,8 @@ class Job extends Model
 
     public static function getFeaturedJobs($limit = 5)
     {
-        return self::where('is_featured', true)
-            ->latest('posted_on')
+        return self::where('is_featured', 1)
+            ->orderBy('featured_order') 
             ->take($limit)
             ->get();
     }

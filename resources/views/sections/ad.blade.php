@@ -1,4 +1,4 @@
-<section class="ads w_100 h_fc bg_white p_v7">
+<section class="ads w_100 h_fc bg_white ">
     @if($ad = \App\Models\Ad::getActive())
         <img src="{{ asset('storage/' . $ad->image_path) }}" 
              alt="{{ $ad->title }} - WorldWide Recruitment Services" 

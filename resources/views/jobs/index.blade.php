@@ -2,7 +2,7 @@
 @section('title', 'Available Jobs')
 
 @section('content')
-<div class="jobs_page w_100 min_100vh primary_font p_s7 p_v7 bg_white flex_cl gap_4vh">
+<div class="jobs_page w_100 min_100vh primary_font p_s7 p_v10 bg_white flex_cl gap_4vh">
     <x-section-title text="Available Jobs" />
 
     <div class="jobs_grid w_100 grid col_3 gap_2vw">
@@ -20,7 +20,7 @@
                     <h5 class="color_blue">{{ $job->country }}</h5>
                     <h5 class="color_light">{{ $job->positions_left }} Positions</h5>
                 </div>
-                <h5 class="color_light">{{ \Str::limit($job->description, 100) }}</h5>
+                <h5 class="color_light">{{ \Str::limit(strip_tags($job->description), 150) }}</h5>
             </div>
         </a>
         @empty

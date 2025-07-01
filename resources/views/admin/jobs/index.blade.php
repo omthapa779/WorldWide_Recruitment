@@ -23,9 +23,9 @@
                      alt="{{ $job->title }}"
                      class="w_100 h_100 obj_cover bradius_s">
             </div>
-            <div class="job_details w_80 flex_cl justify_sb">
+            <div class="job_details w_100 flex_cl justify_sb">
                 <div class="flex_cl gap_1vw">
-                    <div class="flex justify_sb align_c">
+                    <div class="flex justify_sb w_100 align_c">
                         <h2 class="color_primary">{{ $job->title }}</h2>
                         <div class="status_badge {{ $job->is_featured ? 'bg_green' : 'bg_orange' }} p_v2 p_s4 bradius_s bg_blue">
                             <h5 class="color_white">{{ $job->is_featured ? 'Featured' : 'Not Featured' }}</h5>
@@ -33,19 +33,19 @@
                     </div>
                     <div class="flex gap_2vw">
                         <div class="flex align_c gap_1vw">
-                            <i class="ri-map-pin-line color_blue"></i>
+                            <h3><i class="ri-map-pin-line color_blue"></i></h3>
                             <h5 class="color_blue">{{ $job->country }}</h5>
                         </div>
                         <div class="flex align_c gap_1vw">
-                            <i class="ri-team-line color_light"></i>
+                            <h3><i class="ri-team-line color_light"></i></h3>
                             <h5 class="color_light">{{ $job->positions_left }} Positions</h5>
                         </div>
                         <div class="flex align_c gap_1vw">
-                            <i class="ri-time-line color_light"></i>
+                            <h3><i class="ri-time-line color_light"></i></h3>
                             <h5 class="color_light">Posted {{ $job->posted_on->diffForHumans() }}</h5>
                         </div>
                     </div>
-                    <h5 class="color_light">{{ \Str::limit($job->description, 150) }}</h5>
+                    <h5 class="color_light">{{ \Str::limit(strip_tags($job->description), 150) }}</h5>
                 </div>
                 <div class="flex gap_1vw">
                     <x-button href="{{ route('admin.jobs.edit', $job) }}">

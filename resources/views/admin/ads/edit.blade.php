@@ -5,7 +5,7 @@
 @section('content')
 <div class="w_100 h_fc flex_cl gap_4vh">
     <div class="w_100 flex">
-        <x-section-title text="Hero Section Form" />
+        <x-section-title text="Ads Section Form" />
     </div>
     <div class="form_card bg_white_light bradius_s p_v4 p_s4 mtop_2vh">
         <form action="{{ route('admin.ads.update') }}" method="POST" enctype="multipart/form-data" 

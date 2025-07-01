@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
-    --primary_font: 'Noto Sans', sans-serif;
+    --primary_font: 'Montserrat';
     --secondary_font: 'PT Serif';
 
     --white_color: #FFFAFA;
-    --primary_color: #004687;
+    --primary_color: #002f7f;
     --secondary_color: #fe6601;
     --black_color: #0C0C0C;
     --grey_color: #8b8e8b;
@@ -85,6 +86,9 @@
 .h_100{
     height: 100%;
 }
+.h_7vh{
+    height: 7vh;
+}
 .h_10vh{
     height: 10vh;
 }
@@ -102,6 +106,9 @@
 }
 .h_70vh{
     height: 70vh;
+}
+.h_80vh{
+    height: 80vh;
 }
 .h_90vh{
     height: 90vh;

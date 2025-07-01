@@ -1,25 +1,28 @@
 @extends('essentials.admin_navbar')
 @section('title', 'Edit News')
-@section('page_title', 'Edit News Article')
+
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+@endpush
 
 @section('content')
 <div class="w_100 h_fc flex_cl gap_4vh">
-      <div class="w_100 flex">
-        <x-section-title text="Edit News Form" />
+    <div class="w_100 flex">
+        <x-section-title text="Edit News" />
     </div>
     <div class="form_card bg_white_light bradius_s p_v4 p_s4 mtop_2vh">
-        <form action="{{ route('admin.news.update', $news) }}" method="POST" enctype="multipart/form-data" 
+        <form action="{{ route('admin.news.update', $news->id) }}" method="POST" enctype="multipart/form-data"
               class="w_100 h_fc flex_cl gap_2vw">
             @csrf
             @method('PUT')
-            
+
             <!-- Title -->
             <div class="input_group w_100 flex_cl gap_1vw">
                 <label for="title" class="flex align_c gap_1vw">
-                    <h4 class="font_w400"><i class="ri-text-snippet"></i>  News Title</h4>
+                    <h4 class="font_w400"><i class="ri-newspaper-line"></i> News Title</h4>
                 </label>
-                <input type="text" name="title" id="title" 
-                       class="form_input w_100" required 
+                <input type="text" name="title" id="title"
+                       class="form_input w_100" required
                        value="{{ old('title', $news->title) }}"
                        placeholder="Enter news title">
             </div>
@@ -29,38 +32,44 @@
                 <label for="content" class="flex align_c gap_1vw">
                     <h4 class="font_w400"><i class="ri-file-text-line"></i> Content</h4>
                 </label>
-                <textarea name="content" id="content" rows="10" 
-                          class="form_input w_100" required 
+                <textarea name="content" id="summernote"
+                          class="form_input w_100" required rows="10"
                           placeholder="Enter news content">{{ old('content', $news->content) }}</textarea>
             </div>
 
-            <!-- CTA -->
-            <div class="input_group w_100 flex_cl gap_1vw">
-                <label for="cta" class="flex align_c gap_1vw">
-                    <h4 class="font_w400"><i class="ri-cursor-line"></i> Call to Action</h4>
-                </label>
-                <input type="text" name="cta" id="cta" 
-                       class="form_input w_100" required 
-                       value="{{ old('cta', $news->cta) }}"
-                       placeholder="Enter call to action text">
-            </div>
-
-            <!-- Image -->
-            <div class="input_group w_100 flex_cl gap_1vw">
-                <label for="image" class="flex align_c gap_1vw">
-                    <h4 class="font_w400"><i class="ri-image-line"></i> News Image</h4>
-                </label>
-                <input type="file" name="image" id="image" 
-                       class="form_input w_100"
-                       accept="image/*">
-                
-                @if($news->image_path)
-                <div class="current_image w_100 h_20vh mtop_2vh">
-                    <img src="{{ asset('storage/' . $news->image_path) }}" 
-                         alt="Current Image"
-                         class="w_100 h_100 obj_cover bradius_s">
+            <!-- Images -->
+            <div class="grid col_2 gap_2vw w_100">
+                <!-- Image 1 -->
+                <div class="input_group w_100 flex_cl gap_1vw">
+                    <label for="image_1" class="flex align_c gap_1vw">
+                        <h4 class="font_w400"><i class="ri-image-line"></i> Image 1</h4>
+                        <h5 class="color_light">(Optional)</h5>
+                    </label>
+                    <input type="file" name="image_1" id="image_1"
+                           class="form_input w_100" accept="image/*"
+                           onchange="previewImage(this, 'preview_1')">
+                    <div id="preview_1" class="image_preview h_15vh">
+                        @if($news->image_1)
+                            <img src="{{ asset('storage/'.$news->image_1) }}" class="w_100 h_100 obj_cover bradius_s">
+                        @endif
+                    </div>
                 </div>
-                @endif
+
+                <!-- Image 2 -->
+                <div class="input_group w_100 flex_cl gap_1vw">
+                    <label for="image_2" class="flex align_c gap_1vw">
+                        <h4 class="font_w400"><i class="ri-image-add-line"></i> Image 2</h4>
+                        <h5 class="color_light">(Optional)</h5>
+                    </label>
+                    <input type="file" name="image_2" id="image_2"
+                           class="form_input w_100" accept="image/*"
+                           onchange="previewImage(this, 'preview_2')">
+                    <div id="preview_2" class="image_preview h_15vh">
+                        @if($news->image_2)
+                            <img src="{{ asset('storage/'.$news->image_2) }}" class="w_100 h_100 obj_cover bradius_s">
+                        @endif
+                    </div>
+                </div>
             </div>
 
             <!-- Posted On -->
@@ -68,18 +77,84 @@
                 <label for="posted_on" class="flex align_c gap_1vw">
                     <h4 class="font_w400"><i class="ri-calendar-line"></i> Posted Date</h4>
                 </label>
-                <input type="datetime-local" name="posted_on" id="posted_on" 
+                <input type="datetime-local" name="posted_on" id="posted_on"
                        class="form_input w_100"
-                       value="{{ old('posted_on', $news->posted_on->format('Y-m-d\TH:i')) }}">
+                       value="{{ old('posted_on', $news->posted_on ? $news->posted_on->format('Y-m-d\TH:i') : now()->format('Y-m-d\TH:i')) }}">
             </div>
 
             <!-- Submit Button -->
             <x-button type="submit" class="w_100">
                 <h3 class="font_w500 color_white">
-                    <i class="ri-save-line color_white"></i> Update News
+                    <i class="ri-add-line color_white"></i> Update News
                 </h3>
             </x-button>
         </form>
     </div>
 </div>
+
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#summernote').summernote({
+        height: 300,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']],
+            ['view', ['fullscreen', 'codeview']],
+        ],
+        callbacks: {
+            onImageUpload: function(files) {
+                for(let i = 0; i < files.length; i++) {
+                    uploadImage(files[i]);
+                }
+            }
+        }
+    });
+
+    function uploadImage(file) {
+        let formData = new FormData();
+        formData.append('file', file);
+        $.ajax({
+            url: '{{ route("admin.news.upload") }}',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                $('#summernote').summernote('insertImage', response.location);
+            }
+        });
+    }
+});
+
+function previewImage(input, previewId) {
+    const preview = document.getElementById(previewId);
+    preview.innerHTML = '';
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.innerHTML = `<div class="w_100 h_100 pos_relative"><img src="${e.target.result}" class="w_100 h_100 obj_cover bradius_s"></div>`;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+@endpush
+
+<style>
+.image_preview {
+    background: #f5f5f5;
+    border: 0.1vw dashed rgba(0,0,0,0.1);
+    border-radius: 0.5vw;
+    margin-top: 1vh;
+}
+</style>
 @endsection

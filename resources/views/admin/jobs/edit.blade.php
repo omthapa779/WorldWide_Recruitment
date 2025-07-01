@@ -5,8 +5,20 @@
 @section('content')
 <div class="w_100 h_fc flex_cl gap_4vh">
     <div class="form_card bg_white_light bradius_s p_v4 p_s4">
-        <form action="{{ route('admin.jobs.update', $job) }}" method="POST" 
-              enctype="multipart/form-data" class="w_100 h_fc flex_cl gap_2vw">
+
+        @if($errors->any())
+    <div class="alert alert_danger w_100 p_v4 p_s4 bradius_s">
+        <h4 class="color_red">
+            <i class="ri-error-warning-line"></i> Please fix the following errors:
+        </h4>
+        <ul class="list_style_disc p_s4 mtop_2vh">
+            @foreach($errors->all() as $error)
+                <li><h5 class="color_red">{{ $error }}</h5></li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        <form action="{{ route('admin.jobs.update', $job) }}" method="POST" enctype="multipart/form-data" class="w_100 h_fc flex_cl gap_2vw">
             @csrf
             @method('PUT')
             
@@ -55,7 +67,7 @@
                 <label for="description">
                     <h4 class="font_w400">Job Description</h4>
                 </label>
-                <textarea name="description" id="description" rows="10" 
+                <textarea name="description" id="summernote" rows="10" 
                           class="form_input w_100" required>{{ old('description', $job->description) }}</textarea>
             </div>
 
@@ -68,12 +80,25 @@
                 <h5 class="color_light">Leave empty to keep current image</h5>
             </div>
 
-            <div class="input_group w_100 flex gap_1vw align_c">
-                <input type="checkbox" name="is_featured" id="is_featured" 
-                       class="form_checkbox" {{ $job->is_featured ? 'checked' : '' }}>
-                <label for="is_featured">
-                    <h4 class="font_w400">Featured Job</h4>
+            <div class="input_group w_100 flex_cl gap_1vw">
+                <label for="is_featured" class="flex align_c gap_1vw">
+                    <h4 class="font_w400"><i class="ri-star-line"></i> Featured Job</h4>
                 </label>
+                <select name="is_featured" id="is_featured" class="form_input w_100" required>
+                    <option value="1" {{ old('is_featured', $job->is_featured) == 1 ? 'selected' : '' }}>Yes</option>
+                    <option value="0" {{ old('is_featured', $job->is_featured) == 0 ? 'selected' : '' }}>No</option>
+                </select>
+            </div>
+
+            <div class="input_group w_100 flex_cl gap_1vw" id="featured_order_group">
+                <label for="featured_order" class="flex align_c gap_1vw">
+                    <h4 class="font_w400"><i class="ri-list-ordered"></i> Featured Order</h4>
+                </label>
+                <input type="number" name="featured_order" id="featured_order"
+                    class="form_input w_100"
+                    min="1"
+                    value="{{ old('featured_order') }}"
+                    placeholder="Order among featured jobs (1 = highest)">
             </div>
 
             <!-- Action Buttons -->

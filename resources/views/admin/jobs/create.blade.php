@@ -62,7 +62,7 @@
                 <label for="description" class="flex align_c gap_1vw">
                     <h4 class="font_w400"><i class="ri-file-text-line"></i> Job Description</h4>
                 </label>
-                <textarea name="description" id="description" rows="10" 
+                <textarea name="description" id="summernote" rows="10" 
                           class="form_input w_100" required 
                           placeholder="Enter job description">{{ old('description') }}</textarea>
             </div>
@@ -87,6 +87,16 @@
                     <option value="0" {{ old('is_featured') == 0 ? 'selected' : '' }}>No</option>
                 </select>
             </div>
+            <div class="input_group w_100 flex_cl gap_1vw" id="featured_order_group" style="display: {{ old('is_featured', 0) == 1 ? 'block' : 'none' }};">
+                <label for="featured_order" class="flex align_c gap_1vw">
+                    <h4 class="font_w400"><i class="ri-list-ordered"></i> Featured Order</h4>
+                </label>
+                <input type="number" name="featured_order" id="featured_order"
+                    class="form_input w_100"
+                    min="1"
+                    value="{{ old('featured_order') }}"
+                    placeholder="Order among featured jobs (1 = highest)">
+            </div>
 
             <!-- Submit Button -->
             <x-button type="submit" class="w_100">
@@ -97,4 +107,15 @@
         </form>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const isFeatured = document.getElementById('is_featured');
+    const orderGroup = document.getElementById('featured_order_group');
+    if(isFeatured && orderGroup) {
+        isFeatured.addEventListener('change', function() {
+            orderGroup.style.display = this.value == 1 ? 'block' : 'none';
+        });
+    }
+});
+</script>
 @endsection
