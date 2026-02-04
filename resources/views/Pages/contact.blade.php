@@ -9,13 +9,21 @@
         Get in touch with WorldWide Recruitment Services today. Our team is ready to assist you with any inquiries.</p>
     </div>
 
-    <div class="contact_info_holder w_100 h_fc grid col_3 justify_sb gap_4vw p_s7 mtop_10vh">
+    <div class="contact_info_holder w_100 h_fc grid col_2 justify_sb gap_2vw p_s7 mtop_10vh">
         <div class="contact_info_card w_100 h_fc bg_white_light bradius_s p_v5 p_s2">
             <div class="contact_icon bg_blue w_fc bradius_s p_v2 p_s2">
                 <i class="ri-map-pin-2-fill color_white"></i>
             </div>
-            <h3 class="color_primary mtop_2vh">Our Location</h3>
+            <h3 class="color_primary mtop_2vh">Nepal Office</h3>
             <p class="mtop_2vh">Samakhusi Chowk, <br> Kathmandu 44600, Nepal</p>
+        </div>
+
+        <div class="contact_info_card w_100 h_fc bg_white_light bradius_s p_v5 p_s2">
+            <div class="contact_icon bg_blue w_fc bradius_s p_v2 p_s2">
+                <i class="ri-map-pin-2-fill color_white"></i>
+            </div>
+            <h3 class="color_primary mtop_2vh">Japan Branch</h3>
+            <p class="mtop_2vh">〒124-0014 <br> 東京都葛飾区東四つ木1-24-9</p>
         </div>
         
         <div class="contact_info_card w_100 h_fc bg_white_light bradius_s p_v5 p_s2">

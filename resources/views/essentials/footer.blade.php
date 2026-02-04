@@ -26,6 +26,9 @@
 
             <a href="mailto:info@wrsnepal.com" class="footer_link"><h4 class="color_light mtop_2vh font_w500">info@wrsnepal.com</h4></a>
             <a href="tel:+9779841893098" class="footer_link"><h4 class="color_light font_w500">+977 9841893098</h4></a>
+            
+             <h3 class="color_white secondary_font mtop_2vh">Japan Branch</h3>
+            <h4 class="color_light mtop_2vh font_w500">〒124-0014 <br> 東京都葛飾区東四つ木1-24-9</h4>
         </div>
     </div>
 
