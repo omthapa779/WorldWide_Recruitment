@@ -29,6 +29,7 @@
             
              <h3 class="color_white secondary_font mtop_2vh">Japan Branch</h3>
             <h4 class="color_light mtop_2vh font_w500">〒124-0014 <br> 東京都葛飾区東四つ木1-24-9</h4>
+            <a href="tel:+818030956977" class="footer_link"><h4 class="color_light mtop_1vh font_w500">+81 80 3095 6977</h4></a>
         </div>
     </div>
 
