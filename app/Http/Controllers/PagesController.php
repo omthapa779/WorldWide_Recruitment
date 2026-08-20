@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
+/**
+ * The three static pages. All of their copy comes from the shared `site`
+ * translations, so there is nothing to pass through as props.
+ */
 class PagesController extends Controller
 {
-    public function about(){
-        return view('Pages.about');
+    public function about(): Response
+    {
+        return Inertia::render('About');
     }
-    public function services(){
-        return view('Pages.services');
+
+    public function services(): Response
+    {
+        return Inertia::render('Services');
     }
-    public function contact(){
-        return view('Pages.contact');
+
+    public function contact(): Response
+    {
+        return Inertia::render('Contact');
     }
 }

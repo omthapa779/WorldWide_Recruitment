@@ -1,49 +1,40 @@
 @extends('essentials.admin_navbar')
-@section('title', 'Ads Management')
-@section('page_title', 'Advertisement Overview')
+@section('title', 'Advertisement')
+@section('crumb', 'Advertisement')
 
 @section('content')
-<div class="w_100 min_80vh h_fc flex_cl gap_4vh">
-    <div class="w_100 flex">
-         <x-section-title text="Ads Section Management" />
+<div class="adm-page-head">
+    <div>
+        <h1 class="adm-page-title">Advertisement</h1>
+        <p class="adm-page-sub">The banner shown between sections on the homepage.</p>
     </div>
-    <!-- Preview -->
+    <div class="adm-page-actions">
+        <a href="{{ route('admin.ads.edit') }}" class="adm-btn is-primary"><i class="ri-edit-line"></i> Edit advertisement</a>
+    </div>
+</div>
+
+<div class="adm-card">
     @if($ad)
-    <div class="preview_card bg_white_light bradius_s p_v4 p_s4 mtop_2vh">
-        
-        <div class="preview_content w_100 grid col_2 gap_2vw">
-            <div class="preview_image w_100 h_40vh">
-                <img src="{{ asset('storage/' . $ad->image_path) }}" 
-                     alt="{{ $ad->title }}" 
-                     class="w_100 h_100 obj_cover bradius_s">
-            </div>
-            
-            <div class="preview_details flex_cl gap_2vw justify_sb">
-
-                <div class="detail_holder w_100 flex_cl gap_1vw">
-                    <div class="detail_group">
-                        <h5 class="color_light">Title</h5>
-                        <h3 class="color_primary">{{ $ad->title }}</h3>
-                    </div>
-                
-                    <div class="detail_group">
-                        <h5 class="color_light">Last Updated</h5>
-                        <h4 class="color_primary">{{ $ad->updated_at->diffForHumans() }}</h4>
-                    </div>
-                </div>
-
-                <x-button href="{{ route('admin.ads.edit') }}">
-                    <h3 class="font_w500 color_white p_s4">Edit Advertisement</h3>
-                </x-button>
-            </div>
+    <div class="adm-card-head">
+        <h2 class="adm-card-title">Current configuration</h2>
+        <span class="adm-card-meta">Updated {{ $ad->updated_at->diffForHumans() }}</span>
+    </div>
+    <div class="adm-card-body">
+        <div class="adm-grid-2">
+            <img src="{{ asset('storage/' . $ad->image_path) }}" alt="{{ $ad->title }}" class="adm-preview-img is-wide">
+            <dl class="adm-kv">
+                <div><dt>Title</dt><dd>{{ $ad->title }}</dd></div>
+                <div><dt>Last updated</dt><dd>{{ $ad->updated_at->format('Y-m-d H:i') }}</dd></div>
+            </dl>
         </div>
     </div>
     @else
-    <div class="empty_state bg_white_light bradius_s p_v4 p_s4 text_ac">
-        <h3 class="color_light">No advertisement configured yet</h3>
-        <x-button href="{{ route('admin.ads.edit') }}" class="mtop_2vh">
-            <h3 class="font_w500 color_white">Set Up Advertisement</h3>
-        </x-button>
+    <div class="adm-card-body">
+        <div class="adm-empty">
+            <i class="ri-advertisement-line"></i>
+            <span class="adm-empty-title">No advertisement configured yet</span>
+            <a href="{{ route('admin.ads.edit') }}" class="adm-btn is-primary is-sm">Set up advertisement</a>
+        </div>
     </div>
     @endif
 </div>

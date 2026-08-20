@@ -1,82 +1,96 @@
 @extends('essentials.admin_navbar')
-@section('title', 'Jobs Management')
-@section('page_title', 'Jobs Overview')
+@section('title', 'Jobs')
+@section('crumb', 'Jobs')
 
 @section('content')
-<div class="w_100 h_fc flex_cl gap_4vh">
-    <!-- Action Buttons -->
-    <div class="admin_title grid col_2 justify_sb align_c">
-        <x-section-title text="Jobs Management" />
-        <x-button href="{{ route('admin.jobs.create') }}" class="w_40 justify_sfe">
-            <h3 class="font_w500 color_white p_s4">
-                <i class="ri-add-line color_white"></i> Add Job
-            </h3>
-        </x-button>
+<div class="adm-page-head">
+    <div>
+        <h1 class="adm-page-title">Jobs</h1>
+        <p class="adm-page-sub">{{ $jobs->total() }} listing{{ $jobs->total() === 1 ? '' : 's' }} in total.</p>
+    </div>
+    <div class="adm-page-actions">
+        <a href="{{ route('admin.jobs.create') }}" class="adm-btn is-primary"><i class="ri-add-line"></i> Add job</a>
+    </div>
+</div>
+
+@if(session('success'))
+    <div class="adm-alert is-success">
+        <span class="adm-alert-title"><i class="ri-check-line"></i> {{ session('success') }}</span>
+    </div>
+@endif
+
+<div class="adm-card">
+    <div class="adm-card-body is-flush">
+        @if($jobs->count())
+        <div class="adm-table-wrap">
+            <table class="adm-table">
+                <thead>
+                    <tr>
+                        <th class="is-tight">Image</th>
+                        <th>Role</th>
+                        <th>Destination</th>
+                        <th class="is-num">Positions</th>
+                        <th class="is-tight">Featured</th>
+                        <th class="is-tight">Posted</th>
+                        <th class="is-tight"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($jobs as $job)
+                    <tr>
+                        <td class="is-tight">
+                            @if($job->image_path)
+                                <img src="{{ asset('storage/' . $job->image_path) }}" alt="" class="adm-thumb">
+                            @else
+                                <span class="adm-thumb-empty"><i class="ri-image-line"></i></span>
+                            @endif
+                        </td>
+                        <td>
+                            <span class="adm-cell-title">{{ $job->title }}</span>
+                            <span class="adm-cell-sub">
+                                @if($job->title_ja){{ $job->title_ja }} · @endif
+                                {{ \Str::limit(strip_tags($job->description), 90) }}
+                            </span>
+                        </td>
+                        <td>{{ $job->country }}</td>
+                        <td class="is-num">{{ $job->positions_left }}</td>
+                        <td class="is-tight">
+                            <span class="adm-pill {{ $job->is_featured ? 'is-on' : 'is-off' }}">
+                                {{ $job->is_featured ? 'Featured #' . ($job->featured_order ?? '—') : 'Standard' }}
+                            </span>
+                        </td>
+                        <td class="is-tight adm-num">
+                            {{ $job->posted_on ? $job->posted_on->format('Y-m-d') : '—' }}
+                        </td>
+                        <td class="is-tight">
+                            <div class="adm-row-actions">
+                                <a href="{{ route('admin.jobs.edit', $job) }}" class="adm-btn is-sm">
+                                    <i class="ri-edit-line"></i> Edit
+                                </a>
+                                <form action="{{ route('admin.jobs.destroy', $job) }}" method="POST"
+                                      onsubmit="return confirm('Are you sure you want to delete this job?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="adm-btn is-sm is-danger">
+                                        <i class="ri-delete-bin-line"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @else
+        <div class="adm-empty">
+            <i class="ri-briefcase-4-line"></i>
+            <span class="adm-empty-title">No jobs available</span>
+            <a href="{{ route('admin.jobs.create') }}" class="adm-btn is-primary is-sm">Add the first job</a>
+        </div>
+        @endif
     </div>
 
-    <!-- Jobs Grid -->
-    <div class="jobs_grid w_100 grid col_12 gap_2vw mtop_2vh">
-        @forelse($jobs as $job)
-        <div class="job_item bg_white_light bradius_s p_v4 p_s2 flex gap_2vw">
-            <div class="job_image_admin w_40 h_35vh">
-                <img src="{{ asset('storage/' . $job->image_path) }}" 
-                     alt="{{ $job->title }}"
-                     class="w_100 h_100 obj_cover bradius_s">
-            </div>
-            <div class="job_details w_100 flex_cl justify_sb">
-                <div class="flex_cl gap_1vw">
-                    <div class="flex justify_sb w_100 align_c">
-                        <h2 class="color_primary">{{ $job->title }}</h2>
-                        <div class="status_badge {{ $job->is_featured ? 'bg_green' : 'bg_orange' }} p_v2 p_s4 bradius_s bg_blue">
-                            <h5 class="color_white">{{ $job->is_featured ? 'Featured' : 'Not Featured' }}</h5>
-                        </div>
-                    </div>
-                    <div class="flex gap_2vw">
-                        <div class="flex align_c gap_1vw">
-                            <h3><i class="ri-map-pin-line color_blue"></i></h3>
-                            <h5 class="color_blue">{{ $job->country }}</h5>
-                        </div>
-                        <div class="flex align_c gap_1vw">
-                            <h3><i class="ri-team-line color_light"></i></h3>
-                            <h5 class="color_light">{{ $job->positions_left }} Positions</h5>
-                        </div>
-                        <div class="flex align_c gap_1vw">
-                            <h3><i class="ri-time-line color_light"></i></h3>
-                            <h5 class="color_light">Posted {{ $job->posted_on->diffForHumans() }}</h5>
-                        </div>
-                    </div>
-                    <h5 class="color_light">{{ \Str::limit(strip_tags($job->description), 150) }}</h5>
-                </div>
-                <div class="flex gap_1vw">
-                    <x-button href="{{ route('admin.jobs.edit', $job) }}">
-                        <h4 class="font_w500 color_white p_s4">
-                            <i class="ri-edit-line color_white"></i> Edit
-                        </h4>
-                    </x-button>
-                    <form action="{{ route('admin.jobs.destroy', $job) }}" 
-                          method="POST" 
-                          onsubmit="return confirm('Are you sure you want to delete this job?');">
-                        @csrf
-                        @method('DELETE')
-                        <x-button type="submit" class="bg_orange h_100">
-                            <h4 class="font_w500 color_white p_s4">
-                                <i class="ri-delete-bin-line color_white"></i> Delete
-                            </h4>
-                        </x-button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        @empty
-        <div class="empty_state text_ac p_v4">
-            <h4 class="color_light">No jobs available</h4>
-        </div>
-        @endforelse
-    </div>
-
-    <!-- Pagination -->
-    <div class="pagination w_100 flex justify_c">
-        {{ $jobs->links() }}
-    </div>
+    {{ $jobs->links('admin.partials.pagination') }}
 </div>
 @endsection

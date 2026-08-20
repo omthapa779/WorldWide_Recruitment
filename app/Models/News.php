@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasLocalisedFields;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
 class News extends Model
 {
-   
+    use HasLocalisedFields;
+
     protected $fillable = [
         'title',
-        'content', 
-        'image_1', 
-        'image_2', 
-        'posted_on', 
+        'title_ja',
+        'content',
+        'content_ja',
+        'image_1',
+        'image_2',
+        'posted_on',
         'status'
     ];
 

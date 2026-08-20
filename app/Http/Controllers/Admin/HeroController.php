@@ -25,7 +25,9 @@ class HeroController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'title_ja' => 'nullable|string|max:255',
             'button_cta' => 'required|string|max:50',
+            'button_cta_ja' => 'nullable|string|max:50',
             'image' => $request->hasFile('image') ? 'required|image|mimes:jpeg,png,jpg|max:2048' : ''
         ]);
 
@@ -52,7 +54,9 @@ class HeroController extends Controller
         // Create new hero
         Hero::create([
             'title' => $request->title,
+            'title_ja' => $request->title_ja,
             'button_cta' => $request->button_cta,
+            'button_cta_ja' => $request->button_cta_ja,
             'image_path' => $imagePath
         ]);
 

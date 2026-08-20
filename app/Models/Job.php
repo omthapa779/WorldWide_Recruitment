@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasLocalisedFields;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 class Job extends Model
 {
+    use HasLocalisedFields;
+
      protected $fillable = [
     'title',
+    'title_ja',
     'positions_left',
     'country',
     'description',
+    'description_ja',
     'image_path',
     'is_featured',
     'featured_order',

@@ -3,9 +3,505 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
+@source '../**/*.jsx';
 @source '../**/*.js';
 
+/* =========================================================================
+   和 × 世界  —  WorldWide Recruitment Services design system
+   Traditional Japanese colour names, mapped onto the existing brand.
+   紺 kon (indigo)  ← brand navy  #002f7f
+   朱 shu (vermillion) ← brand orange #fe6601
+   ========================================================================= */
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* --- Typography ------------------------------------------------------ */
+    --font-mincho: 'Shippori Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    --font-sans: 'Zen Kaku Gothic New', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, 'SFMono-Regular', 'Roboto Mono', monospace;
+
+    /* --- 墨 sumi — ink ---------------------------------------------------- */
+    --color-sumi-950: #0b0a09;
+    --color-sumi-900: #17140f;
+    --color-sumi-800: #23201a;
+    --color-sumi-700: #3a352d;
+    --color-sumi-600: #554f45;
+
+    /* --- 鼠 nezumi — mouse grey ------------------------------------------ */
+    --color-nezumi-500: #8b857a;
+    --color-nezumi-400: #a9a297;
+    --color-nezumi-300: #c7c1b6;
+    --color-nezumi-200: #ddd8ce;
+    --color-nezumi-100: #ebe7df;
+
+    /* --- 生成り kinari / 和紙 washi — unbleached paper -------------------- */
+    --color-washi: #fbf9f4;
+    --color-kinari: #f4f1e8;
+    --color-kinari-dark: #e9e4d7;
+
+    /* --- 紺 kon / 藍 ai — indigo (brand navy) ----------------------------- */
+    --color-kon-950: #050f24;
+    --color-kon-900: #08183a;
+    --color-kon-800: #0b2255;
+    --color-kon-700: #002f7f;
+    --color-kon-600: #1a4b9e;
+    --color-kon-500: #3568bd;
+    --color-kon-300: #8fadd8;
+    --color-kon-100: #dde5f2;
+
+    /* --- 朱 shu — vermillion (brand orange) ------------------------------ */
+    --color-shu-800: #8f2a0c;
+    --color-shu-700: #b83a12;
+    --color-shu-600: #d94f18;
+    --color-shu-500: #fe6601;
+    --color-shu-400: #ff8a3d;
+    --color-shu-100: #ffe6d4;
+
+    /* --- 松葉 matsuba — pine, used sparingly ----------------------------- */
+    --color-matsuba: #5c6b52;
+
+    /* --- Motion ---------------------------------------------------------- */
+    --ease-washi: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-sumi: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* =========================================================================
+   Base
+   ========================================================================= */
+
+@layer base {
+    :root {
+        color-scheme: light;
+    }
+
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        scroll-behavior: smooth;
+        /* `clip`, not `hidden` — `hidden` would turn this into a scroll
+           container and stop window scroll events from firing. */
+        overflow-x: clip;
+    }
+
+    body {
+        background-color: var(--color-washi);
+        color: var(--color-sumi-900);
+        font-family: var(--font-sans);
+        font-feature-settings: 'palt' 1;
+    }
+
+    /* Mincho headings read as Japanese editorial type. */
+    h1,
+    h2,
+    h3 {
+        font-family: var(--font-mincho);
+        font-weight: 500;
+        letter-spacing: 0.01em;
+    }
+
+    ::selection {
+        background: var(--color-shu-500);
+        color: var(--color-washi);
+    }
+
+    /* A hairline scrollbar keeps the ma (間) intact. */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background: var(--color-kinari);
+    }
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-nezumi-300);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-kon-700);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+/* =========================================================================
+   Utilities — Japanese typographic + textile motifs
+   ========================================================================= */
+
+/* 縦書き tategaki — vertical writing */
+@utility tategaki {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+@utility tategaki-upright {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+/* 和紙 washi — paper grain overlay */
+@utility washi-grain {
+    position: relative;
+}
+@utility washi-grain-layer {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* 青海波 seigaiha — the blue-ocean-wave pattern */
+@utility seigaiha {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23002f7f' stroke-width='1' stroke-opacity='0.28'%3E%3Cpath d='M-40 40a40 40 0 0 1 80 0M-40 40a30 30 0 0 1 60 0M-40 40a20 20 0 0 1 40 0M-40 40a10 10 0 0 1 20 0'/%3E%3Cpath d='M0 40a40 40 0 0 1 80 0M0 40a30 30 0 0 1 60 0M0 40a20 20 0 0 1 40 0M0 40a10 10 0 0 1 20 0'/%3E%3Cpath d='M40 40a40 40 0 0 1 80 0M40 40a30 30 0 0 1 60 0M40 40a20 20 0 0 1 40 0M40 40a10 10 0 0 1 20 0'/%3E%3Cpath d='M-20 80a40 40 0 0 1 80 0M-20 80a30 30 0 0 1 60 0M-20 80a20 20 0 0 1 40 0M-20 80a10 10 0 0 1 20 0'/%3E%3Cpath d='M20 80a40 40 0 0 1 80 0M20 80a30 30 0 0 1 60 0M20 80a20 20 0 0 1 40 0M20 80a10 10 0 0 1 20 0'/%3E%3Cpath d='M-20 0a40 40 0 0 1 80 0M-20 0a30 30 0 0 1 60 0M-20 0a20 20 0 0 1 40 0M-20 0a10 10 0 0 1 20 0'/%3E%3Cpath d='M20 0a40 40 0 0 1 80 0M20 0a30 30 0 0 1 60 0M20 0a20 20 0 0 1 40 0M20 0a10 10 0 0 1 20 0'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 80px 80px;
+}
+
+/* 麻の葉 asanoha — the hemp-leaf lattice.
+   Three sets of hairlines at 0°/60°/120° form the triangular grid the motif
+   is built on. Deliberately NOT a checkerboard: a small low-contrast checker
+   reads as the transparency grid image editors draw behind a PNG, i.e. as a
+   broken image rather than as pattern. */
+@utility asanoha {
+    background-image:
+        repeating-linear-gradient(60deg, rgba(0, 47, 127, 0.075) 0 1px, transparent 1px 30px),
+        repeating-linear-gradient(-60deg, rgba(0, 47, 127, 0.075) 0 1px, transparent 1px 30px),
+        repeating-linear-gradient(0deg, rgba(0, 47, 127, 0.075) 0 1px, transparent 1px 26px);
+}
+
+/* The same lattice for use over a dark ground. */
+@utility asanoha-light {
+    background-image:
+        repeating-linear-gradient(60deg, rgba(251, 249, 244, 0.09) 0 1px, transparent 1px 30px),
+        repeating-linear-gradient(-60deg, rgba(251, 249, 244, 0.09) 0 1px, transparent 1px 30px),
+        repeating-linear-gradient(0deg, rgba(251, 249, 244, 0.09) 0 1px, transparent 1px 26px);
+}
+
+/* 縞 shima — fine vertical stripes */
+@utility shima {
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgba(23, 20, 15, 0.055) 0px,
+        rgba(23, 20, 15, 0.055) 1px,
+        transparent 1px,
+        transparent 9px
+    );
+}
+
+/* Hairline rules — the thin keisen that structure Japanese layouts */
+@utility hairline {
+    border-color: rgba(23, 20, 15, 0.14);
+}
+@utility hairline-light {
+    border-color: rgba(251, 249, 244, 0.22);
+}
+
+/* Editorial numerals: 01 — 02 — 03 */
+@utility numeral {
+    font-family: var(--font-mincho);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+}
+
+/* =========================================================================
+   Components
+   ========================================================================= */
+
+@layer components {
+    /* --- 判子 hanko — the vermillion seal ------------------------------- */
+    .hanko {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--color-shu-600);
+        color: var(--color-shu-600);
+        border-radius: 4px;
+        font-family: var(--font-mincho);
+        line-height: 1.15;
+        text-align: center;
+        transform: rotate(-4deg);
+        opacity: 0.92;
+    }
+
+    /* --- 暖簾 noren — the split-curtain reveal used on the hero ---------
+       The resting state is *lifted*, and `animation-fill-mode: both` paints
+       the covering state only while the animation is actually scheduled. If
+       animations never run, the curtain is simply already open rather than
+       stranded over the hero. */
+    .noren-panel {
+        transform: translateY(-101%);
+        animation: noren-lift 1.5s var(--ease-washi) both;
+    }
+
+    /* =====================================================================
+       序 — hero stage motion
+       Visibility is carried by TRANSITIONS keyed off [data-ready], never by
+       keyframes: if transitions are disabled or stall, the element lands on
+       its end state and stays readable. Keyframes below are decoration only,
+       so their failure is invisible.
+       ===================================================================== */
+
+    /* Units of the headline rise out of their mask */
+    .hero-glyph {
+        opacity: 0;
+        transform: translateY(0.85em) rotate(2deg);
+        transition:
+            opacity 0.9s var(--ease-washi) var(--d, 0ms),
+            transform 1.05s var(--ease-washi) var(--d, 0ms);
+    }
+    .hero-stage[data-ready='true'] .hero-glyph {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Supporting copy and controls */
+    .hero-rise {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+            opacity 1s var(--ease-washi) var(--d, 0ms),
+            transform 1s var(--ease-washi) var(--d, 0ms);
+    }
+    .hero-stage[data-ready='true'] .hero-rise {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* The short rule beside the eyebrow draws itself outward */
+    .hero-rule {
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 1.1s var(--ease-washi) 320ms;
+    }
+    .hero-stage[data-ready='true'] .hero-rule {
+        transform: scaleX(1);
+    }
+
+    /* 判子 — the seal presses down and settles */
+    .hero-stamp {
+        display: inline-block;
+        opacity: 0;
+        transform: scale(1.75) rotate(-16deg);
+        transition:
+            opacity 0.5s ease-out var(--d, 0ms),
+            transform 0.75s cubic-bezier(0.2, 1.5, 0.4, 1) var(--d, 0ms);
+    }
+    .hero-stage[data-ready='true'] .hero-stamp {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+
+    /* --- Scroll reveal --------------------------------------------------- */
+    .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+            opacity 0.95s var(--ease-washi),
+            transform 0.95s var(--ease-washi);
+    }
+    .reveal[data-shown='true'] {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* --- Ink-brush underline that sweeps in on hover -------------------- */
+    .ink-link {
+        position: relative;
+        display: inline-block;
+    }
+    .ink-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        height: 1px;
+        width: 100%;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.55s var(--ease-washi);
+    }
+    .ink-link:hover::after,
+    .ink-link[data-active='true']::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    /* --- Rich text coming out of the Summernote admin editor ------------ */
+    .prose-wa {
+        font-family: var(--font-sans);
+        color: var(--color-sumi-700);
+        line-height: 2;
+    }
+    .prose-wa > * + * {
+        margin-top: 1.35em;
+    }
+    .prose-wa h1,
+    .prose-wa h2,
+    .prose-wa h3,
+    .prose-wa h4 {
+        font-family: var(--font-mincho);
+        color: var(--color-sumi-900);
+        line-height: 1.5;
+        margin-top: 2em;
+    }
+    .prose-wa h2 {
+        font-size: 1.5rem;
+        padding-left: 0.75rem;
+        border-left: 3px solid var(--color-shu-500);
+    }
+    .prose-wa h3 {
+        font-size: 1.2rem;
+    }
+    .prose-wa a {
+        color: var(--color-kon-700);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+    .prose-wa ul,
+    .prose-wa ol {
+        padding-left: 1.4em;
+    }
+    .prose-wa ul {
+        list-style: none;
+    }
+    .prose-wa ul > li {
+        position: relative;
+        padding-left: 0.2em;
+    }
+    .prose-wa ul > li::before {
+        content: '';
+        position: absolute;
+        left: -1em;
+        top: 0.85em;
+        width: 6px;
+        height: 6px;
+        background: var(--color-shu-500);
+        transform: rotate(45deg);
+    }
+    .prose-wa ol {
+        list-style: decimal;
+    }
+    .prose-wa li + li {
+        margin-top: 0.5em;
+    }
+    .prose-wa img {
+        width: 100%;
+        height: auto;
+    }
+    .prose-wa blockquote {
+        border-left: 2px solid var(--color-nezumi-300);
+        padding-left: 1.25rem;
+        color: var(--color-sumi-600);
+        font-family: var(--font-mincho);
+    }
+    .prose-wa table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .prose-wa th,
+    .prose-wa td {
+        border: 1px solid rgba(23, 20, 15, 0.14);
+        padding: 0.6rem 0.9rem;
+        text-align: left;
+    }
+
+    /* --- Laravel pagination, restyled ----------------------------------- */
+    .wa-pagination nav > div:first-child {
+        display: none;
+    }
+    .wa-pagination span[aria-current='page'] > span,
+    .wa-pagination a {
+        font-family: var(--font-mincho);
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+/* =========================================================================
+   Keyframes
+   ========================================================================= */
+
+@keyframes noren-lift {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-101%);
+    }
+}
+
+/* --- Hero decoration. Failure of any of these is invisible. ------------- */
+
+/* Slow Ken Burns push on whichever reel image is showing */
+@keyframes hero-kenburns {
+    from {
+        transform: scale(1) translate3d(0, 0, 0);
+    }
+    to {
+        transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+    }
+}
+.hero-kenburns {
+    animation: hero-kenburns 9s ease-out forwards;
+}
+
+/* The seigaiha field drifts sideways, like water passing under the page */
+@keyframes hero-drift {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 80px 40px;
+    }
+}
+.hero-drift {
+    animation: hero-drift 14s linear infinite;
+}
+
+/* The scroll rail runs a highlight down its length */
+@keyframes hero-scroll-run {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+.hero-scroll-rail::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, var(--color-shu-500), transparent);
+    animation: hero-scroll-run 2.2s var(--ease-sumi) infinite;
+}
+
+@keyframes marquee-slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes sway {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(8px);
+    }
+}
+
+@utility animate-marquee {
+    animation: marquee-slide 38s linear infinite;
+}
+
+@utility animate-sway {
+    animation: sway 2.4s var(--ease-sumi) infinite;
 }

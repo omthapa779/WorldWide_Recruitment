@@ -25,7 +25,9 @@ class NewsController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'title_ja' => 'nullable|string|max:255',
             'content' => 'required|string',
+            'content_ja' => 'nullable|string',
             'image_1' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'image_2' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'posted_on' => 'nullable|date',
@@ -35,7 +37,9 @@ class NewsController extends Controller
 
         $data = [
             'title' => $validated['title'],
+            'title_ja' => $validated['title_ja'] ?? null,
             'content' => $validated['content'],
+            'content_ja' => $validated['content_ja'] ?? null,
             'posted_on' => $validated['posted_on'] ?? now(),
             'status' => $status,
         ];
@@ -62,7 +66,9 @@ class NewsController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'title_ja' => 'nullable|string|max:255',
             'content' => 'required|string',
+            'content_ja' => 'nullable|string',
             'image_1' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'image_2' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'posted_on' => 'nullable|date',
@@ -72,7 +78,9 @@ class NewsController extends Controller
 
         $data = [
             'title' => $validated['title'],
+            'title_ja' => $validated['title_ja'] ?? null,
             'content' => $validated['content'],
+            'content_ja' => $validated['content_ja'] ?? null,
             'posted_on' => $validated['posted_on'] ?? now(),
             'status' => $status,
         ];

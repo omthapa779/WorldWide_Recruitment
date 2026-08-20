@@ -1,117 +1,185 @@
 @extends('essentials.admin_navbar')
 @section('title', 'Edit Job')
-@section('page_title', 'Edit Job Details')
+@section('crumb', 'Jobs / Edit')
 
 @section('content')
-<div class="w_100 h_fc flex_cl gap_4vh">
-    <div class="form_card bg_white_light bradius_s p_v4 p_s4">
-
-        @if($errors->any())
-    <div class="alert alert_danger w_100 p_v4 p_s4 bradius_s">
-        <h4 class="color_red">
-            <i class="ri-error-warning-line"></i> Please fix the following errors:
-        </h4>
-        <ul class="list_style_disc p_s4 mtop_2vh">
-            @foreach($errors->all() as $error)
-                <li><h5 class="color_red">{{ $error }}</h5></li>
-            @endforeach
-        </ul>
+<div class="adm-page-head">
+    <div>
+        <h1 class="adm-page-title">{{ $job->title }}</h1>
+        <p class="adm-page-sub">
+            Last updated {{ $job->updated_at->diffForHumans() }} ·
+            Posted {{ $job->posted_on ? $job->posted_on->format('Y-m-d') : '—' }}
+        </p>
     </div>
-@endif
-        <form action="{{ route('admin.jobs.update', $job) }}" method="POST" enctype="multipart/form-data" class="w_100 h_fc flex_cl gap_2vw">
-            @csrf
-            @method('PUT')
-            
-            <!-- Current Preview -->
-            <div class="current_preview w_100 flex gap_2vw bg_white bradius_s p_v4 p_s4">
-                <div class="preview_image w_40 h_35vh">
-                    <img src="{{ asset('storage/' . $job->image_path) }}" 
-                         alt="{{ $job->title }}"
-                         class="w_100 h_100 obj_cover bradius_s">
-                </div>
-                <div class="preview_details w_60 flex_cl justify_c gap_1vh">
-                    <h3 class="color_primary">Current Details</h3>
-                    <h5 class="color_light">Last Updated: {{ $job->updated_at->diffForHumans() }}</h5>
-                </div>
-            </div>
-
-            <!-- Edit Form -->
-            <div class="input_group w_100 flex_cl gap_1vw">
-                <label for="title">
-                    <h4 class="font_w400">Job Title</h4>
-                </label>
-                <input type="text" name="title" id="title" 
-                       class="form_input w_100" required 
-                       value="{{ old('title', $job->title) }}">
-            </div>
-
-            <div class="input_group w_100 flex_cl gap_1vw">
-                <label for="positions_left">
-                    <h4 class="font_w400">Available Positions</h4>
-                </label>
-                <input type="number" name="positions_left" id="positions_left" 
-                       class="form_input w_100" required min="0"
-                       value="{{ old('positions_left', $job->positions_left) }}">
-            </div>
-
-            <div class="input_group w_100 flex_cl gap_1vw">
-                <label for="country">
-                    <h4 class="font_w400">Country</h4>
-                </label>
-                <input type="text" name="country" id="country" 
-                       class="form_input w_100" required
-                       value="{{ old('country', $job->country) }}">
-            </div>
-
-            <div class="input_group w_100 flex_cl gap_1vw">
-                <label for="description">
-                    <h4 class="font_w400">Job Description</h4>
-                </label>
-                <textarea name="description" id="summernote" rows="10" 
-                          class="form_input w_100" required>{{ old('description', $job->description) }}</textarea>
-            </div>
-
-            <div class="input_group w_100 flex_cl gap_1vw">
-                <label for="image">
-                    <h4 class="font_w400">Update Job Image</h4>
-                </label>
-                <input type="file" name="image" id="image" 
-                       class="form_input w_100" accept="image/*">
-                <h5 class="color_light">Leave empty to keep current image</h5>
-            </div>
-
-            <div class="input_group w_100 flex_cl gap_1vw">
-                <label for="is_featured" class="flex align_c gap_1vw">
-                    <h4 class="font_w400"><i class="ri-star-line"></i> Featured Job</h4>
-                </label>
-                <select name="is_featured" id="is_featured" class="form_input w_100" required>
-                    <option value="1" {{ old('is_featured', $job->is_featured) == 1 ? 'selected' : '' }}>Yes</option>
-                    <option value="0" {{ old('is_featured', $job->is_featured) == 0 ? 'selected' : '' }}>No</option>
-                </select>
-            </div>
-
-            <div class="input_group w_100 flex_cl gap_1vw" id="featured_order_group">
-                <label for="featured_order" class="flex align_c gap_1vw">
-                    <h4 class="font_w400"><i class="ri-list-ordered"></i> Featured Order</h4>
-                </label>
-                <input type="number" name="featured_order" id="featured_order"
-                    class="form_input w_100"
-                    min="1"
-                    value="{{ old('featured_order') }}"
-                    placeholder="Order among featured jobs (1 = highest)">
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="button_group w_100 flex gap_2vw">
-                <x-button type="submit" class="w_100">
-                    <h3 class="font_w500 color_white">Update Job</h3>
-                </x-button>
-                <x-button href="{{ route('admin.jobs.index') }}" 
-                         class="w_100 bg_orange">
-                    <h3 class="font_w500 color_white">Cancel</h3>
-                </x-button>
-            </div>
-        </form>
+    <div class="adm-page-actions">
+        <a href="{{ route('admin.jobs.index') }}" class="adm-btn"><i class="ri-arrow-left-line"></i> Back to jobs</a>
     </div>
 </div>
+
+@if($errors->any())
+<div class="adm-alert is-danger">
+    <span class="adm-alert-title"><i class="ri-error-warning-line"></i> Please fix the following:</span>
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<form action="{{ route('admin.jobs.update', $job) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+
+    <div class="adm-form-layout">
+        <div>
+            <div class="adm-card" style="margin-top:0;">
+                <div class="adm-card-head"><h2 class="adm-card-title">Role</h2></div>
+                <div class="adm-card-body">
+                    <div class="adm-grid-2">
+                        <div class="adm-field">
+                            <label class="adm-label" for="title">
+                                <i class="ri-briefcase-line"></i> Job title <span class="adm-req">*</span>
+                            </label>
+                            <input type="text" name="title" id="title" class="adm-input" required
+                                   value="{{ old('title', $job->title) }}">
+                        </div>
+
+                        <div class="adm-field">
+                            <label class="adm-label" for="title_ja">
+                                <i class="ri-translate-2"></i> Job title <span class="adm-opt">日本語</span>
+                            </label>
+                            <input type="text" name="title_ja" id="title_ja" class="adm-input"
+                                   value="{{ old('title_ja', $job->title_ja) }}" placeholder="日本語の職種名（任意）">
+                            <p class="adm-hint">Optional. Falls back to the English title if blank.</p>
+                        </div>
+                    </div>
+
+                    <div class="adm-grid-2">
+                        <div class="adm-field">
+                            <label class="adm-label" for="country">
+                                <i class="ri-map-pin-line"></i> Country <span class="adm-req">*</span>
+                            </label>
+                            <input type="text" name="country" id="country" class="adm-input" required
+                                   value="{{ old('country', $job->country) }}">
+                        </div>
+
+                        <div class="adm-field">
+                            <label class="adm-label" for="positions_left">
+                                <i class="ri-team-line"></i> Available positions <span class="adm-req">*</span>
+                            </label>
+                            <input type="number" name="positions_left" id="positions_left" class="adm-input"
+                                   required min="0" value="{{ old('positions_left', $job->positions_left) }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">
+                    <h2 class="adm-card-title">Description</h2>
+                    <span class="adm-card-meta">Shown on the job detail page</span>
+                </div>
+                <div class="adm-card-body">
+                    <div class="adm-field">
+                        <label class="adm-label" for="description">
+                            <i class="ri-file-text-line"></i> Job description <span class="adm-req">*</span>
+                        </label>
+                        <textarea name="description" id="summernote" rows="10" class="adm-textarea" required>{{ old('description', $job->description) }}</textarea>
+                    </div>
+
+                    <div class="adm-field">
+                        <label class="adm-label" for="description_ja">
+                            <i class="ri-translate-2"></i> Job description <span class="adm-opt">日本語</span>
+                        </label>
+                        <textarea name="description_ja" id="summernote_ja" rows="10" class="adm-textarea">{{ old('description_ja', $job->description_ja) }}</textarea>
+                        <p class="adm-hint">Optional. Falls back to the English description if blank.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <aside>
+            <div class="adm-card" style="margin-top:0;">
+                <div class="adm-card-head"><h2 class="adm-card-title">Placement</h2></div>
+                <div class="adm-card-body">
+                    <div class="adm-field">
+                        <label class="adm-label" for="is_featured">
+                            <i class="ri-star-line"></i> Featured job <span class="adm-req">*</span>
+                        </label>
+                        <select name="is_featured" id="is_featured" class="adm-select" required>
+                            <option value="1" {{ old('is_featured', $job->is_featured) == 1 ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ old('is_featured', $job->is_featured) == 0 ? 'selected' : '' }}>No</option>
+                        </select>
+                        <p class="adm-hint">Featured jobs appear on the homepage.</p>
+                    </div>
+
+                    <div class="adm-field" id="featured_order_group">
+                        <label class="adm-label" for="featured_order">
+                            <i class="ri-list-ordered"></i> Featured order
+                        </label>
+                        <input type="number" name="featured_order" id="featured_order" class="adm-input" min="1"
+                               value="{{ old('featured_order') }}" placeholder="1 = highest">
+                    </div>
+                </div>
+            </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head"><h2 class="adm-card-title">Image</h2></div>
+                <div class="adm-card-body">
+                    @if($job->image_path)
+                        <img src="{{ asset('storage/' . $job->image_path) }}" alt=""
+                             class="adm-preview-img is-wide" style="margin-bottom:12px;">
+                    @endif
+                    <div class="adm-field">
+                        <label class="adm-label" for="image">
+                            <i class="ri-image-line"></i> Replace image
+                        </label>
+                        <input type="file" name="image" id="image" class="adm-input" accept="image/*"
+                               onchange="admPreviewImage(this, 'preview_image')">
+                        <p class="adm-hint">Leave empty to keep the current image.</p>
+                        <div id="preview_image" class="adm-image-preview"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <div class="adm-actionbar">
+        <span class="adm-actionbar-note">Last updated {{ $job->updated_at->diffForHumans() }}.</span>
+        <a href="{{ route('admin.jobs.index') }}" class="adm-btn">Cancel</a>
+        <button type="submit" class="adm-btn is-primary"><i class="ri-save-line"></i> Update job</button>
+    </div>
+</form>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var isFeatured = document.getElementById('is_featured');
+        var orderGroup = document.getElementById('featured_order_group');
+        if (isFeatured && orderGroup) {
+            var sync = function () {
+                orderGroup.style.display = isFeatured.value == 1 ? 'block' : 'none';
+            };
+            isFeatured.addEventListener('change', sync);
+            sync();
+        }
+    });
+
+    function admPreviewImage(input, previewId) {
+        var preview = document.getElementById(previewId);
+        if (!preview) return;
+        preview.innerHTML = '';
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+@endpush

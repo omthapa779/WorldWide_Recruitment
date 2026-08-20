@@ -25,9 +25,11 @@ class JobsController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'title_ja' => 'nullable|string|max:255',
             'positions_left' => 'required|integer|min:0',
             'country' => 'required|string|max:255',
             'description' => 'required|string',
+            'description_ja' => 'nullable|string',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'is_featured' => 'required|boolean',
             'featured_order' => 'nullable|integer|min:1|required_if:is_featured,1',
@@ -39,9 +41,11 @@ class JobsController extends Controller
 
                 Job::create([
                     'title' => $validated['title'],
+                    'title_ja' => $validated['title_ja'] ?? null,
                     'positions_left' => $validated['positions_left'],
                     'country' => $validated['country'],
                     'description' => $validated['description'],
+                    'description_ja' => $validated['description_ja'] ?? null,
                     'image_path' => $imagePath,
                     'is_featured' => (bool)$validated['is_featured'],
                     'featured_order' => $validated['is_featured'] ? $validated['featured_order'] : null,
@@ -68,9 +72,11 @@ class JobsController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'title_ja' => 'nullable|string|max:255',
             'positions_left' => 'required|integer|min:0',
             'country' => 'required|string|max:255',
             'description' => 'required|string',
+            'description_ja' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'is_featured' => 'required|boolean',
             'featured_order' => 'nullable|integer|min:1|required_if:is_featured,1',

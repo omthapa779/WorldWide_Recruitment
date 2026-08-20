@@ -1,234 +1,209 @@
 @extends('essentials.admin_navbar')
 @section('title', 'Dashboard')
-@section('page_title', 'Dashboard Overview')
+@section('crumb', 'Dashboard')
 
 @section('content')
-<div class="w_100 h_fc flex_cl gap_2vw primary_font mtop_2vh">
+@php
+    $hero = \App\Models\Hero::getActive();
+    $ad = \App\Models\Ad::getActive();
+    $latestNews = \App\Models\News::latest('posted_on')->take(5)->get();
+    $featuredJobs = \App\Models\Job::where('is_featured', true)->orderBy('featured_order')->take(5)->get();
+@endphp
 
-    <x-section-title text="Dashboard" />
-    <!-- Stats Cards -->
-    <div class="stats_holder_dashboard w_100 grid col_2 gap_1vw">
-        <!-- Jobs Card -->
-        <div class="stat_card bg_white_light bradius_s p_v4 p_s4 hover_scale">
-            <div class="flex justify_sb align_c">
-                <div class="flex_cl gap_1vh">
-                    <h4 class="color_primary font_w500">Total Jobs</h4>
-                    <h2 class="color_primary">{{ $statistics['totalJobs'] }}</h2>
-                    <h5 class="color_light">Active Listings</h5>
-                </div>
-                <div class="stat_bubble bg_blue_light">
-                    <h2 class="font_w400"><i class="ri-suitcase-line color_blue"></i></h2>
-                </div>
-            </div>
-        </div>
+<div class="adm-page-head">
+    <div>
+        <h1 class="adm-page-title">Dashboard</h1>
+        <p class="adm-page-sub">Content status across the public website.</p>
+    </div>
+    <div class="adm-page-actions">
+        <a href="{{ route('admin.jobs.create') }}" class="adm-btn"><i class="ri-add-line"></i> New job</a>
+        <a href="{{ route('admin.news.create') }}" class="adm-btn is-primary"><i class="ri-add-line"></i> New article</a>
+    </div>
+</div>
 
-        <!-- News Card -->
-        <div class="stat_card bg_white_light bradius_s p_v4 p_s4 hover_scale">
-            <div class="flex justify_sb align_c">
-                <div class="flex_cl gap_1vh">
-                    <h4 class="color_primary font_w500">News Posts</h4>
-                    <h2 class="color_primary">{{ $statistics['totalNews'] }}</h2>
-                    <h5 class="color_light">Published Articles</h5>
-                </div>
-                <div class="stat_bubble bg_blue_light">
-                    <h2 class="font_w400"><i class="ri-newspaper-line color_blue"></i></h2>
-                </div>
-            </div>
+<!-- Counters -->
+<div class="adm-stats">
+    <div class="adm-stat">
+        <div>
+            <div class="adm-stat-label">Total Jobs</div>
+            <div class="adm-stat-value adm-num">{{ $statistics['totalJobs'] }}</div>
+            <div class="adm-stat-meta">Active listings</div>
         </div>
-
-        <!-- Ads Card -->
-        <div class="stat_card bg_white_light bradius_s p_v4 p_s4 hover_scale">
-            <div class="flex justify_sb align_c">
-                <div class="flex_cl gap_1vh">
-                    <h4 class="color_primary font_w500">Active Ads</h4>
-                    <h2 class="color_primary">{{ $statistics['activeAds'] }}</h2>
-                    <h5 class="color_light">Running Campaigns</h5>
-                </div>
-                <div class="stat_bubble bg_blue_light">
-                    <h2 class="font_w400"><i class="ri-advertisement-line color_blue"></i></h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- Hero Card -->
-        <div class="stat_card bg_white_light bradius_s p_v4 p_s4 hover_scale">
-            <div class="flex justify_sb align_c">
-                <div class="flex_cl gap_1vh">
-                    <h4 class="color_primary font_w500">Hero Sections</h4>
-                    <h2 class="color_primary">{{ $statistics['heroSections'] }}</h2>
-                    <h5 class="color_light">Active Sections</h5>
-                </div>
-                <div class="stat_bubble bg_blue_light">
-                    <h2 class="font_w400"><i class="ri-layout-masonry-line color_blue"></i></h2>
-                </div>
-            </div>
-        </div>
+        <span class="adm-stat-icon"><i class="ri-briefcase-4-line"></i></span>
     </div>
 
-
-    <div class=" admin_title grid col_2 justify_sb align_c mbottom_2vh mtop_2vh">
-        <x-section-title text="Hero Section" />
-        <x-button href="{{ route('admin.hero.edit') }}" class="admin_action_button" >
-            <h3 class="font_w500 color_white p_s4">Edit Hero</h3>
-        </x-button>
+    <div class="adm-stat">
+        <div>
+            <div class="adm-stat-label">News Posts</div>
+            <div class="adm-stat-value adm-num">{{ $statistics['totalNews'] }}</div>
+            <div class="adm-stat-meta">Published articles</div>
+        </div>
+        <span class="adm-stat-icon"><i class="ri-newspaper-line"></i></span>
     </div>
-    <!-- Hero Section Management -->
-    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s2">
-    
-        @if($hero = \App\Models\Hero::getActive())
-        <div class="hero_preview w_100 grid col_2 gap_2vw ">
-            <!-- Image Preview -->
-            <div class="preview_image w_100 h_30vh">
-                <img src="{{ asset('storage/' . $hero->image_path) }}" 
-                     alt="Hero Image" 
-                     class="w_100 h_100 obj_cover bradius_s">
-            </div>
 
-            <!-- Content Preview -->
-            <div class="preview_content flex_cl justify_c gap_1vw">
-                <div class="preview_item">
-                    <h5 class="color_light">Title</h5>
-                    <h3 class="color_primary">{{ $hero->title }}</h3>
-                </div>
+    <div class="adm-stat">
+        <div>
+            <div class="adm-stat-label">Active Ads</div>
+            <div class="adm-stat-value adm-num">{{ $statistics['activeAds'] }}</div>
+            <div class="adm-stat-meta">Running campaigns</div>
+        </div>
+        <span class="adm-stat-icon"><i class="ri-advertisement-line"></i></span>
+    </div>
 
-                <div class="preview_item">
-                    <h5 class="color_light">Button CTA</h5>
-                    <h4 class="color_primary">{{ $hero->button_cta }}</h4>
-                </div>
+    <div class="adm-stat">
+        <div>
+            <div class="adm-stat-label">Hero Sections</div>
+            <div class="adm-stat-value adm-num">{{ $statistics['heroSections'] }}</div>
+            <div class="adm-stat-meta">Active sections</div>
+        </div>
+        <span class="adm-stat-icon"><i class="ri-layout-masonry-line"></i></span>
+    </div>
+</div>
 
-                <div class="preview_item">
-                    <h5 class="color_light">Last Updated</h5>
-                    <h4 class="color_blue">{{ $hero->updated_at->diffForHumans() }}</h4>
-                </div>
-            </div>
+<!-- Featured jobs -->
+<div class="adm-card">
+    <div class="adm-card-head">
+        <h2 class="adm-card-title">Featured jobs</h2>
+        <a href="{{ route('admin.jobs.index') }}" class="adm-btn is-sm">Manage jobs <i class="ri-arrow-right-line"></i></a>
+    </div>
+    <div class="adm-card-body is-flush">
+        @if($featuredJobs->count())
+        <div class="adm-table-wrap">
+            <table class="adm-table">
+                <thead>
+                    <tr>
+                        <th class="is-tight">Order</th>
+                        <th>Role</th>
+                        <th>Destination</th>
+                        <th class="is-num">Positions</th>
+                        <th class="is-tight"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($featuredJobs as $job)
+                    <tr>
+                        <td class="is-tight adm-num">{{ $job->featured_order ?? '—' }}</td>
+                        <td>
+                            <span class="adm-cell-title">{{ $job->title }}</span>
+                            @if($job->title_ja)<span class="adm-cell-sub">{{ $job->title_ja }}</span>@endif
+                        </td>
+                        <td>{{ $job->country }}</td>
+                        <td class="is-num">{{ $job->positions_left }}</td>
+                        <td class="is-tight">
+                            <a href="{{ route('admin.jobs.edit', $job) }}" class="adm-btn is-sm">Edit</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
         @else
-        <div class="empty_state text_ac p_v4">
-            <h4 class="color_light">No hero section configured yet</h4>
-            <x-button href="{{ route('admin.hero.edit') }}" class="mtop_2vh">
-                <h3 class="font_w500 color_white">Set Up Hero</h3>
-            </x-button>
+        <div class="adm-empty">
+            <i class="ri-briefcase-4-line"></i>
+            <span class="adm-empty-title">No featured jobs yet</span>
         </div>
         @endif
     </div>
+</div>
 
-    <div class=" admin_title grid col_2 justify_sb align_c mbottom_2vh mtop_2vh">
-        <x-section-title text="Ads Section" />
-        <x-button href="{{ route('admin.ads.edit') }}" class="admin_action_button" >
-            <h3 class="font_w500 color_white p_s4">Edit Ads</h3>
-        </x-button>
+<!-- Latest news -->
+<div class="adm-card">
+    <div class="adm-card-head">
+        <h2 class="adm-card-title">Latest news</h2>
+        <a href="{{ route('admin.news.index') }}" class="adm-btn is-sm">Manage news <i class="ri-arrow-right-line"></i></a>
     </div>
-
-    <!-- Ads Section Management -->
-    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s2">
-        @if($ad = \App\Models\Ad::getActive())
-        <div class="hero_preview w_100 grid col_2 gap_2vw">
-            <!-- Image Preview -->
-            <div class="preview_image w_100 h_30vh">
-                <img src="{{ asset('storage/' . $ad->image_path) }}" 
-                    alt="Advertisement Image" 
-                    class="w_100 h_100 obj_cover bradius_s">
-            </div>
-
-            <!-- Content Preview -->
-            <div class="preview_content flex_cl justify_c gap_1vw">
-                <div class="preview_item">
-                    <h5 class="color_light">Title</h5>
-                    <h3 class="color_primary">{{ $ad->title }}</h3>
-                </div>
-
-                <div class="preview_item">
-                    <h5 class="color_light">Last Updated</h5>
-                    <h4 class="color_blue">{{ $ad->updated_at->diffForHumans() }}</h4>
-                </div>
-            </div>
-        </div>
-        @else
-        <div class="empty_state text_ac p_v4">
-            <h4 class="color_light">No advertisement configured yet</h4>
-            <x-button href="{{ route('admin.ads.edit') }}" class="mtop_2vh">
-                <h3 class="font_w500 color_white">Set Up Advertisement</h3>
-            </x-button>
-        </div>
-        @endif
-    </div>
-
-    <!-- News Section Management -->
-    <div class="admin_title grid col_2 justify_sb align_c mbottom_2vh mtop_2vh">
-        <x-section-title text="Latest News" />
-        <x-button href="{{ route('admin.news.index') }}" class="admin_action_button">
-            <h3 class="font_w500 color_white p_s4">Manage News</h3>
-        </x-button>
-    </div>
-    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s2">
-        @php
-            $latestNews = \App\Models\News::latest('posted_on')->take(3)->get();
-        @endphp
+    <div class="adm-card-body is-flush">
         @if($latestNews->count())
-        <div class="news_preview w_100 grid col_3 gap_2vw">
-            @foreach($latestNews as $news)
-            <div class="preview_card bg_white bradius_s p_v4 p_s2">
-                <div class="preview_image w_100 h_20vh">
-                    @if($news->image_1)
-                        <img src="{{ asset('storage/' . $news->image_1) }}" 
-                            alt="{{ $news->title }}"
-                            class="w_100 h_100 obj_cover bradius_s">
-                    @elseif($news->image_2)
-                        <img src="{{ asset('storage/' . $news->image_2) }}" 
-                            alt="{{ $news->title }}"
-                            class="w_100 h_100 obj_cover bradius_s">
-                    @else
-                        <div class="w_100 h_100 flex justify_c align_c bg_gray_light bradius_s">
-                            <h3><i class="ri-image-line color_light"></i></h3>
-                        </div>
-                    @endif
-                </div>
-                <div class="preview_content flex_cl gap_1vh mtop_2vh">
-                    <h4 class="color_primary">{{ $news->title }}</h4>
-                    <h5 class="color_blue">{{ $news->time_ago }}</h5>
-                </div>
-            </div>
-            @endforeach
+        <div class="adm-table-wrap">
+            <table class="adm-table">
+                <thead>
+                    <tr>
+                        <th class="is-tight">Posted</th>
+                        <th>Headline</th>
+                        <th class="is-tight">Status</th>
+                        <th class="is-tight"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($latestNews as $news)
+                    <tr>
+                        <td class="is-tight adm-num">
+                            {{ $news->posted_on ? \Carbon\Carbon::parse($news->posted_on)->format('Y-m-d') : '—' }}
+                        </td>
+                        <td>
+                            <span class="adm-cell-title">{{ $news->title }}</span>
+                            @if($news->title_ja)<span class="adm-cell-sub">{{ $news->title_ja }}</span>@endif
+                        </td>
+                        <td class="is-tight">
+                            <span class="adm-pill {{ $news->status === 'published' ? 'is-on' : 'is-off' }}">
+                                {{ ucfirst($news->status) }}
+                            </span>
+                        </td>
+                        <td class="is-tight">
+                            <a href="{{ route('admin.news.edit', $news) }}" class="adm-btn is-sm">Edit</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
         @else
-        <div class="empty_state text_ac p_v4">
-            <h4 class="color_light">No news articles yet</h4>
+        <div class="adm-empty">
+            <i class="ri-newspaper-line"></i>
+            <span class="adm-empty-title">No news articles yet</span>
         </div>
         @endif
+    </div>
+</div>
+
+<!-- Hero + Ad, side by side -->
+<div class="adm-grid-2" style="margin-top:16px;">
+    <div class="adm-card" style="margin-top:0;">
+        <div class="adm-card-head">
+            <h2 class="adm-card-title">Hero section</h2>
+            <a href="{{ route('admin.hero.edit') }}" class="adm-btn is-sm">Edit</a>
+        </div>
+        <div class="adm-card-body">
+            @if($hero)
+                <img src="{{ asset('storage/' . $hero->image_path) }}" alt=""
+                     class="adm-preview-img is-wide" style="margin-bottom:12px;">
+                <dl class="adm-kv">
+                    <div><dt>Title</dt><dd>{{ $hero->title }}</dd></div>
+                    @if($hero->title_ja)<div><dt>Title (JA)</dt><dd>{{ $hero->title_ja }}</dd></div>@endif
+                    <div><dt>Button</dt><dd>{{ $hero->button_cta }}</dd></div>
+                    <div><dt>Updated</dt><dd>{{ $hero->updated_at->diffForHumans() }}</dd></div>
+                </dl>
+            @else
+                <div class="adm-empty">
+                    <i class="ri-image-edit-line"></i>
+                    <span class="adm-empty-title">No hero section configured</span>
+                    <a href="{{ route('admin.hero.edit') }}" class="adm-btn is-primary is-sm">Set up hero</a>
+                </div>
+            @endif
+        </div>
     </div>
 
-    <!-- Jobs Section Management -->
-    <div class="admin_title grid col_2 justify_sb align_c mbottom_2vh mtop_2vh">
-        <x-section-title text="Featured Jobs" />
-        <x-button href="{{ route('admin.jobs.index') }}" class="admin_action_button">
-            <h3 class="font_w500 color_white p_s4">Manage Jobs</h3>
-        </x-button>
-    </div>
-    <div class="section_card h_fc bg_white_light bradius_s p_v4 p_s2">
-        @if($featuredJobs = \App\Models\Job::where('is_featured', true)->take(3)->get())
-        <div class="jobs_preview w_100 grid col_3 gap_2vw">
-            @foreach($featuredJobs as $job)
-            <div class="preview_card bg_white bradius_s p_v4 p_s2">
-                <div class="preview_image w_100 h_20vh">
-                    <img src="{{ asset('storage/' . $job->image_path) }}" 
-                        alt="{{ $job->title }}"
-                        class="w_100 h_100 obj_cover bradius_s">
-                </div>
-                <div class="preview_content flex_cl gap_1vh mtop_2vh">
-                    <h4 class="color_primary">{{ $job->title }}</h4>
-                    <div class="flex justify_sb">
-                        <h5 class="color_blue">{{ $job->country }}</h5>
-                        <h5 class="color_light">{{ $job->positions_left }} Positions</h5>
-                    </div>
-                </div>
-            </div>
-            @endforeach
+    <div class="adm-card" style="margin-top:0;">
+        <div class="adm-card-head">
+            <h2 class="adm-card-title">Advertisement</h2>
+            <a href="{{ route('admin.ads.edit') }}" class="adm-btn is-sm">Edit</a>
         </div>
-        @else
-        <div class="empty_state text_ac p_v4">
-            <h4 class="color_light">No featured jobs yet</h4>
+        <div class="adm-card-body">
+            @if($ad)
+                <img src="{{ asset('storage/' . $ad->image_path) }}" alt=""
+                     class="adm-preview-img is-wide" style="margin-bottom:12px;">
+                <dl class="adm-kv">
+                    <div><dt>Title</dt><dd>{{ $ad->title }}</dd></div>
+                    <div><dt>Updated</dt><dd>{{ $ad->updated_at->diffForHumans() }}</dd></div>
+                </dl>
+            @else
+                <div class="adm-empty">
+                    <i class="ri-advertisement-line"></i>
+                    <span class="adm-empty-title">No advertisement configured</span>
+                    <a href="{{ route('admin.ads.edit') }}" class="adm-btn is-primary is-sm">Set up advertisement</a>
+                </div>
+            @endif
         </div>
-        @endif
     </div>
 </div>
 @endsection

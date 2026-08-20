@@ -13,11 +13,8 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\JobsController;
 
 use App\Http\Controllers\ContactController;
-
-// models
-use App\Models\Hero;
-use App\Models\Ad;
-use App\Models\Job;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocaleController;
 
 Route::get('/run-admin-seeder', function () {
     Artisan::call('db:seed', [
@@ -44,11 +41,10 @@ Route::get('/create-symlink', function () {
     }
 });
 
-Route::get('/', function () {
-    $hero = Hero::getActive();
-    $ad = Ad::getActive();
-    return view('welcome', compact('hero', 'ad'));
-})->name('home');  // Add the route name here
+Route::get('/', HomeController::class)->name('home');
+
+// Language switch — stores the choice in the session and returns to the page.
+Route::get('/lang/{locale}', LocaleController::class)->name('locale.switch');
 
 Route::get('/about-us', [PagesController::class, 'about'])->name('about');
 Route::get('/services', [PagesController::class, 'services'])->name('services');
