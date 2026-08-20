@@ -8,6 +8,7 @@ export default function SiteLayout({ title, description, transparentHeader = fal
     const { props } = usePage();
     const { t, locale } = useI18n();
     const flash = props.flash ?? {};
+    const seo = props.seo ?? {};
     const [notice, setNotice] = useState(null);
 
     // The root Blade template only renders on a full page load, so after a
@@ -17,6 +18,30 @@ export default function SiteLayout({ title, description, transparentHeader = fal
     useEffect(() => {
         document.documentElement.lang = locale;
     }, [locale]);
+
+    // The Blade root renders one set of SEO tags server-side so crawlers see
+    // them without running JavaScript. On client-side navigation we rewrite
+    // those same elements rather than letting anything append a second copy.
+    useEffect(() => {
+        if (!seo.title) return;
+
+        const set = (selector, attribute, value) => {
+            const el = document.head.querySelector(selector);
+            if (el && value != null) el.setAttribute(attribute, value);
+        };
+
+        set('meta[name="description"]', 'content', seo.description);
+        set('link[rel="canonical"]', 'href', seo.canonical);
+        set('meta[property="og:title"]', 'content', seo.title);
+        set('meta[property="og:description"]', 'content', seo.description);
+        set('meta[property="og:image"]', 'content', seo.image);
+        set('meta[property="og:url"]', 'content', seo.canonical);
+        set('meta[property="og:type"]', 'content', seo.type);
+        set('meta[property="og:locale"]', 'content', seo.locale);
+        set('meta[name="twitter:title"]', 'content', seo.title);
+        set('meta[name="twitter:description"]', 'content', seo.description);
+        set('meta[name="twitter:image"]', 'content', seo.image);
+    }, [seo.title, seo.description, seo.canonical, seo.image, seo.type, seo.locale]);
 
     useEffect(() => {
         const message = flash.success || flash.error;
@@ -29,10 +54,7 @@ export default function SiteLayout({ title, description, transparentHeader = fal
 
     return (
         <div className="relative flex min-h-screen flex-col bg-washi">
-            <Head>
-                <title>{title}</title>
-                {description && <meta name="description" content={description} />}
-            </Head>
+            <Head title={seo.title ?? title} />
 
             {/* 和紙 — a whisper of paper grain over the whole page */}
             <div

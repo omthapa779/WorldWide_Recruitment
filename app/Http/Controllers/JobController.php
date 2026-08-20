@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Support\Seo;
 use App\Support\SiteContent;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,6 +16,7 @@ class JobController extends Controller
 
         return Inertia::render('Jobs/Index', [
             'jobs' => $jobs->through(fn (Job $job) => SiteContent::jobCard($job)),
+            'seo' => Seo::make(__('site.jobs.heroTitle'), __('site.jobs.meta')),
             'countries' => Job::query()
                 ->whereNotNull('country')
                 ->distinct()
@@ -29,6 +31,12 @@ class JobController extends Controller
             'job' => array_merge(SiteContent::jobCard($job), [
                 'description' => $job->localised('description'),
             ]),
+            'seo' => Seo::make(
+                $job->localised('title'),
+                $job->localised('description'),
+                $job->image_path ? asset('storage/'.$job->image_path) : null,
+                'article',
+            ),
             'related' => Job::where('id', '!=', $job->id)
                 ->latest('posted_on')
                 ->take(3)

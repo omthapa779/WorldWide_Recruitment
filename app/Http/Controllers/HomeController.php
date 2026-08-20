@@ -6,6 +6,7 @@ use App\Models\Ad;
 use App\Models\Hero;
 use App\Models\Job;
 use App\Models\News;
+use App\Support\Seo;
 use App\Support\SiteContent;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -18,6 +19,9 @@ class HomeController extends Controller
         $ad = Ad::getActive();
 
         return Inertia::render('Home', [
+            'seo' => Seo::make(null, __('site.home.meta'), $hero && $hero->image_path
+                ? asset('storage/'.$hero->image_path)
+                : asset('resources/images/hero_japan.jpg')),
             'hero' => [
                 'title' => $hero?->localised('title')
                     ?? __('site.home.sub'),

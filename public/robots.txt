@@ -1,2 +1,11 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Back office — nothing here belongs in an index.
+Disallow: /admin
+Disallow: /login
+
+# Language switch endpoints are redirects, not content.
+Disallow: /lang/
+
+Sitemap: https://wrsnepal.com/sitemap.xml

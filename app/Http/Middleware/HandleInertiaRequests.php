@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use App\Support\Seo;
 use Illuminate\Support\Facades\App;
 use Inertia\Middleware;
 
@@ -38,6 +39,10 @@ class HandleInertiaRequests extends Middleware
             'locale' => $locale,
             'locales' => SetLocale::SUPPORTED,
             'translations' => trans('site'),
+
+            // Default SEO for any page that does not supply its own.
+            'seo' => Seo::make(),
+            'organisationSchema' => Seo::organisation(),
 
             'company' => [
                 'name' => 'WorldWide Recruitment Services Pvt. Ltd.',

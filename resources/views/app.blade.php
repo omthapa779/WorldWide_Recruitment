@@ -5,23 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title inertia>{{ config('app.name', 'WorldWide Recruitment Services') }}</title>
+    @php
+        // Rendered server-side on purpose: this is an Inertia SPA without SSR,
+        // so anything the React <Head> adds is invisible to crawlers that do
+        // not execute JavaScript. The `inertia` attribute lets Inertia's head
+        // manager take these over during client-side navigation instead of
+        // duplicating them.
+        $seo = $page['props']['seo'] ?? [];
+        $schema = $page['props']['organisationSchema'] ?? null;
+        $title = $seo['title'] ?? config('app.name', 'WorldWide Recruitment Services');
+        $description = $seo['description'] ?? '';
+        $canonical = $seo['canonical'] ?? url()->current();
+        $image = $seo['image'] ?? asset('resources/images/logo.png');
+        $ogType = $seo['type'] ?? 'website';
+        $siteName = $seo['siteName'] ?? 'WorldWide Recruitment Services Pvt. Ltd.';
+        $ogLocale = $seo['locale'] ?? 'en_US';
+    @endphp
 
-    <meta name="description" content="WorldWide Recruitment Services Pvt. Ltd. — a government-licensed Nepali manpower agency (License No. 1617-079/80) connecting Nepalese talent with employers in Japan, Dubai, Qatar and beyond.">
-    <meta name="keywords" content="Recruitment Nepal, Manpower Nepal, Jobs in Japan, Overseas Employment, WRS Nepal, Ethical Recruitment, 人材紹介, ネパール">
-    <meta name="author" content="WorldWide Recruitment Services Pvt. Ltd.">
+    {{-- Only the title is handed to Inertia; the rest are updated in place
+         by SiteLayout so there is exactly one of each in the document. --}}
+    <title inertia>{{ $title }}</title>
+    <meta name="description" content="{{ $description }}">
+    <link rel="canonical" href="{{ $canonical }}">
 
-    <meta property="og:site_name" content="WorldWide Recruitment Services">
-    <meta property="og:title" content="WorldWide Recruitment Services Pvt. Ltd.">
-    <meta property="og:description" content="Connecting Nepalese talent with global opportunities. Government-licensed overseas employment for Japan, Dubai, Qatar and more.">
-    <meta property="og:image" content="{{ asset('resources/images/logo.png') }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:type" content="website">
+    <meta name="author" content="{{ $siteName }}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+    <meta property="og:site_name" content="{{ $siteName }}">
+    <meta property="og:title" content="{{ $title }}">
+    <meta property="og:description" content="{{ $description }}">
+    <meta property="og:image" content="{{ $image }}">
+    <meta property="og:url" content="{{ $canonical }}">
+    <meta property="og:type" content="{{ $ogType }}">
+    <meta property="og:locale" content="{{ $ogLocale }}">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WorldWide Recruitment Services Pvt. Ltd.">
-    <meta name="twitter:description" content="Connecting Nepalese talent with global opportunities.">
-    <meta name="twitter:image" content="{{ asset('resources/images/logo.png') }}">
+    <meta name="twitter:title" content="{{ $title }}">
+    <meta name="twitter:description" content="{{ $description }}">
+    <meta name="twitter:image" content="{{ $image }}">
+
+    @if($schema)
+        <script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    @endif
 
     <link rel="shortcut icon" href="{{ asset('resources/favicon.ico') }}" type="image/x-icon">
 

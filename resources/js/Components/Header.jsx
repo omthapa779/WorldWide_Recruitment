@@ -98,18 +98,18 @@ export default function Header({ transparent = false }) {
                             <img
                                 src="/resources/images/logo.png"
                                 alt=""
-                                className="h-11 w-11 shrink-0 object-contain lg:h-12 lg:w-12"
+                                className="h-14 w-14 shrink-0 object-contain lg:h-16 lg:w-16"
                             />
                             <span className="flex flex-col leading-tight">
                                 <span
-                                    className={`font-mincho text-[0.95rem] tracking-[0.08em] lg:text-[1.05rem] ${
+                                    className={`font-mincho text-[1.05rem] tracking-[0.08em] lg:text-[1.2rem] ${
                                         floating ? 'text-washi' : 'text-kon-700'
                                     }`}
                                 >
                                     {company.nameLocalised}
                                 </span>
                                 <span
-                                    className={`text-[0.6rem] tracking-[0.3em] ${
+                                    className={`text-[0.62rem] tracking-[0.28em] ${
                                         floating ? 'text-washi/65' : 'text-nezumi-500'
                                     }`}
                                 >

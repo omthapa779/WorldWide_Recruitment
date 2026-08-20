@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\JobsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\SitemapController;
 
 Route::get('/run-admin-seeder', function () {
     Artisan::call('db:seed', [
@@ -42,6 +43,8 @@ Route::get('/create-symlink', function () {
 });
 
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 // Language switch — stores the choice in the session and returns to the page.
 Route::get('/lang/{locale}', LocaleController::class)->name('locale.switch');

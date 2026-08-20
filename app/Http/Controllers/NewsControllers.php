@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Support\Seo;
 use App\Support\SiteContent;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -18,6 +19,7 @@ class NewsControllers extends Controller
 
         return Inertia::render('News/Index', [
             'news' => $news->through(fn (News $item) => SiteContent::newsCard($item)),
+            'seo' => Seo::make(__('site.news.heroTitle'), __('site.news.meta')),
         ]);
     }
 
@@ -33,6 +35,12 @@ class NewsControllers extends Controller
                     ->map(fn ($path) => asset('storage/'.$path))
                     ->values(),
             ]),
+            'seo' => Seo::make(
+                $news->localised('title'),
+                $news->localised('content'),
+                ($img = $news->image_1 ?: $news->image_2) ? asset('storage/'.$img) : null,
+                'article',
+            ),
             'more' => News::where('status', 'published')
                 ->where('id', '!=', $news->id)
                 ->latest('posted_on')
