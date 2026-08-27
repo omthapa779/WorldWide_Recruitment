@@ -20,7 +20,7 @@ export default function HankoSeal({ license, className = '', size = 'md' }) {
             title={`${t('common.licenceLabel')} ${license}`}
         >
             <span className="text-[0.85em] tracking-[0.3em] opacity-80">{t('common.sealTop')}</span>
-            <span aria-hidden="true" className="h-px w-8 bg-shu-600/60" />
+            <span aria-hidden="true" className="h-px w-8 bg-shu-700/60" />
             <span className="numeral font-semibold leading-tight">{license}</span>
             <span className="text-[0.78em] tracking-[0.2em] opacity-70">{t('common.sealBottom')}</span>
         </div>

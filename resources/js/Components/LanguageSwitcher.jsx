@@ -17,7 +17,7 @@ export default function LanguageSwitcher({ tone = 'dark', className = '' }) {
     return (
         <div
             className={`flex items-center border ${
-                light ? 'border-washi/25' : 'border-washi/20'
+                light ? 'border-washi/25' : 'border-sumi-900/20'
             } ${className}`}
             role="group"
             aria-label="Language"
@@ -32,10 +32,10 @@ export default function LanguageSwitcher({ tone = 'dark', className = '' }) {
                         aria-current={active ? 'true' : undefined}
                         className={`px-3 py-1.5 text-[0.62rem] tracking-[0.18em] transition-colors duration-400 ${
                             active
-                                ? 'bg-shu-600 text-washi'
+                                ? 'bg-shu-700 text-washi'
                                 : light
                                   ? 'text-washi/60 hover:bg-washi/10 hover:text-washi'
-                                  : 'text-washi/55 hover:bg-washi/10 hover:text-washi'
+                                  : 'text-sumi-600 hover:bg-sumi-900/5 hover:text-sumi-900'
                         }`}
                     >
                         {LABELS[code].short}
@@ -52,7 +52,7 @@ export function LanguageSwitcherWide({ className = '' }) {
 
     return (
         <div className={`flex flex-col gap-2.5 ${className}`}>
-            <span className="text-[0.58rem] tracking-[0.3em] text-washi/40 uppercase">{t('locale.label')}</span>
+            <span className="text-[0.58rem] tracking-[0.3em] text-nezumi-400 uppercase">{t('locale.label')}</span>
             <div className="flex">
                 {['en', 'ja'].map((code) => {
                     const active = locale === code;
@@ -64,8 +64,8 @@ export function LanguageSwitcherWide({ className = '' }) {
                             aria-current={active ? 'true' : undefined}
                             className={`border px-6 py-3 text-[0.7rem] tracking-[0.2em] transition-colors duration-400 ${
                                 active
-                                    ? 'border-shu-600 bg-shu-600 text-washi'
-                                    : 'border-washi/20 text-washi/60 hover:border-washi/45 hover:text-washi'
+                                    ? 'border-shu-700 bg-shu-700 text-washi'
+                                    : 'border-sumi-900/20 text-sumi-600 hover:border-sumi-900/45 hover:text-sumi-900'
                             }`}
                         >
                             {LABELS[code].full}

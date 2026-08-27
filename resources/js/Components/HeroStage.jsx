@@ -1,314 +1,206 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from './Button';
-import HankoSeal from './HankoSeal';
 import { useI18n, lines } from '../lib/i18n';
-import { usePrefersReducedMotion, splitHeadline } from '../lib/motion';
+import { usePrefersReducedMotion } from '../lib/motion';
 
 /**
- * 序 — the hero stage.
+ * 序 — the hero.
  *
- * Four layers move independently: a slow cross-fading image reel behind a
- * drifting seigaiha pattern, the headline, and the seal. Pointer movement and
- * scroll offset both feed one rAF loop that writes transforms straight to the
- * DOM — no React state per frame.
+ * Deliberately restrained. An earlier version layered per-glyph kinetic type,
+ * pointer parallax, a curtain wipe, a drifting pattern and a bouncing seal on
+ * top of one another; together they read as a showreel rather than as a
+ * licensed recruitment firm. What sells this company is credibility, so the
+ * structure now leads with the licence, states the offer plainly, and closes
+ * with the figures — one photograph, one gentle entrance, nothing competing.
  *
- * Everything that decides *visibility* is a CSS transition driven by the
- * `ready` flag, never a keyframe animation: if animations never run, the
- * transition simply lands on its end state and the hero is fully readable.
- * Keyframes are used only for effects whose failure is invisible (drift, the
- * slow zoom, the scroll-rail highlight).
+ * Visibility is still carried by CSS transitions keyed off [data-ready], never
+ * by keyframes: if transitions never run, everything lands on its end state and
+ * the hero stays readable.
  */
 export default function HeroStage({ hero, company, slides = [] }) {
-    const { t, isJapanese } = useI18n();
+    const { t } = useI18n();
     const reduced = usePrefersReducedMotion();
 
     const sectionRef = useRef(null);
     const reelRef = useRef(null);
-    const patternRef = useRef(null);
-    const contentRef = useRef(null);
-    const sealRef = useRef(null);
 
     const [ready, setReady] = useState(false);
-    const [curtain, setCurtain] = useState(true);
     const [active, setActive] = useState(0);
 
     const reel = slides.length > 0 ? slides : [hero.image];
-    const headlineLines = useMemo(() => lines(t('home.headline')), [t]);
+    const headline = lines(t('home.headline'));
+    const stats = t('stats', []) || [];
 
-    /* -- entrance ---------------------------------------------------------
-       The curtain is removed from the DOM outright once it has lifted, so a
-       stalled animation can never leave the hero covered. */
     useEffect(() => {
-        const start = requestAnimationFrame(() => setReady(true));
-        const lift = setTimeout(() => setCurtain(false), reduced ? 100 : 2000);
-        return () => {
-            cancelAnimationFrame(start);
-            clearTimeout(lift);
-        };
-    }, [reduced]);
+        const id = requestAnimationFrame(() => setReady(true));
+        return () => cancelAnimationFrame(id);
+    }, []);
 
-    /* -- image reel ------------------------------------------------------- */
     useEffect(() => {
         if (reduced || reel.length < 2) return;
-
-        const advance = () => {
-            if (document.hidden) return;
-            setActive((i) => (i + 1) % reel.length);
-        };
-
-        const timer = setInterval(advance, 6200);
+        const timer = setInterval(() => {
+            if (!document.hidden) setActive((i) => (i + 1) % reel.length);
+        }, 7000);
         return () => clearInterval(timer);
     }, [reduced, reel.length]);
 
-    /* -- pointer + scroll parallax ---------------------------------------
-       One loop, easing current values toward their targets and writing
-       transforms directly. */
+    /* One slow vertical drift on the photograph as the page scrolls. The
+       pointer tilt is gone — that was the restless part. */
     useEffect(() => {
         if (reduced) return;
-
         const section = sectionRef.current;
         if (!section) return;
 
         let frame;
-        const target = { x: 0, y: 0, scroll: 0 };
-        const current = { x: 0, y: 0, scroll: 0 };
-
-        const onPointer = (event) => {
-            const rect = section.getBoundingClientRect();
-            target.x = (event.clientX - rect.left) / rect.width - 0.5;
-            target.y = (event.clientY - rect.top) / rect.height - 0.5;
-        };
-
-        const onLeave = () => {
-            target.x = 0;
-            target.y = 0;
-        };
+        let target = 0;
+        let current = 0;
 
         const onScroll = () => {
             const rect = section.getBoundingClientRect();
-            target.scroll = Math.min(Math.max(-rect.top / Math.max(rect.height, 1), 0), 1);
+            target = Math.min(Math.max(-rect.top / Math.max(rect.height, 1), 0), 1);
         };
-
         const tick = () => {
-            current.x += (target.x - current.x) * 0.06;
-            current.y += (target.y - current.y) * 0.06;
-            current.scroll += (target.scroll - current.scroll) * 0.12;
-
+            current += (target - current) * 0.1;
             if (reelRef.current) {
-                reelRef.current.style.transform = `translate3d(${current.x * -26}px, ${
-                    current.y * -18 + current.scroll * 60
-                }px, 0) scale(${1.06 + current.scroll * 0.06})`;
+                reelRef.current.style.transform =
+                    'translate3d(0, ' + current * 40 + 'px, 0) scale(' + (1.04 + current * 0.03) + ')';
             }
-            if (patternRef.current) {
-                patternRef.current.style.transform = `translate3d(${current.x * 42}px, ${current.y * 28}px, 0)`;
-            }
-            if (contentRef.current) {
-                contentRef.current.style.transform = `translate3d(${current.x * 12}px, ${
-                    current.y * 8 - current.scroll * 90
-                }px, 0)`;
-                contentRef.current.style.opacity = String(Math.max(1 - current.scroll * 1.35, 0));
-            }
-            if (sealRef.current) {
-                sealRef.current.style.transform = `translate3d(${current.x * -34}px, ${current.y * -22}px, 0)`;
-            }
-
             frame = requestAnimationFrame(tick);
         };
 
         onScroll();
         frame = requestAnimationFrame(tick);
-        window.addEventListener('pointermove', onPointer, { passive: true });
-        section.addEventListener('pointerleave', onLeave);
         window.addEventListener('scroll', onScroll, { passive: true });
-
         return () => {
             cancelAnimationFrame(frame);
-            window.removeEventListener('pointermove', onPointer);
-            section.removeEventListener('pointerleave', onLeave);
             window.removeEventListener('scroll', onScroll);
         };
     }, [reduced]);
-
-    // Running index for the stagger, so the delay keeps climbing across lines.
-    let step = 0;
 
     return (
         <section
             ref={sectionRef}
             data-ready={ready}
-            className="hero-stage relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-kon-950 pt-[clamp(5.25rem,13vh,8.5rem)] text-washi [@media(min-height:600px)]:h-[100svh]"
+            className="hero-stage relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-kon-700 pt-[7.5rem] text-washi lg:pt-[10rem] [@media(min-height:600px)]:h-[100svh]"
         >
-            {/* 一 — the image reel */}
-            <div ref={reelRef} className="absolute inset-0 will-change-transform">
+            {/* Photograph — the right side on desktop, behind the copy on mobile. */}
+            <div ref={reelRef} className="absolute inset-y-0 right-0 w-full will-change-transform lg:w-[46%]">
                 {reel.map((src, i) => (
                     <img
                         key={src}
                         src={src}
                         alt=""
                         aria-hidden="true"
-                        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[2200ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                            i === active ? 'opacity-45' : 'opacity-0'
-                        } ${!reduced && i === active ? 'hero-kenburns' : ''}`}
+                        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                            i === active ? 'opacity-100' : 'opacity-0'
+                        }`}
                     />
                 ))}
             </div>
 
-            <div className="absolute inset-0 bg-gradient-to-br from-kon-950 via-kon-950/80 to-kon-900/35" />
+            {/* Legibility: a full wash on small screens, a soft seam on desktop. */}
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-b from-kon-700/92 via-kon-700/88 to-kon-700/95 lg:hidden"
+            />
+            <div
+                aria-hidden="true"
+                className="absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-kon-700 via-kon-700 to-transparent lg:block"
+            />
 
-            {/* 二 — drifting seigaiha */}
-            <div ref={patternRef} className="absolute -inset-16 will-change-transform">
-                <div aria-hidden="true" className="seigaiha hero-drift absolute inset-0 opacity-[0.22]" />
+            <div className="relative z-10 mx-auto flex w-full max-w-[1500px] flex-auto flex-col justify-center px-6 py-[clamp(0.5rem,3vh,3rem)] lg:px-8 xl:px-14">
+                <div className="max-w-[34rem] lg:max-w-[46%]">
+                    {/* Credibility first — the licence is this company's strongest claim. */}
+                    <div
+                        className="hero-rise flex items-center gap-3 text-[0.7rem] tracking-[0.32em] text-shu-400"
+                        style={{ '--d': '60ms' }}
+                    >
+                        <span aria-hidden="true" className="h-px w-8 bg-shu-400" />
+                        {t('home.eyebrow')}
+                    </div>
+
+                    <h1
+                        className="hero-rise mt-[clamp(0.9rem,2.6vh,1.75rem)] text-[clamp(2.1rem,min(5.4vw,7.4vh),4.4rem)] leading-[1.12] tracking-[0.02em]"
+                        style={{ '--d': '150ms' }}
+                    >
+                        {headline.map((line, i) => (
+                            <span key={i} className="block">
+                                {line}
+                            </span>
+                        ))}
+                    </h1>
+
+                    <p
+                        className="hero-rise mt-[clamp(0.75rem,2vh,1.25rem)] max-w-xl text-[clamp(0.95rem,1.35vw,1.1rem)] leading-relaxed text-washi/85"
+                        style={{ '--d': '240ms' }}
+                    >
+                        {hero.title}
+                    </p>
+
+                    <p
+                        className="hero-rise mt-3 max-w-xl text-sm leading-relaxed text-washi/70 [@media(max-height:740px)]:hidden"
+                        style={{ '--d': '300ms' }}
+                    >
+                        {t('home.sub')}
+                    </p>
+
+                    <div
+                        className="hero-rise mt-[clamp(1.1rem,3vh,2rem)] flex flex-wrap items-center gap-3"
+                        style={{ '--d': '380ms' }}
+                    >
+                        <Button href="/contact" variant="shu">
+                            {hero.cta}
+                        </Button>
+                        <Button href="/jobs" variant="ghost">
+                            {t('common.viewJobs')}
+                        </Button>
+                        <a
+                            href={company.profilePdf}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ink-link ml-1 text-[0.72rem] tracking-[0.18em] text-kon-100/80 hover:text-washi"
+                        >
+                            {t('common.companyProfile')} ↓
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            {/* 暖簾 — split curtain, removed from the DOM once lifted */}
-            {curtain && (
-                <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-30 flex">
-                    {[0, 1, 2, 3, 4].map((i) => (
+            {/* Figures close the hero. The strongest professional signal available,
+                and every one of these is published by the client. */}
+            <div
+                className="hero-rise relative z-10 border-t border-washi/20 bg-kon-950/70 backdrop-blur-md"
+                style={{ '--d': '470ms' }}
+            >
+                <div className="mx-auto grid max-w-[1500px] grid-cols-2 divide-x divide-washi/15 px-6 sm:grid-cols-4 lg:px-8 xl:px-14">
+                    {stats.map((stat) => (
+                        <div
+                            key={stat.title}
+                            className="flex flex-col gap-0.5 py-[clamp(0.8rem,2.4vh,1.5rem)] pr-5 pl-5 first:pl-0"
+                        >
+                            <span className="numeral text-[clamp(1.35rem,2.4vw,2rem)] leading-none text-washi">
+                                {stat.value}
+                                {stat.suffix}
+                            </span>
+                            <span className="text-[0.68rem] tracking-[0.14em] text-washi/80">{stat.title}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Reel position, tucked against the photograph. */}
+            {reel.length > 1 && (
+                <div className="pointer-events-none absolute right-6 bottom-[9rem] z-10 hidden gap-1.5 lg:flex">
+                    {reel.map((src, i) => (
                         <span
-                            key={i}
-                            className="noren-panel h-full flex-1 bg-kinari"
-                            style={{ animationDelay: `${120 + i * 100}ms` }}
+                            key={src}
+                            className={`block h-0.5 transition-all duration-700 ${
+                                i === active ? 'w-7 bg-washi' : 'w-3 bg-washi/50'
+                            }`}
                         />
                     ))}
                 </div>
             )}
-
-            <div className="relative z-10 mx-auto flex w-full max-w-[1500px] flex-auto flex-col justify-center px-6 py-[clamp(0.5rem,3vh,4rem)] lg:px-8 xl:px-14">
-                <div className="grid items-center gap-[clamp(1.5rem,5vh,3.5rem)] lg:grid-cols-[1fr_auto]">
-                    <div ref={contentRef} className="flex flex-col gap-[clamp(0.8rem,2.4vh,2rem)] will-change-transform">
-                        <div className="hero-rise flex items-center gap-4" style={{ '--d': '120ms' }}>
-                            <span aria-hidden="true" className="hero-rule h-px w-14 bg-shu-500" />
-                            <span className="text-[0.68rem] tracking-[0.4em] text-shu-400">
-                                {t('home.eyebrow')}
-                            </span>
-                        </div>
-
-                        {/* Kinetic headline — each unit rises out of its own mask */}
-                        <h1 className="text-[clamp(2rem,min(6.6vw,8vh),5.4rem)] leading-[1.08] tracking-[0.04em]">
-                            {headlineLines.map((line, li) => (
-                                <span key={li} className="block overflow-hidden py-[0.08em]">
-                                    {splitHeadline(line, isJapanese).map((unit, ui) => {
-                                        const delay = 260 + step * (isJapanese ? 52 : 90);
-                                        step += 1;
-                                        return (
-                                            <span
-                                                key={ui}
-                                                className="hero-glyph inline-block whitespace-pre"
-                                                style={{ '--d': `${delay}ms` }}
-                                            >
-                                                {unit.text}
-                                                {!isJapanese && ' '}
-                                            </span>
-                                        );
-                                    })}
-                                </span>
-                            ))}
-                        </h1>
-
-                        <p
-                            className="hero-rise max-w-xl text-[clamp(0.95rem,min(1.6vw,2.1vh),1.25rem)] leading-relaxed text-washi/80"
-                            style={{ '--d': '900ms' }}
-                        >
-                            {hero.title}
-                        </p>
-
-                        <p
-                            className="hero-rise max-w-xl text-sm leading-relaxed text-washi/55 [@media(max-height:760px)]:hidden"
-                            style={{ '--d': '1020ms' }}
-                        >
-                            {t('home.sub')}
-                        </p>
-
-                        <div
-                            className="hero-rise flex flex-wrap items-center gap-3 pt-1"
-                            style={{ '--d': '1140ms' }}
-                        >
-                            <Button href="/contact" variant="shu">
-                                {hero.cta}
-                            </Button>
-                            <Button href="/jobs" variant="ghost">
-                                {t('common.viewJobs')}
-                            </Button>
-                            <a
-                                href={company.profilePdf}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="ink-link text-[0.72rem] tracking-[0.22em] text-washi/60 hover:text-washi"
-                            >
-                                {t('common.companyProfile')} ↓
-                            </a>
-                        </div>
-                    </div>
-
-                    <div ref={sealRef} className="hidden flex-col items-center gap-[clamp(1rem,3vh,2rem)] will-change-transform lg:flex">
-                        <span
-                            aria-hidden="true"
-                            className="hero-rise tategaki font-mincho text-lg tracking-[0.6em] text-washi/40 [@media(max-height:860px)]:hidden"
-                            style={{ '--d': '1260ms' }}
-                        >
-                            {t('home.vertical')}
-                        </span>
-                        {/* The seal presses down like a stamp rather than fading in */}
-                        <span className="hero-stamp" style={{ '--d': '1420ms' }}>
-                            <HankoSeal license={company.license} size="lg" />
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            {/* Foot of the stage: scroll cue, reel position, licence */}
-            <div className="relative z-10 mx-auto flex w-full max-w-[1500px] items-end justify-between gap-6 px-6 pb-[clamp(0.75rem,3vh,2.5rem)] lg:px-8 xl:px-14">
-                <div
-                    className="hero-rise flex items-center gap-3 text-[0.62rem] tracking-[0.3em] text-washi/45"
-                    style={{ '--d': '1500ms' }}
-                >
-                    <span aria-hidden="true" className="hero-scroll-rail relative block h-10 w-px bg-washi/20" />
-                    <span>{t('common.scroll')}</span>
-                </div>
-
-                {reel.length > 1 && (
-                    <div
-                        className="hero-rise hidden items-center gap-3 sm:flex [@media(max-height:600px)]:!hidden"
-                        style={{ '--d': '1560ms' }}
-                        role="tablist"
-                        aria-label="Hero images"
-                    >
-                        {reel.map((src, i) => (
-                            <button
-                                key={src}
-                                type="button"
-                                role="tab"
-                                aria-selected={i === active}
-                                aria-label={`Image ${i + 1}`}
-                                onClick={() => setActive(i)}
-                                className="group flex items-center gap-2 py-2"
-                            >
-                                <span className="numeral text-[0.58rem] tracking-[0.2em] text-washi/35 group-hover:text-washi/70">
-                                    {String(i + 1).padStart(2, '0')}
-                                </span>
-                                <span
-                                    className={`block h-px transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                                        i === active ? 'w-10 bg-shu-500' : 'w-4 bg-washi/25 group-hover:bg-washi/50'
-                                    }`}
-                                />
-                            </button>
-                        ))}
-                    </div>
-                )}
-
-                <div className="flex items-center gap-6 lg:hidden">
-                    <HankoSeal license={company.license} size="sm" />
-                </div>
-
-                <p
-                    className="hero-rise hidden max-w-xs text-right text-[0.68rem] leading-relaxed tracking-[0.14em] text-washi/40 lg:block"
-                    style={{ '--d': '1620ms' }}
-                >
-                    {t('common.licenceLabel')} {company.license}
-                    <br />
-                    {t('common.authority')}
-                </p>
-            </div>
         </section>
     );
 }

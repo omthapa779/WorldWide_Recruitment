@@ -126,7 +126,7 @@ export default function ContactSection({ no = '06', withMap = true }) {
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="group mt-2 inline-flex w-fit items-center gap-3 border border-sumi-900 bg-sumi-900 px-10 py-4 text-[0.75rem] font-medium tracking-[0.24em] text-washi transition-colors duration-500 hover:border-shu-600 hover:bg-shu-600 disabled:cursor-not-allowed disabled:opacity-55"
+                                className="group mt-2 inline-flex w-fit items-center gap-3 border border-sumi-900 bg-sumi-900 px-10 py-4 text-[0.75rem] font-medium tracking-[0.24em] text-washi transition-colors duration-500 hover:border-shu-700 hover:bg-shu-700 disabled:cursor-not-allowed disabled:opacity-55"
                             >
                                 {processing ? t('contact.form.sending') : t('contact.form.send')}
                                 <span
@@ -216,7 +216,7 @@ function OfficeBlock({ title, lines, links }) {
                     <a
                         key={link.href}
                         href={link.href}
-                        className="ink-link w-fit text-sm text-kon-700 hover:text-shu-600"
+                        className="ink-link w-fit text-sm text-kon-700 hover:text-shu-700"
                     >
                         {link.label}
                     </a>

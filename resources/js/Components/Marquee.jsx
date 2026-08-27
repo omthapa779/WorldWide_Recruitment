@@ -68,7 +68,7 @@ export default function Marquee({ items = [], className = '' }) {
     const pass = (keyPrefix) =>
         items.map((item, i) => (
             <span key={`${keyPrefix}-${item}-${i}`} className="flex shrink-0 items-center gap-10">
-                <span className="text-[0.72rem] tracking-[0.32em] text-washi/60 uppercase">{item}</span>
+                <span className="text-[0.72rem] tracking-[0.32em] text-sumi-600 uppercase">{item}</span>
                 <span aria-hidden="true" className="text-shu-500">
                     ◆
                 </span>
@@ -84,7 +84,7 @@ export default function Marquee({ items = [], className = '' }) {
     return (
         <div
             ref={wrapRef}
-            className={`relative overflow-hidden border-y border-sumi-900/12 bg-sumi-950 py-4 ${className}`}
+            className={`relative overflow-hidden border-y border-sumi-900/12 bg-kinari py-4 ${className}`}
         >
             {/* Hidden reference copy: one pass, used purely for measurement. */}
             <div
@@ -106,11 +106,11 @@ export default function Marquee({ items = [], className = '' }) {
 
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-sumi-950 to-transparent"
+                className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-kinari to-transparent"
             />
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-sumi-950 to-transparent"
+                className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-kinari to-transparent"
             />
         </div>
     );

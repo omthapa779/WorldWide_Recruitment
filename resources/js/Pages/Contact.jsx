@@ -36,7 +36,7 @@ export default function Contact() {
                             >
                                 <div className="flex flex-col gap-1">
                                     <h3 className="text-2xl tracking-[0.1em] text-sumi-900">{office.title}</h3>
-                                    <span className="text-[0.6rem] tracking-[0.28em] text-shu-600">
+                                    <span className="text-[0.6rem] tracking-[0.28em] text-shu-700">
                                         {office.accent}
                                     </span>
                                 </div>
@@ -54,14 +54,14 @@ export default function Contact() {
                                         <a
                                             key={phone}
                                             href={`tel:${phone.replace(/[\s-]/g, '')}`}
-                                            className="ink-link w-fit text-sm text-kon-700 hover:text-shu-600"
+                                            className="ink-link w-fit text-sm text-kon-700 hover:text-shu-700"
                                         >
                                             {phone}
                                         </a>
                                     ))}
                                     <a
                                         href={`mailto:${office.email}`}
-                                        className="ink-link w-fit text-sm text-kon-700 hover:text-shu-600"
+                                        className="ink-link w-fit text-sm text-kon-700 hover:text-shu-700"
                                     >
                                         {office.email}
                                     </a>
@@ -72,16 +72,16 @@ export default function Contact() {
                         {/* Social / hours card */}
                         <Reveal
                             delay={220}
-                            className="flex flex-col gap-5 border-t-2 border-shu-600 bg-sumi-950 p-8 text-washi"
+                            className="flex flex-col gap-5 border-t-2 border-shu-700 bg-kinari p-8 text-sumi-900"
                         >
                             <div className="flex flex-col gap-1">
                                 <h3 className="text-2xl tracking-[0.1em]">{t('contact.social.title')}</h3>
-                                <span className="text-[0.6rem] tracking-[0.28em] text-shu-400">
+                                <span className="text-[0.6rem] tracking-[0.28em] text-shu-700">
                                     {t('contact.social.accent')}
                                 </span>
                             </div>
 
-                            <div className="flex flex-wrap gap-2 border-t border-washi/12 pt-5">
+                            <div className="flex flex-wrap gap-2 border-t border-sumi-900/12 pt-5">
                                 {[
                                     ['Facebook', company.socials.facebook],
                                     ['Instagram', company.socials.instagram],
@@ -93,14 +93,14 @@ export default function Contact() {
                                         href={href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="border border-washi/20 px-4 py-2 text-[0.62rem] tracking-[0.18em] text-washi/70 transition-colors duration-400 hover:border-shu-500 hover:bg-shu-500 hover:text-washi"
+                                        className="border border-sumi-900/20 px-4 py-2 text-[0.62rem] tracking-[0.18em] text-sumi-600 transition-colors duration-400 hover:border-shu-700 hover:bg-shu-700 hover:text-washi"
                                     >
                                         {label}
                                     </a>
                                 ))}
                             </div>
 
-                            <span className="numeral mt-auto pt-4 text-[0.68rem] tracking-[0.18em] text-shu-400">
+                            <span className="numeral mt-auto pt-4 text-[0.68rem] tracking-[0.18em] text-shu-700">
                                 {t('common.licenceLabel')} {company.license}
                             </span>
                         </Reveal>

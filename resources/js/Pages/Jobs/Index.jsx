@@ -101,7 +101,7 @@ function FilterChip({ active, onClick, children }) {
             onClick={onClick}
             className={`border px-4 py-2 text-[0.68rem] tracking-[0.18em] transition-colors duration-400 ${
                 active
-                    ? 'border-shu-600 bg-shu-600 text-washi'
+                    ? 'border-shu-700 bg-shu-700 text-washi'
                     : 'border-sumi-900/15 text-sumi-900 hover:border-sumi-900'
             }`}
         >

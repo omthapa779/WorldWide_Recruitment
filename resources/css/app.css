@@ -26,9 +26,12 @@
     --color-sumi-700: #3a352d;
     --color-sumi-600: #554f45;
 
-    /* --- 鼠 nezumi — mouse grey ------------------------------------------ */
-    --color-nezumi-500: #8b857a;
-    --color-nezumi-400: #a9a297;
+    /* --- 鼠 nezumi — mouse grey ------------------------------------------
+       Retuned for a light ground: these carry secondary and tertiary text on
+       washi/kinari now, not on ink, so they must hold their own contrast.
+       nezumi-500 ≈ 5.4:1 and nezumi-400 ≈ 4.9:1 against kinari. */
+    --color-nezumi-500: #67615a;
+    --color-nezumi-400: #6f6860;
     --color-nezumi-300: #c7c1b6;
     --color-nezumi-200: #ddd8ce;
     --color-nezumi-100: #ebe7df;
@@ -217,8 +220,10 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        border: 2px solid var(--color-shu-600);
-        color: var(--color-shu-600);
+        /* shu-700 rather than shu-600: the seal's text is small, and on paper
+           the lighter shade only reaches 3.9:1. */
+        border: 2px solid var(--color-shu-700);
+        color: var(--color-shu-700);
         border-radius: 4px;
         font-family: var(--font-mincho);
         line-height: 1.15;

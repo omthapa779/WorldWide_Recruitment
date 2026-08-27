@@ -2,9 +2,9 @@ import { Link } from '@inertiajs/react';
 
 const VARIANTS = {
     // Sumi-ink block that fills with vermillion on hover.
-    solid: 'bg-sumi-900 text-washi border-sumi-900 hover:bg-shu-600 hover:border-shu-600',
+    solid: 'bg-sumi-900 text-washi border-sumi-900 hover:bg-shu-700 hover:border-shu-700',
     // Vermillion — reserved for the single most important action on a page.
-    shu: 'bg-shu-600 text-washi border-shu-600 hover:bg-sumi-900 hover:border-sumi-900',
+    shu: 'bg-shu-700 text-washi border-shu-700 hover:bg-sumi-900 hover:border-sumi-900',
     // Indigo.
     kon: 'bg-kon-700 text-washi border-kon-700 hover:bg-kon-900 hover:border-kon-900',
     // Hairline outline on paper.

@@ -67,18 +67,18 @@ export default function About() {
             </section>
 
             {/* 実績 — figures */}
-            <section className="relative overflow-hidden bg-sumi-950 py-20 text-washi">
-                <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-20" />
-                <div className="relative mx-auto grid max-w-[1500px] gap-px bg-washi/12 sm:grid-cols-2 lg:grid-cols-4">
+            <section className="relative overflow-hidden bg-kinari py-20 text-sumi-900">
+                <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-[0.10]" />
+                <div className="relative mx-auto grid max-w-[1500px] gap-px bg-sumi-900/12 sm:grid-cols-2 lg:grid-cols-4">
                     {stats.map((stat) => (
-                        <div key={stat.title} className="flex flex-col gap-2 bg-sumi-950 px-8 py-10">
+                        <div key={stat.title} className="flex flex-col gap-2 bg-washi px-8 py-10">
                             <Counter
                                 value={stat.value}
                                 suffix={stat.suffix}
-                                className="text-[clamp(2.4rem,4.5vw,3.4rem)] leading-none text-shu-400"
+                                className="text-[clamp(2.4rem,4.5vw,3.4rem)] leading-none text-shu-700"
                             />
-                            <span className="font-mincho text-sm tracking-[0.16em]">{stat.title}</span>
-                            <span className="text-[0.6rem] tracking-[0.24em] text-washi/45">{stat.accent}</span>
+                            <span className="font-mincho text-sm tracking-[0.16em] text-sumi-900">{stat.title}</span>
+                            <span className="text-[0.6rem] tracking-[0.24em] text-nezumi-400">{stat.accent}</span>
                         </div>
                     ))}
                 </div>
@@ -96,7 +96,7 @@ export default function About() {
                                 delay={i * 100}
                                 className="group flex flex-col gap-4 border-t-2 border-sumi-900 bg-washi p-8 transition-colors duration-500 hover:border-shu-500"
                             >
-                                <span className="numeral text-[0.7rem] tracking-[0.24em] text-shu-600">
+                                <span className="numeral text-[0.7rem] tracking-[0.24em] text-shu-700">
                                     {service.no}
                                 </span>
 
@@ -146,33 +146,33 @@ export default function About() {
             </section>
 
             {/* 選ばれる理由 */}
-            <section className="relative isolate overflow-hidden bg-kon-950 py-24 text-washi lg:py-32">
+            <section className="relative isolate overflow-hidden bg-kinari py-24 text-sumi-900 lg:py-32">
                 <img
                     src="/resources/images/why_choose_us.png"
                     alt=""
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover opacity-10"
+                    className="absolute inset-0 h-full w-full object-cover opacity-[0.08]"
                 />
-                <div className="absolute inset-0 bg-kon-950/85" />
-                <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-20" />
+                <div className="absolute inset-0 bg-kinari/88" />
+                <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-[0.10]" />
 
                 <div className="relative mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
                     <SectionHeading
                         no="04"
                         title={t('about.why.title')}
                         accent={t('about.why.accent')}
-                        tone="light"
+                        tone="dark"
                     />
 
                     <div className="grid gap-x-8 gap-y-8 pt-14 sm:grid-cols-2 lg:grid-cols-5">
                         {reasons.map((reason, i) => (
-                            <Reveal key={reason.no} delay={i * 70} className="flex gap-4 border-t border-washi/12 pt-6">
-                                <span className="numeral shrink-0 text-[0.7rem] tracking-[0.2em] text-shu-400">
+                            <Reveal key={reason.no} delay={i * 70} className="flex gap-4 border-t border-sumi-900/12 pt-6">
+                                <span className="numeral shrink-0 text-[0.7rem] tracking-[0.2em] text-shu-700">
                                     {reason.no}
                                 </span>
                                 <div className="flex flex-col gap-2">
-                                    <h3 className="text-xl tracking-[0.08em] text-washi">{reason.title}</h3>
-                                    <span className="text-[0.6rem] tracking-[0.26em] text-washi/45">
+                                    <h3 className="text-xl tracking-[0.08em] text-sumi-900">{reason.title}</h3>
+                                    <span className="text-[0.6rem] tracking-[0.26em] text-nezumi-400">
                                         {reason.accent}
                                     </span>
                                 </div>
@@ -180,11 +180,11 @@ export default function About() {
                         ))}
                     </div>
 
-                    <Reveal className="mt-16 flex flex-wrap items-center gap-5 border-t border-washi/12 pt-10">
+                    <Reveal className="mt-16 flex flex-wrap items-center gap-5 border-t border-sumi-900/12 pt-10">
                         <Button href="/jobs" variant="shu">
                             {t('common.currentOpenings')}
                         </Button>
-                        <Button href="/contact" variant="ghost">
+                        <Button href="/contact" variant="outline">
                             {t('common.contactUs')}
                         </Button>
                     </Reveal>

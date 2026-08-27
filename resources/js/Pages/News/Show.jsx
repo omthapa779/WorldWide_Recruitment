@@ -21,11 +21,11 @@ export default function NewsShow({ article, more }) {
                         aria-label="Breadcrumb"
                         className="flex flex-wrap items-center gap-2 text-[0.65rem] tracking-[0.22em] text-nezumi-400"
                     >
-                        <Link href="/" className="hover:text-shu-600">
+                        <Link href="/" className="hover:text-shu-700">
                             {t('nav.home')}
                         </Link>
                         <span aria-hidden="true">/</span>
-                        <Link href="/news" className="hover:text-shu-600">
+                        <Link href="/news" className="hover:text-shu-700">
                             {t('nav.news')}
                         </Link>
                         <span aria-hidden="true">/</span>
@@ -33,7 +33,7 @@ export default function NewsShow({ article, more }) {
                     </nav>
 
                     <div className="mt-8 flex items-center gap-4">
-                        <time className="numeral text-[0.75rem] tracking-[0.2em] text-shu-600">
+                        <time className="numeral text-[0.75rem] tracking-[0.2em] text-shu-700">
                             {article.postedOn ?? ''}
                         </time>
                         <span aria-hidden="true" className="h-px w-12 bg-sumi-900/20" />
@@ -80,7 +80,7 @@ export default function NewsShow({ article, more }) {
                         />
 
                         <aside className="hidden lg:block">
-                            <div className="sticky top-28 flex flex-col gap-4 border-t-2 border-shu-600 pt-5">
+                            <div className="sticky top-28 flex flex-col gap-4 border-t-2 border-shu-700 pt-5">
                                 <span className="font-mincho text-sm tracking-[0.14em] text-sumi-900">
                                     {t('common.share')}
                                 </span>

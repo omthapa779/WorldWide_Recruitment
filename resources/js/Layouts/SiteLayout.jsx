@@ -73,8 +73,8 @@ export default function SiteLayout({ title, description, transparentHeader = fal
                     role="status"
                     className={`fixed right-5 bottom-5 z-[70] max-w-sm border px-6 py-4 text-sm shadow-lg ${
                         notice.kind === 'success'
-                            ? 'border-kon-700 bg-kon-700 text-washi'
-                            : 'border-shu-700 bg-shu-700 text-washi'
+                            ? 'border-l-4 border-kon-700 bg-washi text-sumi-900'
+                            : 'border-l-4 border-shu-700 bg-washi text-sumi-900'
                     }`}
                 >
                     <span className="mb-1 block font-mincho text-xs tracking-[0.28em] opacity-70">

@@ -29,23 +29,23 @@ export default function JobCard({ job, index }) {
                     </div>
                 )}
 
-                <div className="absolute inset-0 bg-gradient-to-t from-sumi-950/55 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-sumi-950/25 via-transparent to-transparent" />
 
                 {typeof index === 'number' && (
-                    <span className="numeral absolute top-0 left-0 bg-sumi-950/85 px-3 py-2 text-[0.65rem] tracking-[0.2em] text-washi">
+                    <span className="numeral absolute top-0 left-0 bg-washi/90 px-3 py-2 text-[0.65rem] tracking-[0.2em] text-sumi-900">
                         {String(index + 1).padStart(2, '0')}
                     </span>
                 )}
 
                 {job.country && (
-                    <span className="absolute right-0 bottom-0 bg-shu-600 px-4 py-2 text-[0.62rem] font-medium tracking-[0.22em] text-washi">
+                    <span className="absolute right-0 bottom-0 bg-shu-700 px-4 py-2 text-[0.62rem] font-medium tracking-[0.22em] text-washi">
                         {job.country}
                     </span>
                 )}
             </div>
 
             <div className="flex flex-1 flex-col gap-3 p-6">
-                <h3 className="text-lg leading-snug tracking-[0.03em] text-sumi-900 transition-colors duration-400 group-hover:text-shu-600">
+                <h3 className="text-lg leading-snug tracking-[0.03em] text-sumi-900 transition-colors duration-400 group-hover:text-shu-700">
                     {job.title}
                 </h3>
 
@@ -55,7 +55,7 @@ export default function JobCard({ job, index }) {
 
                 <div className="mt-auto flex items-center justify-between border-t border-sumi-900/10 pt-4 text-[0.68rem] tracking-[0.18em] text-nezumi-500">
                     <span className="flex items-center gap-2">
-                        <span className="font-mincho text-shu-600">{t('common.recruiting')}</span>
+                        <span className="font-mincho text-shu-700">{t('common.recruiting')}</span>
                         <span className="numeral text-sumi-900">{job.positions ?? '—'}</span>
                         <span>{t('common.positions')}</span>
                     </span>

@@ -36,7 +36,7 @@ export default function Pagination({ links }) {
                         preserveScroll={false}
                         className={`${base} ${
                             link.active
-                                ? 'border-shu-600 bg-shu-600 text-washi'
+                                ? 'border-shu-700 bg-shu-700 text-washi'
                                 : 'border-sumi-900/15 text-sumi-900 hover:border-sumi-900 hover:bg-sumi-900 hover:text-washi'
                         }`}
                     >

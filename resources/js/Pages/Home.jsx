@@ -6,7 +6,6 @@ import Button from '../Components/Button';
 import HeroStage from '../Components/HeroStage';
 import JobCard from '../Components/JobCard';
 import NewsRow from '../Components/NewsRow';
-import Counter from '../Components/Counter';
 import Marquee from '../Components/Marquee';
 import ContactSection from '../Components/ContactSection';
 import EmptyNote from '../Components/EmptyNote';
@@ -25,9 +24,8 @@ export default function Home({ hero, heroSlides, ad, featuredJobs, latestNews })
             <About />
             <Services />
             <FeaturedJobs jobs={featuredJobs} />
-            <WhyUs />
             <AdBanner ad={ad} />
-            <ContactSection no="06" />
+            <ContactSection no="05" />
         </SiteLayout>
     );
 }
@@ -81,12 +79,12 @@ function About() {
                         {/* The licence number — the one credential the client
                             actually publishes. Previously a founding year, which
                             wrsnepal.com does not state anywhere. */}
-                        <div className="absolute -bottom-8 -left-6 hidden w-60 flex-col gap-1 bg-kon-700 p-6 text-washi sm:flex">
+                        <div className="absolute -bottom-8 -left-6 hidden w-60 flex-col gap-1 border-t-2 border-shu-700 bg-kinari p-6 text-kon-700 shadow-sm sm:flex">
                             <span className="numeral text-2xl">{company.license}</span>
                             <span className="font-mincho text-sm tracking-[0.2em]">
                                 {t('home.about.licenceCaption')}
                             </span>
-                            <span className="text-[0.6rem] tracking-[0.24em] text-washi/60">
+                            <span className="text-[0.6rem] tracking-[0.24em] text-nezumi-500">
                                 {t('home.about.licenceAccent')}
                             </span>
                         </div>
@@ -125,7 +123,7 @@ function Services() {
                         <Reveal key={service.no} delay={i * 110}>
                             <Link
                                 href="/services"
-                                className="group relative flex h-full flex-col bg-washi transition-colors duration-500 hover:bg-sumi-950"
+                                className="group relative flex h-full flex-col bg-washi transition-colors duration-500 hover:bg-kinari-dark"
                             >
                                 <div className="relative aspect-[16/10] overflow-hidden">
                                     <img
@@ -134,27 +132,27 @@ function Services() {
                                         loading="lazy"
                                         className="h-full w-full object-cover grayscale-[0.35] transition-all duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105 group-hover:grayscale-0"
                                     />
-                                    <div className="absolute inset-0 bg-kon-950/35 transition-opacity duration-500 group-hover:opacity-0" />
-                                    <span className="numeral absolute top-0 left-0 bg-shu-600 px-4 py-2.5 text-[0.68rem] tracking-[0.24em] text-washi">
+                                    <div className="absolute inset-0 bg-washi/25 transition-opacity duration-500 group-hover:opacity-0" />
+                                    <span className="numeral absolute top-0 left-0 bg-shu-700 px-4 py-2.5 text-[0.68rem] tracking-[0.24em] text-washi">
                                         {service.no}
                                     </span>
                                 </div>
 
                                 <div className="flex flex-1 flex-col gap-4 p-8">
                                     <div className="flex flex-col gap-1">
-                                        <h3 className="text-2xl tracking-[0.08em] text-sumi-900 transition-colors duration-500 group-hover:text-washi">
+                                        <h3 className="text-2xl tracking-[0.08em] text-sumi-900 transition-colors duration-500 group-hover:text-shu-700">
                                             {service.title}
                                         </h3>
-                                        <span className="text-[0.6rem] tracking-[0.28em] text-shu-600">
+                                        <span className="text-[0.6rem] tracking-[0.28em] text-shu-700">
                                             {service.accent}
                                         </span>
                                     </div>
 
-                                    <p className="text-[0.85rem] leading-loose text-nezumi-500 transition-colors duration-500 group-hover:text-washi/60">
+                                    <p className="text-[0.85rem] leading-loose text-nezumi-500 transition-colors duration-500 group-hover:text-sumi-700">
                                         {service.body}
                                     </p>
 
-                                    <span className="mt-auto flex items-center gap-3 pt-4 text-[0.65rem] tracking-[0.24em] text-sumi-900 transition-colors duration-500 group-hover:text-shu-400">
+                                    <span className="mt-auto flex items-center gap-3 pt-4 text-[0.65rem] tracking-[0.24em] text-sumi-900 transition-colors duration-500 group-hover:text-shu-700">
                                         {t('common.viewDetail')}
                                         <span
                                             aria-hidden="true"
@@ -199,85 +197,6 @@ function FeaturedJobs({ jobs }) {
                 ) : (
                     <EmptyNote title={t('home.jobs.emptyTitle')} body={t('home.jobs.emptyBody')} />
                 )}
-            </div>
-        </section>
-    );
-}
-
-/* ===================================================== 05 — 選ばれる理由 */
-
-function WhyUs() {
-    const { t } = useI18n();
-    const reasons = t('reasons', []);
-    const stats = t('stats', []);
-    const sectors = t('sectors', []);
-
-    return (
-        <section className="relative isolate overflow-hidden bg-kon-950 py-24 text-washi lg:py-32">
-            <img
-                src="/resources/images/why_us.jpg"
-                alt=""
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover opacity-15"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-kon-950 via-kon-950/92 to-kon-950" />
-            <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-25" />
-
-            <div className="relative mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
-                <div className="flex flex-col gap-6 border-b border-washi/12 pb-10 lg:flex-row lg:items-end lg:justify-between">
-                    <SectionHeading
-                        no="05"
-                        title={t('home.why.title')}
-                        accent={t('home.why.accent')}
-                        tone="light"
-                    />
-                    <p className="max-w-md text-sm leading-loose text-washi/55">{t('home.why.intro')}</p>
-                </div>
-
-                <div className="my-14 grid gap-px border border-washi/12 bg-washi/12 sm:grid-cols-2 lg:grid-cols-4">
-                    {stats.map((stat) => (
-                        <div key={stat.title} className="flex flex-col gap-2 bg-kon-950 p-8">
-                            <Counter
-                                value={stat.value}
-                                suffix={stat.suffix}
-                                className="text-[clamp(2.4rem,4.5vw,3.4rem)] leading-none text-shu-400"
-                            />
-                            <span className="font-mincho text-sm tracking-[0.16em] text-washi">{stat.title}</span>
-                            <span className="text-[0.6rem] tracking-[0.24em] text-washi/45">{stat.accent}</span>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-5">
-                    {reasons.map((reason, i) => (
-                        <Reveal key={reason.no} delay={i * 70} className="flex gap-4 border-t border-washi/12 pt-6">
-                            <span className="numeral shrink-0 text-[0.7rem] tracking-[0.2em] text-shu-400">
-                                {reason.no}
-                            </span>
-                            <div className="flex flex-col gap-2">
-                                <h3 className="text-xl tracking-[0.08em] text-washi">{reason.title}</h3>
-                                <span className="text-[0.6rem] tracking-[0.26em] text-washi/45">{reason.accent}</span>
-                            </div>
-                        </Reveal>
-                    ))}
-                </div>
-
-                <div className="mt-16 flex flex-col gap-5 border-t border-washi/12 pt-10">
-                    <span className="text-[0.62rem] tracking-[0.32em] text-washi/45">
-                        {t('home.why.sectorsLabel')}
-                    </span>
-                    <div className="flex flex-wrap gap-2.5">
-                        {sectors.map((sector) => (
-                            <span
-                                key={sector.title}
-                                className="flex items-baseline gap-2 border border-washi/18 px-4 py-2.5 text-washi/75 transition-colors duration-400 hover:border-shu-500 hover:text-washi"
-                            >
-                                <span className="font-mincho text-sm tracking-[0.14em]">{sector.title}</span>
-                                <span className="text-[0.58rem] tracking-[0.2em] text-washi/40">{sector.accent}</span>
-                            </span>
-                        ))}
-                    </div>
-                </div>
             </div>
         </section>
     );

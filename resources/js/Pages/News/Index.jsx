@@ -55,14 +55,14 @@ export default function NewsIndex({ news }) {
                                                 </span>
                                             </div>
                                         )}
-                                        <span className="absolute top-0 left-0 bg-shu-600 px-4 py-2 text-[0.6rem] tracking-[0.24em] text-washi">
+                                        <span className="absolute top-0 left-0 bg-shu-700 px-4 py-2 text-[0.6rem] tracking-[0.24em] text-washi">
                                             {t('common.latest')}
                                         </span>
                                     </div>
 
                                     <div className="flex flex-col gap-4 p-8 lg:p-12">
                                         <div className="flex items-center gap-4">
-                                            <time className="numeral text-[0.72rem] tracking-[0.2em] text-shu-600">
+                                            <time className="numeral text-[0.72rem] tracking-[0.2em] text-shu-700">
                                                 {lead.postedOn ?? ''}
                                             </time>
                                             <span aria-hidden="true" className="h-px w-10 bg-sumi-900/20" />
@@ -71,7 +71,7 @@ export default function NewsIndex({ news }) {
                                             </span>
                                         </div>
 
-                                        <h2 className="text-[clamp(1.5rem,2.8vw,2.2rem)] leading-snug tracking-[0.04em] text-sumi-900 transition-colors duration-500 group-hover:text-shu-600">
+                                        <h2 className="text-[clamp(1.5rem,2.8vw,2.2rem)] leading-snug tracking-[0.04em] text-sumi-900 transition-colors duration-500 group-hover:text-shu-700">
                                             {lead.title}
                                         </h2>
 

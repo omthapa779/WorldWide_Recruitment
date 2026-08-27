@@ -15,40 +15,40 @@ export default function JobShow({ job, related }) {
     return (
         <SiteLayout title={job.title} description={job.excerpt}>
             {/* Hero */}
-            <section className="relative isolate overflow-hidden bg-kon-950 text-washi">
+            <section className="relative isolate overflow-hidden bg-kinari text-sumi-900">
                 {job.image && (
-                    <img src={job.image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+                    <img src={job.image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-100" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-r from-kon-950 via-kon-950/85 to-kon-950/35" />
-                <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-20" />
+                <div className="absolute inset-0 bg-gradient-to-r from-kinari via-kinari/94 to-kinari/50" />
+                <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-[0.10]" />
 
                 <div className="relative mx-auto flex max-w-[1500px] flex-col gap-6 px-6 pt-16 pb-14 lg:px-8 lg:pt-24 lg:pb-20 xl:px-14">
                     <nav
                         aria-label="Breadcrumb"
-                        className="flex flex-wrap items-center gap-2 text-[0.65rem] tracking-[0.22em] text-washi/45"
+                        className="flex flex-wrap items-center gap-2 text-[0.65rem] tracking-[0.22em] text-nezumi-400"
                     >
-                        <Link href="/" className="hover:text-shu-400">
+                        <Link href="/" className="hover:text-shu-700">
                             {t('nav.home')}
                         </Link>
                         <span aria-hidden="true">/</span>
-                        <Link href="/jobs" className="hover:text-shu-400">
+                        <Link href="/jobs" className="hover:text-shu-700">
                             {t('nav.jobs')}
                         </Link>
                         <span aria-hidden="true">/</span>
-                        <span className="text-washi/75">{job.title}</span>
+                        <span className="text-sumi-700">{job.title}</span>
                     </nav>
 
                     <div className="flex flex-wrap items-center gap-3">
                         {job.country && (
-                            <span className="bg-shu-600 px-4 py-2 text-[0.62rem] font-medium tracking-[0.24em]">
+                            <span className="bg-shu-700 px-4 py-2 text-[0.62rem] font-medium tracking-[0.24em] text-washi">
                                 {job.country}
                             </span>
                         )}
-                        <span className="border border-washi/25 px-4 py-2 text-[0.62rem] tracking-[0.2em]">
+                        <span className="border border-sumi-900/25 px-4 py-2 text-[0.62rem] tracking-[0.2em]">
                             {job.positions ?? '—'} {t('jobs.show.positionsAvailable')}
                         </span>
                         {job.postedOn && (
-                            <span className="numeral text-[0.68rem] tracking-[0.2em] text-washi/50">
+                            <span className="numeral text-[0.68rem] tracking-[0.2em] text-nezumi-500">
                                 {t('jobs.show.postedOn')} {job.postedOn}
                             </span>
                         )}
@@ -96,7 +96,7 @@ export default function JobShow({ job, related }) {
                                     <span className="font-mincho text-xl tracking-[0.12em] text-sumi-900">
                                         {t('jobs.show.summary')}
                                     </span>
-                                    <span className="text-[0.58rem] tracking-[0.28em] text-shu-600">
+                                    <span className="text-[0.58rem] tracking-[0.28em] text-shu-700">
                                         {t('jobs.show.summaryAccent')}
                                     </span>
                                 </div>
@@ -123,7 +123,7 @@ export default function JobShow({ job, related }) {
                                     </a>
                                     <a
                                         href={`tel:${company.phone.replace(/\s/g, '')}`}
-                                        className="text-center text-[0.7rem] tracking-[0.18em] text-nezumi-500 hover:text-shu-600"
+                                        className="text-center text-[0.7rem] tracking-[0.18em] text-nezumi-500 hover:text-shu-700"
                                     >
                                         {company.phone}
                                     </a>

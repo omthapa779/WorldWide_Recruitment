@@ -19,13 +19,13 @@ export default function NewsRow({ item }) {
                 {t('news.tag')}
             </span>
 
-            <h3 className="text-base leading-snug tracking-[0.02em] text-sumi-900 transition-colors duration-400 group-hover:text-shu-600 sm:text-lg">
+            <h3 className="text-base leading-snug tracking-[0.02em] text-sumi-900 transition-colors duration-400 group-hover:text-shu-700 sm:text-lg">
                 {item.title}
             </h3>
 
             <span
                 aria-hidden="true"
-                className="hidden text-nezumi-400 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5 group-hover:text-shu-600 sm:block"
+                className="hidden text-nezumi-400 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5 group-hover:text-shu-700 sm:block"
             >
                 →
             </span>

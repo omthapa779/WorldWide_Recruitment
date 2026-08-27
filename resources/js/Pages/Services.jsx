@@ -72,7 +72,7 @@ export default function Services() {
                                                 className="h-full w-full object-cover"
                                             />
                                         </div>
-                                        <span className="numeral absolute -top-5 left-0 bg-shu-600 px-5 py-3 text-[0.72rem] tracking-[0.24em] text-washi">
+                                        <span className="numeral absolute -top-5 left-0 bg-shu-700 px-5 py-3 text-[0.72rem] tracking-[0.24em] text-washi">
                                             {service.no}
                                         </span>
                                         <span
@@ -85,7 +85,7 @@ export default function Services() {
 
                                     <div className="flex flex-col gap-5">
                                         <div className="flex flex-col gap-1.5">
-                                            <span className="text-[0.6rem] tracking-[0.32em] text-shu-600">
+                                            <span className="text-[0.6rem] tracking-[0.32em] text-shu-700">
                                                 {service.accent}
                                             </span>
                                             <h3 className="text-[clamp(1.9rem,3.4vw,2.7rem)] tracking-[0.08em] text-sumi-900">
@@ -141,7 +141,7 @@ export default function Services() {
                                     <Counter
                                         value={stat.value}
                                         suffix={stat.suffix}
-                                        className="text-[clamp(2.2rem,4vw,3rem)] leading-none text-shu-600"
+                                        className="text-[clamp(2.2rem,4vw,3rem)] leading-none text-shu-700"
                                     />
                                     <span className="font-mincho text-sm tracking-[0.16em] text-sumi-900">
                                         {stat.title}
@@ -157,20 +157,20 @@ export default function Services() {
             </section>
 
             {/* CTA */}
-            <section className="relative isolate overflow-hidden bg-kon-700 py-20 text-washi">
-                <div aria-hidden="true" className="asanoha-light absolute inset-0 opacity-60" />
+            <section className="relative isolate overflow-hidden border-y border-sumi-900/12 bg-kinari py-20 text-sumi-900">
+                <div aria-hidden="true" className="asanoha absolute inset-0 opacity-70" />
                 <div className="relative mx-auto flex max-w-[1500px] flex-col items-start justify-between gap-8 px-6 lg:flex-row lg:items-center lg:px-8 xl:px-14">
                     <div className="flex flex-col gap-3">
                         <h2 className="text-[clamp(1.8rem,3.6vw,2.6rem)] tracking-[0.08em]">
                             {t('services.cta.title')}
                         </h2>
-                        <p className="max-w-xl text-sm leading-loose text-washi/70">{t('services.cta.body')}</p>
+                        <p className="max-w-xl text-sm leading-loose text-nezumi-500">{t('services.cta.body')}</p>
                     </div>
                     <div className="flex flex-wrap gap-3">
                         <Button href="/contact" variant="shu">
                             {t('common.contactUs')}
                         </Button>
-                        <Button href="/jobs" variant="ghost">
+                        <Button href="/jobs" variant="outline">
                             {t('nav.jobs')}
                         </Button>
                     </div>

@@ -25,7 +25,7 @@ export default function SectionHeading({
         <Reveal className={`flex flex-col gap-3 ${align === 'center' ? 'items-center text-center' : ''} ${className}`}>
             <div className="flex items-center gap-4">
                 {no && (
-                    <span className={`numeral text-xs tracking-[0.3em] ${light ? 'text-shu-400' : 'text-shu-600'}`}>
+                    <span className={`numeral text-xs tracking-[0.3em] ${light ? 'text-shu-400' : 'text-shu-700'}`}>
                         {no}
                     </span>
                 )}
