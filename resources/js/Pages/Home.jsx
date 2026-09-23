@@ -17,7 +17,7 @@ export default function Home({ hero, heroSlides, ad, featuredJobs, latestNews })
     const company = props.company;
 
     return (
-        <SiteLayout title={t('nav.home')} description={t('home.meta')} transparentHeader>
+        <SiteLayout title={t('nav.home')} description={t('home.meta')}>
             <HeroStage hero={hero} company={company} slides={heroSlides} />
             <NewsSection news={latestNews} />
             <Marquee items={t('home.destinations', [])} />

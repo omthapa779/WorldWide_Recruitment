@@ -43,27 +43,17 @@ export default function Header({ transparent = false }) {
 
     // Deliberately no entry animation here: the bar's visibility must never
     // depend on an animation running to completion.
-    const shellClass = transparent
-        ? scrolled
-            ? 'fixed inset-x-0 top-0 z-50'
-            : 'absolute inset-x-0 top-0 z-50 bg-kon-950/65 backdrop-blur-md'
-        : 'sticky top-0 z-50';
+    const shellClass = 'sticky top-0 z-50 shadow-sm';
 
     return (
         <>
             <div className={shellClass}>
                 {/* 上部バー — the thin utility bar Japanese corporate sites always carry */}
-                <div
-                    className={`hidden border-b lg:block ${
-                        floating
-                            ? 'border-washi/15 bg-transparent text-washi/85'
-                            : 'border-sumi-900/10 bg-kinari text-sumi-600'
-                    }`}
-                >
-                    <div className="mx-auto flex max-w-[1500px] items-center justify-between px-8 py-2 text-[0.68rem] tracking-[0.2em] xl:px-14">
+                <div className="hidden border-b border-sumi-900/10 bg-kinari text-sumi-600 lg:block">
+                    <div className="mx-auto flex max-w-[1500px] items-center justify-between px-8 py-2.5 text-[0.68rem] tracking-[0.2em] xl:px-14">
                         <div className="flex items-center gap-3">
-                            <span className={floating ? 'text-shu-400' : 'text-shu-700'}>{t('common.licenceLabel')}</span>
-                            <span className="numeral">{company.license}</span>
+                            <span className="font-semibold text-shu-700">{t('common.licenceLabel')}</span>
+                            <span className="numeral font-bold">{company.license}</span>
                             <span aria-hidden="true" className="h-3 w-px bg-sumi-900/15" />
                             <span>{t('common.authority')}</span>
                         </div>
@@ -71,50 +61,34 @@ export default function Header({ transparent = false }) {
                             and a <div> inside a <p> is invalid HTML that React
                             reports as a hydration error. */}
                         <div className="flex items-center gap-5">
-                            <a href={`mailto:${company.email}`} className="ink-link hover:text-sumi-900">
+                            <a href={`mailto:${company.email}`} className="ink-link font-medium hover:text-sumi-900">
                                 {company.email}
                             </a>
                             <span aria-hidden="true" className="h-3 w-px bg-sumi-900/15" />
                             <a
                                 href={`tel:${company.phone.replace(/\s/g, '')}`}
-                                className="ink-link hover:text-sumi-900"
+                                className="ink-link font-medium hover:text-sumi-900"
                             >
                                 {company.phone}
                             </a>
-                            <LanguageSwitcher tone={floating ? 'light' : 'dark'} className="ml-1" />
+                            <LanguageSwitcher tone="dark" className="ml-1" />
                         </div>
                     </div>
                 </div>
 
-                <header
-                    className={`border-b transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                        floating
-                            ? 'border-washi/20 bg-transparent'
-                            : 'border-sumi-900/10 bg-washi/92 backdrop-blur-md'
-                    }`}
-                >
-                    <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-6 py-4 lg:px-8 xl:px-14">
-                        <Link href="/" className="group flex items-center gap-3.5">
-                            <span className="flex shrink-0 items-center justify-center bg-washi p-1.5 shadow-sm">
-                                <img
-                                    src="/resources/images/logo.png"
-                                    alt=""
-                                    className="h-11 w-11 object-contain lg:h-13 lg:w-13"
-                                />
-                            </span>
-                            <span className="flex flex-col leading-tight">
-                                <span
-                                    className={`font-mincho text-[1.05rem] tracking-[0.08em] lg:text-[1.2rem] ${
-                                        floating ? 'text-washi' : 'text-kon-700'
-                                    }`}
-                                >
+                <header className="border-b border-sumi-900/10 bg-washi/98 backdrop-blur-md transition-shadow duration-300">
+                    <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-6 py-3.5 lg:px-8 xl:px-14">
+                        <Link href="/" className="group flex items-center gap-4 py-1">
+                            <img
+                                src="/resources/images/logo.png"
+                                alt="WorldWide Recruitment Services"
+                                className="h-14 sm:h-16 lg:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm"
+                            />
+                            <span className="flex flex-col leading-tight border-l border-sumi-900/15 pl-4">
+                                <span className="font-mincho text-[1.1rem] sm:text-[1.25rem] lg:text-[1.35rem] font-bold tracking-[0.06em] text-kon-700">
                                     {company.nameLocalised}
                                 </span>
-                                <span
-                                    className={`text-[0.62rem] tracking-[0.28em] ${
-                                        floating ? 'text-washi/70' : 'text-nezumi-500'
-                                    }`}
-                                >
+                                <span className="text-[0.64rem] sm:text-[0.7rem] tracking-[0.24em] text-nezumi-500 font-medium">
                                     {isJapanese ? company.name : 'Services Pvt. Ltd.'}
                                 </span>
                             </span>
@@ -128,15 +102,13 @@ export default function Header({ transparent = false }) {
                                         key={item.href}
                                         href={item.href}
                                         data-active={active}
-                                        className={`ink-link flex flex-col items-center gap-0.5 ${
-                                            floating
-                                                ? 'text-washi hover:text-shu-400'
-                                                : active
-                                                  ? 'text-shu-700'
-                                                  : 'text-sumi-900 hover:text-shu-700'
+                                        className={`ink-link flex flex-col items-center gap-0.5 font-medium ${
+                                            active
+                                                ? 'text-shu-700 font-semibold'
+                                                : 'text-sumi-900 hover:text-shu-700'
                                         }`}
                                     >
-                                        <span className="font-mincho text-[0.92rem] tracking-[0.12em]">
+                                        <span className="font-mincho text-[0.95rem] tracking-[0.12em]">
                                             {t(`nav.${item.key}`)}
                                         </span>
                                     </Link>
@@ -157,16 +129,12 @@ export default function Header({ transparent = false }) {
                                 onClick={() => setOpen((v) => !v)}
                                 aria-label={t('locale.label')}
                                 aria-expanded={open}
-                                className={`relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-[5px] border transition-colors duration-300 xl:hidden ${
-                                    open || !floating ? 'border-sumi-900/20' : 'border-washi/40'
-                                }`}
+                                className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-[5px] border border-sumi-900/20 transition-colors duration-300 xl:hidden"
                             >
                                 {[0, 1, 2].map((i) => (
                                     <span
                                         key={i}
-                                        className={`block h-px w-5 transition-all duration-400 ${
-                                            open || !floating ? 'bg-sumi-900' : 'bg-washi'
-                                        } ${
+                                        className={`block h-px w-5 bg-sumi-900 transition-all duration-400 ${
                                             open && i === 0
                                                 ? 'translate-y-[6px] rotate-45'
                                                 : open && i === 1

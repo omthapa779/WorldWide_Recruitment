@@ -81,7 +81,7 @@ export default function HeroStage({ hero, company, slides = [] }) {
         <section
             ref={sectionRef}
             data-ready={ready}
-            className="hero-stage relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-kon-700 pt-[7.5rem] text-washi lg:pt-[10rem] [@media(min-height:600px)]:h-[100svh]"
+            className="hero-stage relative isolate flex min-h-[calc(100vh-130px)] flex-col justify-between overflow-hidden bg-kon-700 text-washi lg:h-[calc(100vh-130px)]"
         >
             {/* Photograph — the right side on desktop, behind the copy on mobile. */}
             <div ref={reelRef} className="absolute inset-y-0 right-0 w-full will-change-transform lg:w-[46%]">
@@ -108,11 +108,11 @@ export default function HeroStage({ hero, company, slides = [] }) {
                 className="absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-kon-700 via-kon-700 to-transparent lg:block"
             />
 
-            <div className="relative z-10 mx-auto flex w-full max-w-[1500px] flex-auto flex-col justify-center px-6 py-[clamp(0.5rem,3vh,3rem)] lg:px-8 xl:px-14">
+            <div className="relative z-10 mx-auto flex w-full max-w-[1500px] flex-1 flex-col justify-center px-6 py-6 lg:px-8 xl:px-14">
                 <div className="max-w-[34rem] lg:max-w-[46%]">
                     {/* Credibility first — the licence is this company's strongest claim. */}
                     <div
-                        className="hero-rise flex items-center gap-3 text-[0.7rem] tracking-[0.32em] text-shu-400"
+                        className="hero-rise flex items-center gap-3 text-[0.7rem] tracking-[0.32em] text-shu-400 font-semibold"
                         style={{ '--d': '60ms' }}
                     >
                         <span aria-hidden="true" className="h-px w-8 bg-shu-400" />
@@ -120,7 +120,7 @@ export default function HeroStage({ hero, company, slides = [] }) {
                     </div>
 
                     <h1
-                        className="hero-rise mt-[clamp(0.9rem,2.6vh,1.75rem)] text-[clamp(2.1rem,min(5.4vw,7.4vh),4.4rem)] leading-[1.12] tracking-[0.02em]"
+                        className="hero-rise mt-3 text-[clamp(2rem,3.8vw,3.6rem)] leading-[1.12] tracking-[0.02em] font-bold"
                         style={{ '--d': '150ms' }}
                     >
                         {headline.map((line, i) => (
@@ -131,21 +131,21 @@ export default function HeroStage({ hero, company, slides = [] }) {
                     </h1>
 
                     <p
-                        className="hero-rise mt-[clamp(0.75rem,2vh,1.25rem)] max-w-xl text-[clamp(0.95rem,1.35vw,1.1rem)] leading-relaxed text-washi/85"
+                        className="hero-rise mt-3 max-w-xl text-[clamp(0.9rem,1.2vw,1.05rem)] leading-relaxed text-washi/90"
                         style={{ '--d': '240ms' }}
                     >
                         {hero.title}
                     </p>
 
                     <p
-                        className="hero-rise mt-3 max-w-xl text-sm leading-relaxed text-washi/70 [@media(max-height:740px)]:hidden"
+                        className="hero-rise mt-2 max-w-xl text-xs sm:text-sm leading-relaxed text-washi/75 [@media(max-height:740px)]:hidden"
                         style={{ '--d': '300ms' }}
                     >
                         {t('home.sub')}
                     </p>
 
                     <div
-                        className="hero-rise mt-[clamp(1.1rem,3vh,2rem)] flex flex-wrap items-center gap-3"
+                        className="hero-rise mt-5 flex flex-wrap items-center gap-3"
                         style={{ '--d': '380ms' }}
                     >
                         <Button href="/contact" variant="shu">
@@ -176,9 +176,9 @@ export default function HeroStage({ hero, company, slides = [] }) {
                     {stats.map((stat) => (
                         <div
                             key={stat.title}
-                            className="flex flex-col gap-0.5 py-[clamp(0.8rem,2.4vh,1.5rem)] pr-5 pl-5 first:pl-0"
+                            className="flex flex-col gap-0.5 py-3.5 pr-5 pl-5 first:pl-0"
                         >
-                            <span className="numeral text-[clamp(1.35rem,2.4vw,2rem)] leading-none text-washi">
+                            <span className="numeral text-xl sm:text-2xl lg:text-3xl leading-none text-washi font-bold">
                                 {stat.value}
                                 {stat.suffix}
                             </span>

@@ -167,7 +167,7 @@ export default function ContactSection({ no = '06', withMap = true }) {
                         </div>
 
                         {withMap && (
-                            <div className="relative aspect-[4/3] w-full border border-sumi-900/12 grayscale transition-[filter] duration-700 hover:grayscale-0">
+                            <div className="relative aspect-[4/3] w-full border border-sumi-900/12 shadow-sm">
                                 <iframe
                                     src={MAP_SRC}
                                     title={t('footer.nepalOffice')}

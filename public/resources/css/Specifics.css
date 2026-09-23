@@ -1,8 +1,7 @@
 .glass_nav {
-    background: rgba(255,255,255,0.85);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+    background: #ffffff;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -10,7 +9,8 @@
 
 /* Navbar Logo */
 .navbar_logo_img {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    height: 56px;
+    width: auto;
     object-fit: contain;
 }
 

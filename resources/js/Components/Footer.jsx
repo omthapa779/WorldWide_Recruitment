@@ -35,11 +35,11 @@ export default function Footer() {
                 <div className="grid gap-10 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
                     <div className="flex flex-col gap-5">
                         <div className="flex items-center gap-4">
-                            <span className="flex shrink-0 items-center justify-center bg-washi p-2 shadow-sm">
+                            <span className="flex shrink-0 items-center justify-center rounded-md bg-washi p-2 shadow-sm">
                                 <img
                                     src="/resources/images/logo.png"
-                                    alt=""
-                                    className="h-12 w-12 object-contain"
+                                    alt="WorldWide Recruitment Services"
+                                    className="h-12 w-auto object-contain sm:h-14"
                                 />
                             </span>
                             <span className="flex flex-col leading-tight">
