@@ -31,7 +31,7 @@ export default function JobsIndex({ jobs, countries }) {
             />
 
             <section className="bg-washi py-20 lg:py-28">
-                <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col gap-8 border-b border-sumi-900/12 pb-8 lg:flex-row lg:items-end lg:justify-between">
                         <SectionHeading
                             no="01"

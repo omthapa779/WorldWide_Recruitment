@@ -22,7 +22,7 @@ export default function JobShow({ job, related }) {
                 <div className="absolute inset-0 bg-gradient-to-r from-kinari via-kinari/94 to-kinari/50" />
                 <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-[0.10]" />
 
-                <div className="relative mx-auto flex max-w-[1500px] flex-col gap-6 px-6 pt-16 pb-14 lg:px-8 lg:pt-24 lg:pb-20 xl:px-14">
+                <div className="relative mx-auto flex max-w-[1500px] flex-col gap-6 px-4 pt-16 pb-14 sm:px-6 lg:px-8 lg:pt-24 lg:pb-20">
                     <nav
                         aria-label="Breadcrumb"
                         className="flex flex-wrap items-center gap-2 text-[0.65rem] tracking-[0.22em] text-nezumi-400"
@@ -67,7 +67,7 @@ export default function JobShow({ job, related }) {
 
             {/* Detail */}
             <section className="bg-washi py-20 lg:py-28">
-                <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <div className="grid gap-14 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
                         <div className="flex flex-col gap-8">
                             <SectionHeading
@@ -137,7 +137,7 @@ export default function JobShow({ job, related }) {
             {/* Related */}
             {related.length > 0 && (
                 <section className="bg-kinari py-20 lg:py-24">
-                    <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                    <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                         <div className="flex flex-col gap-6 border-b border-sumi-900/12 pb-10 sm:flex-row sm:items-end sm:justify-between">
                             <SectionHeading
                                 no="02"

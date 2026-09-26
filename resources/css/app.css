@@ -101,6 +101,26 @@
         letter-spacing: 0.01em;
     }
 
+    /* Japanese text scaling & letter-spacing optimization */
+    :lang(ja) {
+        letter-spacing: 0.02em;
+    }
+
+    :lang(ja) h1 {
+        font-size: 0.9em;
+        letter-spacing: 0.02em;
+    }
+
+    :lang(ja) h2 {
+        font-size: 0.92em;
+        letter-spacing: 0.02em;
+    }
+
+    :lang(ja) h3 {
+        font-size: 0.94em;
+        letter-spacing: 0.02em;
+    }
+
     ::selection {
         background: var(--color-shu-500);
         color: var(--color-washi);

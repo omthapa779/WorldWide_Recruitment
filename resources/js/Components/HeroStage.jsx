@@ -108,7 +108,7 @@ export default function HeroStage({ hero, company, slides = [] }) {
                 className="absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-kon-700 via-kon-700 to-transparent lg:block"
             />
 
-            <div className="relative z-10 mx-auto flex w-full max-w-[1500px] flex-1 flex-col justify-center px-6 py-6 lg:px-8 xl:px-14">
+            <div className="relative z-10 mx-auto flex w-full max-w-[1500px] flex-1 flex-col justify-center px-4 py-6 sm:px-6 lg:px-8">
                 <div className="max-w-[34rem] lg:max-w-[46%]">
                     {/* Credibility first — the licence is this company's strongest claim. */}
                     <div
@@ -172,7 +172,7 @@ export default function HeroStage({ hero, company, slides = [] }) {
                 className="hero-rise relative z-10 border-t border-washi/20 bg-kon-950/70 backdrop-blur-md"
                 style={{ '--d': '470ms' }}
             >
-                <div className="mx-auto grid max-w-[1500px] grid-cols-2 divide-x divide-washi/15 px-6 sm:grid-cols-4 lg:px-8 xl:px-14">
+                <div className="mx-auto grid max-w-[1500px] grid-cols-2 divide-x divide-washi/15 px-4 sm:grid-cols-4 sm:px-6 lg:px-8">
                     {stats.map((stat) => (
                         <div
                             key={stat.title}

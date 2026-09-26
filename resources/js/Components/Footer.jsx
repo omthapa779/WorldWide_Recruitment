@@ -30,7 +30,7 @@ export default function Footer() {
                 className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-shu-500/70 to-transparent"
             />
 
-            <div className="relative mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+            <div className="relative mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                 {/* Brand + reach */}
                 <div className="grid gap-10 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
                     <div className="flex flex-col gap-5">
@@ -47,7 +47,7 @@ export default function Footer() {
                                     {company.nameLocalised}
                                 </span>
                                 <span className="text-[0.68rem] tracking-[0.24em] text-washi/75">
-                                    {isJapanese ? company.name : 'Services Pvt. Ltd.'}
+                                    {isJapanese ? company.name : 'Pvt. Ltd.'}
                                 </span>
                             </span>
                         </div>
@@ -176,7 +176,7 @@ export default function Footer() {
 
             {/* Legal strip — a shade deeper so the page closes on a firm edge */}
             <div className="relative border-t border-washi/12 bg-kon-700">
-                <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-2 px-6 py-5 text-[0.7rem] tracking-[0.16em] text-washi/75 sm:flex-row lg:px-8 xl:px-14">
+                <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-2 px-4 py-5 text-[0.7rem] tracking-[0.16em] text-washi/75 sm:flex-row sm:px-6 lg:px-8">
                     <p>
                         © {year} {company.name} {t('footer.rights')}
                     </p>

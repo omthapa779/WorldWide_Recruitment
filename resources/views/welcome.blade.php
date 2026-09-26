@@ -9,7 +9,7 @@
             
             <div class="w_100 h_fc flex gap_1vw align_c">
                 <img src="{{ asset('./resources/images/logo.png') }}" alt="" class="h_10vh obj_contain">
-                <h2 class="color_primary">WorldWide Recruitment <br> Services Pvt. Ltd.</h2>
+                <h2 class="color_primary">WorldWide Recruitment <br>  Pvt. Ltd.</h2>
             </div>
 
             <div class="menus w_100 flex gap_2vw ">

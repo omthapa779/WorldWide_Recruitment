@@ -52,7 +52,7 @@ class HandleInertiaRequests extends Middleware
                 'legalSuffix' => $japanese ? '株式会社' : 'Pvt. Ltd.',
                 'short' => 'WRS Nepal',
                 'license' => '1617-079/80',
-                'email' => 'info@wrsnepal.com',
+                'email' => 'wrsnepal@gmail.com',
                 'phone' => '+977 9841893098',
                 'phoneAlt' => '+977-01-5363716',
                 'address' => $japanese

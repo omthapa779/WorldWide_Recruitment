@@ -24,7 +24,7 @@ export default function Contact() {
 
             {/* 拠点 — offices */}
             <section className="bg-washi py-24 lg:py-28">
-                <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <SectionHeading no="01" title={t('contact.offices.title')} accent={t('contact.offices.accent')} />
 
                     <div className="grid gap-8 pt-14 lg:grid-cols-3">

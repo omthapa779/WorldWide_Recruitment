@@ -24,7 +24,7 @@
         <div class="quick_Contacts flex_cl w_100 h_100">
             <h3 class="color_white secondary_font">Quick Contacts</h3>
 
-            <a href="mailto:info@wrsnepal.com" class="footer_link"><h4 class="color_light mtop_2vh font_w500">info@wrsnepal.com</h4></a>
+            <a href="mailto:wrsnepal@gmail.com" class="footer_link"><h4 class="color_light mtop_2vh font_w500">wrsnepal@gmail.com</h4></a>
             <a href="tel:+9779841893098" class="footer_link"><h4 class="color_light font_w500">+977 9841893098</h4></a>
             
              <h3 class="color_white secondary_font mtop_2vh">Japan Branch</h3>

@@ -19,7 +19,7 @@ export default function PageHero({ title, accent, lead, image, breadcrumb = [] }
             )}
             <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-[0.10]" />
 
-            <div className="relative mx-auto flex max-w-[1500px] flex-col gap-6 px-6 pt-20 pb-16 lg:px-8 lg:pt-28 lg:pb-20 xl:px-14">
+            <div className="relative mx-auto flex max-w-[1500px] flex-col gap-6 px-4 pt-20 pb-16 sm:px-6 lg:px-8 lg:pt-28 lg:pb-20">
                 {breadcrumb.length > 0 && (
                     <nav
                         aria-label="Breadcrumb"

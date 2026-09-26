@@ -336,7 +336,7 @@ return [
         ['title' => '事業内容', 'accent' => 'Business', 'value' => '海外人材紹介、書類手続き支援、送り出し支援'],
         ['title' => '対応業種', 'accent' => 'Sectors', 'value' => '建設、宿泊・飲食、警備ほか'],
         ['title' => '対応地域', 'accent' => 'Destinations', 'value' => 'ドバイ、日本、カタールほか'],
-        ['title' => '連絡先', 'accent' => 'Contact', 'value' => 'info@wrsnepal.com / +977 9841893098'],
+        ['title' => '連絡先', 'accent' => 'Contact', 'value' => 'wrsnepal@gmail.com / +977 9841893098'],
     ],
 
     'offices' => [
@@ -345,14 +345,14 @@ return [
             'accent' => 'Nepal Head Office',
             'lines' => ['Samakhusi Chowk', 'Kathmandu 44600, Nepal'],
             'phones' => ['+977-01-5363716', '+977 9841893098'],
-            'email' => 'info@wrsnepal.com',
+            'email' => 'wrsnepal@gmail.com',
         ],
         [
             'title' => '日本支店',
             'accent' => 'Japan Branch',
             'lines' => ['〒124-0014', '東京都葛飾区東四つ木1-24-9'],
             'phones' => ['+81 80 3095 6977'],
-            'email' => 'info@wrsnepal.com',
+            'email' => 'wrsnepal@gmail.com',
         ],
     ],
 

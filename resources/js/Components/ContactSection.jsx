@@ -35,7 +35,7 @@ export default function ContactSection({ no = '06', withMap = true }) {
         <section className="relative overflow-hidden bg-kinari py-24 lg:py-32">
             <div aria-hidden="true" className="shima pointer-events-none absolute inset-0 opacity-60" />
 
-            <div className="relative mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+            <div className="relative mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col gap-6 border-b border-sumi-900/12 pb-10 lg:flex-row lg:items-end lg:justify-between">
                     <SectionHeading no={no} title={t('contact.form.title')} accent={t('contact.form.accent')} />
                     <p className="max-w-md text-sm leading-loose text-nezumi-500">{t('contact.form.intro')}</p>

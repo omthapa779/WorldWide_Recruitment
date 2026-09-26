@@ -16,7 +16,7 @@ export default function NewsShow({ article, more }) {
             <section className="relative overflow-hidden bg-kinari pt-16 pb-14 lg:pt-24 lg:pb-20">
                 <div aria-hidden="true" className="shima pointer-events-none absolute inset-0 opacity-60" />
 
-                <div className="relative mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="relative mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <nav
                         aria-label="Breadcrumb"
                         className="flex flex-wrap items-center gap-2 text-[0.65rem] tracking-[0.22em] text-nezumi-400"
@@ -56,7 +56,7 @@ export default function NewsShow({ article, more }) {
 
             {/* Lead image */}
             {article.image && (
-                <div className="mx-auto -mt-2 max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto -mt-2 max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <Reveal className="aspect-[16/8] w-full overflow-hidden border border-sumi-900/12">
                         <img src={article.image} alt={article.title} className="h-full w-full object-cover" />
                     </Reveal>
@@ -65,7 +65,7 @@ export default function NewsShow({ article, more }) {
 
             {/* Body */}
             <section className="bg-washi py-20 lg:py-28">
-                <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <div className="grid gap-14 lg:grid-cols-[0.2fr_1fr_0.25fr]">
                         <span
                             aria-hidden="true"
@@ -119,7 +119,7 @@ export default function NewsShow({ article, more }) {
             {/* More */}
             {more.length > 0 && (
                 <section className="bg-kinari py-20">
-                    <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                    <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                         <SectionHeading no="02" title={t('news.more.title')} accent={t('news.more.accent')} />
                         <div className="flex flex-col pt-8">
                             {more.map((item) => (

@@ -25,7 +25,7 @@ export default function Services() {
 
             {/* Intro */}
             <section className="bg-washi py-20 lg:py-28">
-                <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
                         <SectionHeading
                             no="01"
@@ -46,7 +46,7 @@ export default function Services() {
 
             {/* The three services, as full-width alternating rows */}
             <section className="bg-kinari py-20 lg:py-28">
-                <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <SectionHeading
                         no="02"
                         title={t('services.pillars.title')}
@@ -107,7 +107,7 @@ export default function Services() {
             {/* 対応業種 + figures */}
             <section className="relative overflow-hidden bg-washi py-24 lg:py-32">
                 <div aria-hidden="true" className="shima pointer-events-none absolute inset-0 opacity-50" />
-                <div className="relative mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="relative mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
                         <div className="flex flex-col gap-8">
                             <SectionHeading
@@ -159,7 +159,7 @@ export default function Services() {
             {/* CTA */}
             <section className="relative isolate overflow-hidden border-y border-sumi-900/12 bg-kinari py-20 text-sumi-900">
                 <div aria-hidden="true" className="asanoha absolute inset-0 opacity-70" />
-                <div className="relative mx-auto flex max-w-[1500px] flex-col items-start justify-between gap-8 px-6 lg:flex-row lg:items-center lg:px-8 xl:px-14">
+                <div className="relative mx-auto flex max-w-[1500px] flex-col items-start justify-between gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:px-8">
                     <div className="flex flex-col gap-3">
                         <h2 className="text-[clamp(1.8rem,3.6vw,2.6rem)] tracking-[0.08em]">
                             {t('services.cta.title')}

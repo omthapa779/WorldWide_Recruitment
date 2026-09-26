@@ -50,7 +50,7 @@ export default function Header({ transparent = false }) {
             <div className={shellClass}>
                 {/* 上部バー — the thin utility bar Japanese corporate sites always carry */}
                 <div className="hidden border-b border-sumi-900/10 bg-kinari text-sumi-600 lg:block">
-                    <div className="mx-auto flex max-w-[1500px] items-center justify-between px-8 py-2.5 text-[0.68rem] tracking-[0.2em] xl:px-14">
+                    <div className="mx-auto flex max-w-[1500px] items-center justify-between px-4 py-2.5 text-[0.68rem] tracking-[0.16em] sm:px-6 lg:px-8">
                         <div className="flex items-center gap-3">
                             <span className="font-semibold text-shu-700">{t('common.licenceLabel')}</span>
                             <span className="numeral font-bold">{company.license}</span>
@@ -77,24 +77,24 @@ export default function Header({ transparent = false }) {
                 </div>
 
                 <header className="border-b border-sumi-900/10 bg-washi/98 backdrop-blur-md transition-shadow duration-300">
-                    <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-6 py-3.5 lg:px-8 xl:px-14">
-                        <Link href="/" className="group flex items-center gap-4 py-1">
+                    <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+                        <Link href="/" className="group flex items-center gap-3 py-1">
                             <img
                                 src="/resources/images/logo.png"
                                 alt="WorldWide Recruitment Services"
-                                className="h-14 sm:h-16 lg:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm"
+                                className="h-12 sm:h-14 lg:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm"
                             />
-                            <span className="flex flex-col leading-tight border-l border-sumi-900/15 pl-4">
-                                <span className="font-mincho text-[1.1rem] sm:text-[1.25rem] lg:text-[1.35rem] font-bold tracking-[0.06em] text-kon-700">
+                            <span className="flex flex-col leading-tight border-l border-sumi-900/15 pl-3">
+                                <span className="font-mincho text-[0.95rem] sm:text-[1.1rem] lg:text-[1.18rem] font-bold tracking-[0.02em] text-kon-700">
                                     {company.nameLocalised}
                                 </span>
-                                <span className="text-[0.64rem] sm:text-[0.7rem] tracking-[0.24em] text-nezumi-500 font-medium">
-                                    {isJapanese ? company.name : 'Services Pvt. Ltd.'}
+                                <span className="text-[0.6rem] sm:text-[0.66rem] tracking-[0.14em] text-nezumi-500 font-medium">
+                                    {isJapanese ? company.name : 'Pvt. Ltd.'}
                                 </span>
                             </span>
                         </Link>
 
-                        <nav className="hidden items-center gap-7 xl:flex">
+                        <nav className="hidden items-center gap-4 lg:gap-5 xl:gap-6 xl:flex">
                             {NAV.map((item) => {
                                 const active = isCurrent(url, item.href);
                                 return (
@@ -108,7 +108,7 @@ export default function Header({ transparent = false }) {
                                                 : 'text-sumi-900 hover:text-shu-700'
                                         }`}
                                     >
-                                        <span className="font-mincho text-[0.95rem] tracking-[0.12em]">
+                                        <span className={`font-mincho text-[0.88rem] lg:text-[0.92rem] ${isJapanese ? 'tracking-[0.04em]' : 'tracking-[0.08em]'}`}>
                                             {t(`nav.${item.key}`)}
                                         </span>
                                     </Link>
@@ -119,7 +119,7 @@ export default function Header({ transparent = false }) {
                         <div className="flex items-center gap-3">
                             <Link
                                 href="/contact"
-                                className="hidden border border-shu-700 bg-shu-700 px-6 py-3 text-[0.68rem] font-medium tracking-[0.22em] text-washi transition-colors duration-500 hover:border-sumi-900 hover:bg-sumi-900 lg:inline-block"
+                                className="hidden border border-shu-700 bg-shu-700 px-5 py-2.5 text-[0.68rem] font-medium tracking-[0.18em] text-washi transition-colors duration-500 hover:border-sumi-900 hover:bg-sumi-900 lg:inline-block"
                             >
                                 {t('common.headerCta')}
                             </Link>

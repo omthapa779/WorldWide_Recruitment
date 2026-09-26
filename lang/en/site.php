@@ -344,7 +344,7 @@ return [
         ['title' => 'Business', 'accent' => '事業内容', 'value' => 'Overseas recruitment, documentation support and deployment services'],
         ['title' => 'Sectors', 'accent' => '対応業種', 'value' => 'Construction, hospitality, security and more'],
         ['title' => 'Destinations', 'accent' => '対応地域', 'value' => 'Dubai, Japan, Qatar and many more'],
-        ['title' => 'Contact', 'accent' => '連絡先', 'value' => 'info@wrsnepal.com / +977 9841893098'],
+        ['title' => 'Contact', 'accent' => '連絡先', 'value' => 'wrsnepal@gmail.com / +977 9841893098'],
     ],
 
     'offices' => [
@@ -353,14 +353,14 @@ return [
             'accent' => 'ネパール本社',
             'lines' => ['Samakhusi Chowk', 'Kathmandu 44600, Nepal'],
             'phones' => ['+977-01-5363716', '+977 9841893098'],
-            'email' => 'info@wrsnepal.com',
+            'email' => 'wrsnepal@gmail.com',
         ],
         [
             'title' => 'Japan Branch',
             'accent' => '日本支店',
             'lines' => ['1-24-9 Higashi-Yotsugi', 'Katsushika-ku, Tokyo 124-0014'],
             'phones' => ['+81 80 3095 6977'],
-            'email' => 'info@wrsnepal.com',
+            'email' => 'wrsnepal@gmail.com',
         ],
     ],
 

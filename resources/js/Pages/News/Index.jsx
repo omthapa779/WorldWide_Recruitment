@@ -24,7 +24,7 @@ export default function NewsIndex({ news }) {
             />
 
             <section className="bg-washi py-20 lg:py-28">
-                <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <SectionHeading
                         no="01"
                         title={t('news.latestUpdates.title')}

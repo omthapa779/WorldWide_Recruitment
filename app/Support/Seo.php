@@ -63,7 +63,7 @@ class Seo
             'logo' => asset('resources/images/logo.png'),
             'image' => asset('resources/images/logo.png'),
             'description' => __('site.footer.blurb'),
-            'email' => 'info@wrsnepal.com',
+            'email' => 'wrsnepal@gmail.com',
             'telephone' => '+977-9841893098',
             'address' => [
                 [

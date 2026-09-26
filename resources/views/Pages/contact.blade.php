@@ -52,7 +52,7 @@
              </div>
         </div>
         
-          <a href="mailto:info@wrsnepal.com" class="w_100 h_100"><div class="contact_info_card w_100 h_100 bg_white_light bradius_s p_v5 p_s2 flex_cl">
+          <a href="mailto:wrsnepal@gmail.com" class="w_100 h_100"><div class="contact_info_card w_100 h_100 bg_white_light bradius_s p_v5 p_s2 flex_cl">
              <div class="w_100 h_fc">
                 <div class="contact_icon bg_blue w_fc bradius_s p_v2 p_s2">
                     <i class="ri-mail-fill color_white"></i>

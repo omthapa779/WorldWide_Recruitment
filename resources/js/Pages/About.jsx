@@ -30,7 +30,7 @@ export default function About() {
 
             {/* ごあいさつ */}
             <section className="relative bg-washi py-24 lg:py-32">
-                <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
                         <div className="flex flex-col gap-8">
                             <SectionHeading no="01" title={t('about.intro.title')} accent={t('about.intro.accent')} />
@@ -86,7 +86,7 @@ export default function About() {
 
             {/* 事業内容 */}
             <section className="bg-kinari py-24 lg:py-32">
-                <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <SectionHeading no="02" title={t('about.what.title')} accent={t('about.what.accent')} />
 
                     <div className="grid gap-8 pt-14 md:grid-cols-3">
@@ -117,7 +117,7 @@ export default function About() {
             {/* 会社概要 — the corporate data table */}
             <section className="relative overflow-hidden bg-washi py-24 lg:py-32">
                 <div aria-hidden="true" className="shima pointer-events-none absolute inset-0 opacity-60" />
-                <div className="relative mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="relative mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
                         <SectionHeading no="03" title={t('about.profile.title')} accent={t('about.profile.accent')} />
 
@@ -156,7 +156,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-kinari/88" />
                 <div aria-hidden="true" className="seigaiha absolute inset-0 opacity-[0.10]" />
 
-                <div className="relative mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+                <div className="relative mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                     <SectionHeading
                         no="04"
                         title={t('about.why.title')}

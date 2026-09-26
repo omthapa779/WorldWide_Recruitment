@@ -39,7 +39,7 @@ function About() {
 
     return (
         <section className="relative bg-washi py-24 lg:py-32">
-            <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+            <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                 <div className="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
                     <div className="flex flex-col gap-8">
                         <SectionHeading no="02" title={t('home.about.title')} accent={t('home.about.accent')} />
@@ -112,7 +112,7 @@ function Services() {
         <section className="relative overflow-hidden bg-kinari py-24 lg:py-32">
             <div aria-hidden="true" className="asanoha pointer-events-none absolute inset-0 opacity-70" />
 
-            <div className="relative mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+            <div className="relative mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col gap-6 border-b border-sumi-900/12 pb-10 lg:flex-row lg:items-end lg:justify-between">
                     <SectionHeading no="03" title={t('home.services.title')} accent={t('home.services.accent')} />
                     <p className="max-w-md text-sm leading-loose text-nezumi-500">{t('home.services.intro')}</p>
@@ -178,7 +178,7 @@ function FeaturedJobs({ jobs }) {
 
     return (
         <section className="bg-washi py-24 lg:py-32">
-            <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+            <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col gap-6 border-b border-sumi-900/12 pb-10 sm:flex-row sm:items-end sm:justify-between">
                     <SectionHeading no="04" title={t('home.jobs.title')} accent={t('home.jobs.accent')} />
                     <Button href="/jobs" variant="outline">
@@ -207,7 +207,7 @@ function FeaturedJobs({ jobs }) {
 function AdBanner({ ad }) {
     return (
         <section className="bg-kinari py-16">
-            <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+            <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                 <Reveal className="relative overflow-hidden border border-sumi-900/12">
                     <img src={ad.image} alt={ad.title} loading="lazy" className="w-full object-cover" />
                 </Reveal>
@@ -223,7 +223,7 @@ function NewsSection({ news }) {
 
     return (
         <section className="bg-washi py-24 lg:py-32">
-            <div className="mx-auto max-w-[1500px] px-6 lg:px-8 xl:px-14">
+            <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col gap-6 border-b border-sumi-900/12 pb-10 sm:flex-row sm:items-end sm:justify-between">
                     <SectionHeading no="01" title={t('home.news.title')} accent={t('home.news.accent')} />
                     <Button href="/news" variant="outline">
