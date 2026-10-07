@@ -71,10 +71,10 @@ class HandleInertiaRequests extends Middleware
                     'phone' => '+81 80 3095 6977',
                 ],
                 'socials' => [
-                    'facebook' => 'https://www.facebook.com/share/1BFPtefB9M/?mibextid=wwXIfr',
-                    'instagram' => 'https://www.instagram.com/globalcentralnepal?igsh=aDFubmR4MndybHgz&utm_source=qr',
+                    'facebook' => 'https://www.facebook.com/wrsnepal/',
+                    'instagram' => 'https://www.instagram.com/wrsnepal2023/',
                     'whatsapp' => 'https://wa.me/9779841893098',
-                    'tiktok' => 'https://www.tiktok.com/@globalcentralconsultancy?_t=ZS-8x8N2viTRvL&_r=1',
+                    'tiktok' => 'https://www.tiktok.com/@worldwiderecruitment2023',
                 ],
                 'profilePdf' => asset('resources/WorldWide_Company_Profile.pdf'),
             ],

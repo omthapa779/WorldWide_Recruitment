@@ -83,9 +83,9 @@ class Seo
             ],
             'areaServed' => ['Japan', 'United Arab Emirates', 'Qatar'],
             'sameAs' => [
-                'https://www.facebook.com/share/1BFPtefB9M/?mibextid=wwXIfr',
-                'https://www.instagram.com/globalcentralnepal',
-                'https://www.tiktok.com/@globalcentralconsultancy',
+                'https://www.facebook.com/wrsnepal/',
+                'https://www.instagram.com/wrsnepal2023/',
+                'https://www.tiktok.com/@worldwiderecruitment2023',
             ],
         ];
     }

@@ -4,10 +4,10 @@
             <h2 class="logo color_white">WorldWide Recruitment <br> Services Pvt. Ltd.</h2>
         </div>
     <div class="socials_holder w_fc h_fc bg_dark p_v1 p_s1 flex gap_1vw justify_sb">
-                <a href="https://www.facebook.com/share/1BFPtefB9M/?mibextid=wwXIfr" target="_blank"><h2><i class="font_w400 ri-facebook-circle-fill color_white footer_icon"></i></h2></a>
-                <a href="https://www.instagram.com/globalcentralnepal?igsh=aDFubmR4MndybHgz&amp;utm_source=qr" target="_blank"><h2><i class="font_w400 ri-instagram-fill color_white footer_icon"></i></h2></a>
+                <a href="https://www.facebook.com/wrsnepal/" target="_blank"><h2><i class="font_w400 ri-facebook-circle-fill color_white footer_icon"></i></h2></a>
+                <a href="https://www.instagram.com/wrsnepal2023/" target="_blank"><h2><i class="font_w400 ri-instagram-fill color_white footer_icon"></i></h2></a>
                 <a href="https://wa.me/9779841893098" target="_blank"><h2><i class="font_w400 ri-whatsapp-fill color_white footer_icon"></i></h2></a>
-                <a href="https://www.tiktok.com/@globalcentralconsultancy?_t=ZS-8x8N2viTRvL&amp;_r=1" target="_blank"><h2><i class="font_w400 ri-tiktok-fill color_white footer_icon"></i></h2></a>
+                <a href="https://www.tiktok.com/@worldwiderecruitment2023" target="_blank"><h2><i class="font_w400 ri-tiktok-fill color_white footer_icon"></i></h2></a>
             </div>
     </div>
 
